@@ -53,29 +53,29 @@ val_link = ''
 span = ''
 
 def ranFName():
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\names.txt","r") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 		first = f.readlines()
 	return random.choice(first).strip()
 
 def ranLName():
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\names.txt","r") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 		last = f.readlines()
 	return random.choice(last).strip()
 
 def randomEmail_name():
-    with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\names.txt", "r") as f:
+    with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt", "r") as f:
         names = f.readlines()
     return random.choice(names).strip()
 
 
 def random_postCode():
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\postcode.txt","r") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\postcode.txt","r") as f:
 		postcode = f.readlines()
 	return random.choice(postcode).strip()
 
 
 def hpi_name():
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\names.txt","r") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 		names = f.readlines()
 	name = random.choice(names).strip()
 	return name[:len(name)//2]+" "+name[len(name)//2]
@@ -86,7 +86,7 @@ def random_phone():
 	return phone_number
 
 def random_address():
-    with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\addresses.txt","r") as f:
+    with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\addresses.txt","r") as f:
         addresses = f.readlines()
         ranAdd = random.choice(addresses).strip('"\n')
     street_town, postcode = ranAdd.rsplit(',',1)
@@ -96,7 +96,7 @@ def random_address():
     return houseNo, street, town, postcode
 
 ranEmail = randomEmail_name()+"."+random_phone()+"@yopmail.com"
-with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\email.txt","w") as f:
+with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
 	f.write(ranEmail)
 	f.close()
 
@@ -111,10 +111,10 @@ async def reg(message, *args):
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
-		with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\proxy.txt") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
 	 		proxies = f.readlines()
 	 		proxy = random.choice(proxies).strip()
-		with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\user-agents.txt") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
 			user_agents = f.readlines()
 			user_agent = random.choice(user_agents).strip()
 		driver_options.add_argument("--proxy-server=http://"+proxy)
@@ -128,14 +128,14 @@ async def reg(message, *args):
 			if "Free" in driver.title:
 				break  # exit loop if page loaded successfully
 		except Exception as e:
-			await message.channel.send(f"Proxy connection failed: retrying. {retry_counter}")
+			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
 			logging.error(e, exc_info=True)
 			retry_counter = retry_counter+1
 			await asyncio.sleep(2)
 		#wait for page to load
 		await asyncio.sleep(2)
 	if retry_counter == max_retry:
-		print(f"{timestamp} {info_statement} [bot]: Maximum retries met while running !reg")
+		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running !reg")
 	else:
 		try:
 			# driver.find_element((By.ID,'onetrust-button-group-parent'))
@@ -199,30 +199,29 @@ async def reg(message, *args):
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
 			try:
-				global span
 				span = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
 			if not span:
 				try:
 					driver.get('https://yopmail.com')
-					try:
-						WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#accept"))).click();
-					except TimeoutException as e:
-						logging.error (e, exc_info=True)
-					try:
-						login=WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#login")))
-						login.click()
-						login.send_keys(ranEmail)
-						time.sleep(1)
-						WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,".material-icons-outlined.f36"))).click();
-						iframe = driver.find_element(By.ID,"ifmail")
-						driver.switch_to.frame(iframe)
-						valuation = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//a[normalize-space()='View valuation']")))
-						global val_link
-						val_link = valuation.get_attribute("href")
-					except TimeoutException as e:
-						logging.error(e, exc_info=True)
+				except TimeoutException as e:
+					logging.error(e, exc_info=True)							
+				try:
+					WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#accept"))).click();
+				except TimeoutException as e:
+					logging.error (e, exc_info=True)
+				try:
+					login=WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#login")))
+					login.click()
+					login.send_keys(ranEmail)
+					time.sleep(1)
+					WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,".material-icons-outlined.f36"))).click();
+					iframe = driver.find_element(By.ID,"ifmail")
+					driver.switch_to.frame(iframe)
+					valuation = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//a[normalize-space()='View valuation']")))
+					val_link = valuation.get_attribute("href")
+
 				except Exception as e:
 					#await message.channel.send("Failed to retrieve mailbox.")
 					logging.error(e, exc_info=True)

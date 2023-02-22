@@ -14,7 +14,6 @@ intents = discord.Intents.default()
 intents.guilds = True
 client = discord.Client(intents=intents)
 general_ID = '1068572399177584702'
-reg_channel_id = ''
 
 logging.basicConfig(filename='errors.log', level=logging.ERROR)
 
@@ -29,12 +28,16 @@ print(f"[{timestamp}] {info_statement} [bot]: Loading...")
     #         f.write(arguments)
     #     await reg(message, *args)
 async def on_message(message):
-    if message.content.startswith('!reg'):
-        args = message.content.split()[1:]
-        arguments = "".join(args)
-        with open('reg.txt', 'w') as f:
-            f.write(arguments)
-        await reg(message, *args)
+    if message.author == client.user:
+        return
+    if isinstance(message.channel, discord.DMChannel):
+        if message.content.startswith('!reg'):
+            args = message.content.split()[1:]
+            arguments = "".join(args)
+            print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {arguments}")
+            with open('reg.txt', 'w') as f:
+                f.write(arguments)
+            await reg(message, *args)
 
 
 @client.event
@@ -48,7 +51,6 @@ async def on_ready():
         for channel in guild.channels:
             if channel.name == 'reg':
                 print(f'[{timestamp}] {info_statement} - Found reg-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
-                global reg_channel_id
                 reg_channel_id = client.get_channel(channel.id)
 
 
