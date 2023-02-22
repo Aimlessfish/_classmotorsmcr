@@ -31,9 +31,14 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import InvalidArgumentException
 import asyncio
+import datetime
 
 logging.basicConfig(filename='errors.log', level=logging.ERROR)
 driver_options = webdriver.ChromeOptions()
+
+info_statement = "[INFO    ]"
+now = datetime.datetime.now()
+timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 
 ##########
 # discord
@@ -199,6 +204,7 @@ async def reg(message, *args):
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
 			try:
+				global span
 				span = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
