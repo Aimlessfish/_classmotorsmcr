@@ -52,10 +52,16 @@ reg_channel = client.get_channel(1076889006203207772)
 
 ##########
 # global
-# settings
+# variables
 ##########
+span_trade_high = ''
+foreCourt_span_low = ''
+foreCourt_span_high = ''
+private_span_low = ''
+private_span_high =  ''
 val_link = ''
-span = ''
+span_trade_low = ''
+span_trade_high = ''
 
 def ranFName():
 	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
@@ -204,11 +210,11 @@ async def reg(message, *args):
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
 			try:
-				global span
-				span = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
+				global span_trade_low
+				span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
-			if not span:
+			if not span_trade_low:
 				try:
 					driver.get('https://yopmail.com')
 				except TimeoutException as e:
@@ -238,7 +244,7 @@ async def reg(message, *args):
 						WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler"))).click();
 					except Exception as e:
 						logging.error(e,exc_info=True)
-					hpi_trade_low = span.text.split()[0]
+					hpi_trade_low = span_trade_low.text.split()[0]
 					intents = discord.Intents.default()
 					client = discord.Client(intents=intents)
 					await message.channel.send("Evalutation for reg: " + registration)
@@ -247,11 +253,55 @@ async def reg(message, *args):
 				except Exception as e:
 					logging.error(e, exc_info=True)	
 			else:
+				driver.wait_until_ready()
+				try:
+					global span_trade_high
+					span_trade_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
+					hpi_trade_high = span_trade_high.text.split()[0]				
+				except TimeoutException as e:
+					logging.error(e,exc_info=True)
+				try:
+					WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]"))).click();
+					try:
+						global foreCourt_span_low
+						foreCourt_span_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
+						foreCourt_low = foreCourt_span_low.text.split()[0]
+						try:
+							global foreCourt_span_high
+							foreCourt_span_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
+							foreCourt_high = foreCourt_span_high.text.split()[0]
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e, exc_info=True)
+				except TimeoutException as e:
+					logging.error(e,exc_info=True)
+				try:
+					WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]"))).click();
+					try:
+						global private_span_low
+						private_span_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
+						private_sale_low = private_span_low.text.split()[0]
+						try:
+							global private_span_high
+							private_span_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
+							private_sale_high = private_span_hgih.text.split()[0]
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+				except TimeoutException as e:
+					logging.error(e,exc_info=True)
 				intents = discord.Intents.default()
 				client = discord.Client(intents=intents)
 				hpi_trade_low = span.text.split()[0]
 				await message.channel.send("Evalutation for reg: " + registration)
-				await message.channel.send("Evalutation price low: " + hpi_trade_low)
+				await message.channel.send("Trade low: " + hpi_trade_low)
+				await message.channel.send("Trade high: " + hpi_trade_high)
+				await message.channel.send("foreCourt_low: " + foreCourt_low)
+				await message.channel.send("foreCourt_high" + foreCourt_high)
+				await message.channel.send("private_sale_low" + private_sale_low)
+				await message.channel.send("private_sale_high" + private_sale_high)
 				driver.quit()
 		except Exception as e:
 			#await message.channel.send("Failed to get evaluation link")
