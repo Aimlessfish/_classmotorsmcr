@@ -19,18 +19,19 @@ def testProxy():
         proxy_list = f.read().split('\n')
     #await message.channel.send("Checking 10 proxies..")
     proxies = proxy_list[0:10]
-    for proxy in proxies: 
+    for proxy in proxies:
+        print(f"[{timestamp}] {info_statement} [Console]: proxy checked.")
         try: 
             response = session.get("http://ident.me/", proxies={'http': f"http://{proxy}"}, timeout=30)
             if response.status_code == 200: 
                 proxy_list.pop(proxy_list.index(proxy))
-                with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\proxy.txt","w") as f:
+                with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","w") as f:
                     f.write("\n".join(proxy_list))
-                with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\working.txt","a") as f:
+                with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","a") as f:
                     f.write(f"{proxy} \n")
             else:
                 proxy_list.pop(proxy_list.index(proxy))
-                with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\proxy.txt","w") as f:
+                with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","w") as f:
                     f.write("\n".join(proxy_list))
         except Exception as e: 
             proxy_list.pop(proxy_list.index(proxy))

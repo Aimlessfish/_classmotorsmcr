@@ -1,21 +1,13 @@
-ERROR:root:Message: unknown error: net::ERR_TUNNEL_CONNECTION_FAILED
-  (Session info: chrome=110.0.5481.104)
+ERROR:root:Message: 
 Stacktrace:
 Backtrace:
 	(No symbol) [0x00B937D3]
 	(No symbol) [0x00B28B81]
 	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A2772D]
-	(No symbol) [0x00A1DC65]
-	(No symbol) [0x00A1F033]
-	(No symbol) [0x00A1DF02]
-	(No symbol) [0x00A1D324]
-	(No symbol) [0x00A1D241]
-	(No symbol) [0x00A1BC95]
-	(No symbol) [0x00A1C518]
-	(No symbol) [0x00A2CF4C]
-	(No symbol) [0x00A91E01]
-	(No symbol) [0x00A7B41C]
+	(No symbol) [0x00A5D382]
+	(No symbol) [0x00A5D4BB]
+	(No symbol) [0x00A93302]
+	(No symbol) [0x00A7B464]
 	(No symbol) [0x00A91215]
 	(No symbol) [0x00A7B216]
 	(No symbol) [0x00A50D97]
@@ -32,32 +24,21 @@ Backtrace:
 	RtlGetFullPathName_UEx [0x77547CFD+173]
 	RtlGetFullPathName_UEx [0x77547CCB+123]
 Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 132, in reg
-    driver.get('https://hpivaluations.com')
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 449, in get
-    self.execute(Command.GET, {"url": url})
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 440, in execute
-    self.error_handler.check_response(response)
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 245, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_TUNNEL_CONNECTION_FAILED
-  (Session info: chrome=110.0.5481.104)
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 215, in reg
+    span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
 Stacktrace:
 Backtrace:
 	(No symbol) [0x00B937D3]
 	(No symbol) [0x00B28B81]
 	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A2772D]
-	(No symbol) [0x00A1DC65]
-	(No symbol) [0x00A1F033]
-	(No symbol) [0x00A1DF02]
-	(No symbol) [0x00A1D324]
-	(No symbol) [0x00A1D241]
-	(No symbol) [0x00A1BC95]
-	(No symbol) [0x00A1C518]
-	(No symbol) [0x00A2CF4C]
-	(No symbol) [0x00A91E01]
-	(No symbol) [0x00A7B41C]
+	(No symbol) [0x00A5D382]
+	(No symbol) [0x00A5D4BB]
+	(No symbol) [0x00A93302]
+	(No symbol) [0x00A7B464]
 	(No symbol) [0x00A91215]
 	(No symbol) [0x00A7B216]
 	(No symbol) [0x00A50D97]
@@ -100,7 +81,64 @@ Backtrace:
 	RtlGetFullPathName_UEx [0x77547CFD+173]
 	RtlGetFullPathName_UEx [0x77547CCB+123]
 Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 148, in reg
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 224, in reg
+    WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#accept"))).click();
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00B937D3]
+	(No symbol) [0x00B28B81]
+	(No symbol) [0x00A2B36D]
+	(No symbol) [0x00A5D382]
+	(No symbol) [0x00A5D4BB]
+	(No symbol) [0x00A93302]
+	(No symbol) [0x00A7B464]
+	(No symbol) [0x00A91215]
+	(No symbol) [0x00A7B216]
+	(No symbol) [0x00A50D97]
+	(No symbol) [0x00A5253D]
+	GetHandleVerifier [0x00E0ABF2+2510930]
+	GetHandleVerifier [0x00E38EC1+2700065]
+	GetHandleVerifier [0x00E3C86C+2714828]
+	GetHandleVerifier [0x00C43480+645344]
+	(No symbol) [0x00B30FD2]
+	(No symbol) [0x00B36C68]
+	(No symbol) [0x00B36D4B]
+	(No symbol) [0x00B40D6B]
+	BaseThreadInitThunk [0x76266709+25]
+	RtlGetFullPathName_UEx [0x77547CFD+173]
+	RtlGetFullPathName_UEx [0x77547CCB+123]
+
+ERROR:root:Message: 
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00B937D3]
+	(No symbol) [0x00B28B81]
+	(No symbol) [0x00A2B36D]
+	(No symbol) [0x00A5D382]
+	(No symbol) [0x00A5D4BB]
+	(No symbol) [0x00A93302]
+	(No symbol) [0x00A7B464]
+	(No symbol) [0x00A91215]
+	(No symbol) [0x00A7B216]
+	(No symbol) [0x00A50D97]
+	(No symbol) [0x00A5253D]
+	GetHandleVerifier [0x00E0ABF2+2510930]
+	GetHandleVerifier [0x00E38EC1+2700065]
+	GetHandleVerifier [0x00E3C86C+2714828]
+	GetHandleVerifier [0x00C43480+645344]
+	(No symbol) [0x00B30FD2]
+	(No symbol) [0x00B36C68]
+	(No symbol) [0x00B36D4B]
+	(No symbol) [0x00B40D6B]
+	BaseThreadInitThunk [0x76266709+25]
+	RtlGetFullPathName_UEx [0x77547CFD+173]
+	RtlGetFullPathName_UEx [0x77547CCB+123]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 245, in reg
     WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler"))).click();
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
@@ -131,552 +169,9 @@ Backtrace:
 	RtlGetFullPathName_UEx [0x77547CFD+173]
 	RtlGetFullPathName_UEx [0x77547CCB+123]
 
-ERROR:root:Message: unknown error: net::ERR_PROXY_CONNECTION_FAILED
-  (Session info: chrome=110.0.5481.177)
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A2772D]
-	(No symbol) [0x00A1DC65]
-	(No symbol) [0x00A1F033]
-	(No symbol) [0x00A1DF02]
-	(No symbol) [0x00A1D324]
-	(No symbol) [0x00A1D241]
-	(No symbol) [0x00A1BC95]
-	(No symbol) [0x00A1C518]
-	(No symbol) [0x00A2CF4C]
-	(No symbol) [0x00A91E01]
-	(No symbol) [0x00A7B41C]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
+ERROR:root:'str' object has no attribute 'text'
 Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 138, in reg
-    driver.get('https://hpivaluations.com')
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 449, in get
-    self.execute(Command.GET, {"url": url})
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 440, in execute
-    self.error_handler.check_response(response)
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 245, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_PROXY_CONNECTION_FAILED
-  (Session info: chrome=110.0.5481.177)
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A2772D]
-	(No symbol) [0x00A1DC65]
-	(No symbol) [0x00A1F033]
-	(No symbol) [0x00A1DF02]
-	(No symbol) [0x00A1D324]
-	(No symbol) [0x00A1D241]
-	(No symbol) [0x00A1BC95]
-	(No symbol) [0x00A1C518]
-	(No symbol) [0x00A2CF4C]
-	(No symbol) [0x00A91E01]
-	(No symbol) [0x00A7B41C]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 154, in reg
-    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler"))).click();
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: element click intercepted: Element <i class="icon icon-navigateright"></i> is not clickable at point (808, 229). Other element would receive the click: <div class="onetrust-pc-dark-filter ot-fade-in" style="z-index:2147483645;"></div>
-  (Session info: chrome=110.0.5481.177)
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A64E3B]
-	(No symbol) [0x00A626DB]
-	(No symbol) [0x00A5FD0B]
-	(No symbol) [0x00A5E4D8]
-	(No symbol) [0x00A53253]
-	(No symbol) [0x00A7B41C]
-	(No symbol) [0x00A52B96]
-	(No symbol) [0x00A7B774]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 165, in reg
-    WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webelement.py", line 93, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webelement.py", line 403, in _execute
-    return self._parent.execute(command, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 440, in execute
-    self.error_handler.check_response(response)
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 245, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <i class="icon icon-navigateright"></i> is not clickable at point (808, 229). Other element would receive the click: <div class="onetrust-pc-dark-filter ot-fade-in" style="z-index:2147483645;"></div>
-  (Session info: chrome=110.0.5481.177)
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A64E3B]
-	(No symbol) [0x00A626DB]
-	(No symbol) [0x00A5FD0B]
-	(No symbol) [0x00A5E4D8]
-	(No symbol) [0x00A53253]
-	(No symbol) [0x00A7B41C]
-	(No symbol) [0x00A52B96]
-	(No symbol) [0x00A7B774]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 171, in reg
-    WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,'//span[normalize-space()="I don\'t own this car"]'))).click();
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 182, in reg
-    name = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formName']")))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 189, in reg
-    email = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formEmail']")))
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 196, in reg
-    postal = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 203, in reg
-    phone = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formTelephone']")))
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
-ERROR:root:Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-Traceback (most recent call last):
-  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 210, in reg
-    WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00B937D3]
-	(No symbol) [0x00B28B81]
-	(No symbol) [0x00A2B36D]
-	(No symbol) [0x00A5D382]
-	(No symbol) [0x00A5D4BB]
-	(No symbol) [0x00A93302]
-	(No symbol) [0x00A7B464]
-	(No symbol) [0x00A91215]
-	(No symbol) [0x00A7B216]
-	(No symbol) [0x00A50D97]
-	(No symbol) [0x00A5253D]
-	GetHandleVerifier [0x00E0ABF2+2510930]
-	GetHandleVerifier [0x00E38EC1+2700065]
-	GetHandleVerifier [0x00E3C86C+2714828]
-	GetHandleVerifier [0x00C43480+645344]
-	(No symbol) [0x00B30FD2]
-	(No symbol) [0x00B36C68]
-	(No symbol) [0x00B36D4B]
-	(No symbol) [0x00B40D6B]
-	BaseThreadInitThunk [0x76266709+25]
-	RtlGetFullPathName_UEx [0x77547CFD+173]
-	RtlGetFullPathName_UEx [0x77547CCB+123]
-
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 249, in reg
+    hpi_trade_low = span_trade_low.text.split()[0]
+                    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'text'

@@ -162,11 +162,8 @@ async def reg(message, *args):
 			enter_reg = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH,"//input[@placeholder='Enter Reg...']")))
 			enter_reg.click();
 			enter_reg.send_keys(*args)
-			asyncio.sleep(2)
-			if not cookies:
-				WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
-			else:
-				cookies.click();
+			await asyncio.sleep(2)
+			WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
 		except Exception as e:
 			#await message.channel.send("Failed to search. Error finding search button.")
 			logging.error(e, exc_info=True)
