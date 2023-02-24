@@ -1,3 +1,4 @@
+
 #coded by AimlessFish
 #29/01/23 - added function which scrapes each results page and parses the HTML for <a class="js-click-handler listing-fpa-link tracking-standard-link"
 #appends all URLs to urls.txt with 'http://autotrader.co.uk' as prefix.
@@ -212,7 +213,7 @@ async def reg(message, *args):
 			await asyncio.sleep(2)
 			try:
 				global span_trade_low
-				span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
+				span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
 			if not span_trade_low:
