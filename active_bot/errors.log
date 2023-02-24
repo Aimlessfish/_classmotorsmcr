@@ -175,3 +175,78 @@ Traceback (most recent call last):
     hpi_trade_low = span_trade_low.text.split()[0]
                     ^^^^^^^^^^^^^^^^^^^
 AttributeError: 'str' object has no attribute 'text'
+ERROR:root:'WebDriver' object has no attribute 'wait_until_ready'
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 302, in reg
+    driver.wait_until_ready()
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'WebDriver' object has no attribute 'wait_until_ready'
+ERROR:root:'WebDriver' object has no attribute 'wait_until_ready'
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 303, in reg
+    driver.wait_until_ready()
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'WebDriver' object has no attribute 'wait_until_ready'
+ERROR:root:Message: 
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00B937D3]
+	(No symbol) [0x00B28B81]
+	(No symbol) [0x00A2B36D]
+	(No symbol) [0x00A5D382]
+	(No symbol) [0x00A5D4BB]
+	(No symbol) [0x00A93302]
+	(No symbol) [0x00A7B464]
+	(No symbol) [0x00A91215]
+	(No symbol) [0x00A7B216]
+	(No symbol) [0x00A50D97]
+	(No symbol) [0x00A5253D]
+	GetHandleVerifier [0x00E0ABF2+2510930]
+	GetHandleVerifier [0x00E38EC1+2700065]
+	GetHandleVerifier [0x00E3C86C+2714828]
+	GetHandleVerifier [0x00C43480+645344]
+	(No symbol) [0x00B30FD2]
+	(No symbol) [0x00B36C68]
+	(No symbol) [0x00B36D4B]
+	(No symbol) [0x00B40D6B]
+	BaseThreadInitThunk [0x76266709+25]
+	RtlGetFullPathName_UEx [0x77547CFD+173]
+	RtlGetFullPathName_UEx [0x77547CCB+123]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 215, in reg
+    test_span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]")))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00B937D3]
+	(No symbol) [0x00B28B81]
+	(No symbol) [0x00A2B36D]
+	(No symbol) [0x00A5D382]
+	(No symbol) [0x00A5D4BB]
+	(No symbol) [0x00A93302]
+	(No symbol) [0x00A7B464]
+	(No symbol) [0x00A91215]
+	(No symbol) [0x00A7B216]
+	(No symbol) [0x00A50D97]
+	(No symbol) [0x00A5253D]
+	GetHandleVerifier [0x00E0ABF2+2510930]
+	GetHandleVerifier [0x00E38EC1+2700065]
+	GetHandleVerifier [0x00E3C86C+2714828]
+	GetHandleVerifier [0x00C43480+645344]
+	(No symbol) [0x00B30FD2]
+	(No symbol) [0x00B36C68]
+	(No symbol) [0x00B36D4B]
+	(No symbol) [0x00B40D6B]
+	BaseThreadInitThunk [0x76266709+25]
+	RtlGetFullPathName_UEx [0x77547CFD+173]
+	RtlGetFullPathName_UEx [0x77547CCB+123]
+
+ERROR:root:cannot access local variable 'test_span_trade_low' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\_classmotorsmcr-main\active_bot\reg_function.py", line 218, in reg
+    if not test_span_trade_low:
+           ^^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'test_span_trade_low' where it is not associated with a value
