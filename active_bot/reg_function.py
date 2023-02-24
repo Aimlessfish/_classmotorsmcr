@@ -244,30 +244,72 @@ async def reg(message, *args):
 						WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler"))).click();
 					except Exception as e:
 						logging.error(e,exc_info=True)
-					hpi_trade_low = span_trade_low.text.split()[0]
+					try:
+						hpi_trade_low = span_trade_low.text.split()[0]
+						global span_trade_high
+						span_trade_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
+						hpi_trade_high = span_trade_high.text.split()[0]
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+					try:
+						WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]"))).click();
+						try:
+							global foreCourt_span_low
+							foreCourt_span_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
+							foreCourt_low = foreCourt_span_low.text.split()[0]
+							try:
+								global foreCourt_span_high
+								foreCourt_span_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
+								foreCourt_high = foreCourt_span_high.text.split()[0]
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e, exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+					try:
+						WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]"))).click();
+						try:
+							global private_span_low
+							private_span_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
+							private_sale_low = private_span_low.text.split()[0]
+							try:
+								global private_span_high
+								private_span_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
+								private_sale_high = private_span_hgih.text.split()[0]
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
 					intents = discord.Intents.default()
 					client = discord.Client(intents=intents)
 					await message.channel.send("Evalutation for reg: " + registration)
-					await message.channel.send("Evalutation price low: " + hpi_trade_low)
+					await message.channel.send("Trade low: " + hpi_trade_low)
+					await message.channel.send("Trade high: " + hpi_trade_high)
+					await message.channel.send("foreCourt_low: " + foreCourt_low)
+					await message.channel.send("foreCourt_high" + foreCourt_high)
+					await message.channel.send("private_sale_low" + private_sale_low)
+					await message.channel.send("private_sale_high" + private_sale_high)
 					driver.quit()
 				except Exception as e:
-					logging.error(e, exc_info=True)	
+					#await message.channel.send("Failed to get evaluation link")
+					logging.error(e, exc_info=True)
 			else:
 				driver.wait_until_ready()
 				try:
-					global span_trade_high
+					
 					span_trade_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
 					hpi_trade_high = span_trade_high.text.split()[0]				
 				except TimeoutException as e:
 					logging.error(e,exc_info=True)
 				try:
 					WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]"))).click();
-					try:
-						global foreCourt_span_low
+					try:						
 						foreCourt_span_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
 						foreCourt_low = foreCourt_span_low.text.split()[0]
-						try:
-							global foreCourt_span_high
+						try:							
 							foreCourt_span_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
 							foreCourt_high = foreCourt_span_high.text.split()[0]
 						except TimeoutException as e:
@@ -278,12 +320,10 @@ async def reg(message, *args):
 					logging.error(e,exc_info=True)
 				try:
 					WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]"))).click();
-					try:
-						global private_span_low
+					try:						
 						private_span_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
 						private_sale_low = private_span_low.text.split()[0]
-						try:
-							global private_span_high
+						try:							
 							private_span_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
 							private_sale_high = private_span_hgih.text.split()[0]
 						except TimeoutException as e:
