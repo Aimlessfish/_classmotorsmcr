@@ -38,8 +38,6 @@ logging.basicConfig(filename='errors.log', level=logging.ERROR)
 driver_options = webdriver.ChromeOptions()
 
 info_statement = "[INFO    ]"
-now = datetime.datetime.now()
-timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 
 ##########
 # discord
@@ -140,6 +138,8 @@ async def reg(message, *args):
 			if "Free" in driver.title:
 				break  # exit loop if page loaded successfully
 		except Exception as e:
+			now = datetime.datetime.now()
+			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
 			logging.error(e, exc_info=True)
 			retry_counter = retry_counter+1
@@ -147,6 +147,8 @@ async def reg(message, *args):
 		#wait for page to load
 		await asyncio.sleep(2)
 	if retry_counter == max_retry:
+		now = datetime.datetime.now()
+		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running !reg")
 	else:
 		try:
@@ -247,7 +249,7 @@ async def reg(message, *args):
 						logging.error(e,exc_info=True)
 					try:
 						global span_trade_low
-						span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]")))
+						span_trade_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
 						hpi_trade_low = span_trade_low.text.split()[0]
 						global span_trade_high
 						span_trade_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
