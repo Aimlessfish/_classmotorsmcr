@@ -122,6 +122,7 @@ with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\em
 # proxy_usage_counter = 0
 
 async def or_less():
+	driver=webdriver.Chrome()
 	try:
 		cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
 		cookies.click();
