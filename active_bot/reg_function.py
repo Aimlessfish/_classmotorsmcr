@@ -120,6 +120,22 @@ with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\em
 # return valuation price
 ##########################
 # proxy_usage_counter = 0
+
+async def or_less():
+	try:
+		cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
+		cookies.click();
+	except TimeoutException as e:
+		logging.error(e,exc_info=True)
+	try:
+		global or_less_data
+		or_less_span = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+		or_less_data = or_less_span.text
+	except TimeoutException as e:
+		logging.error(e,exc_info=True)
+	intents = discord.Intents.default()
+	client = discord.Client(intents=intents)
+	message.channel.send(or_less_data)	
 async def reg(message, *args):
 	registration = str(*args)
 	retry_counter = 0
@@ -248,43 +264,121 @@ async def reg(message, *args):
 				#get hpi_price 
 				try:
 					driver.get(val_link)
+					or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+					check_or_less = or_less_check.text
+					if "or less" in check_or_less:
+						await or_less()
+					else:
+						try:
+							cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
+							cookies.click();
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							global good_price
+							global formatted_trade_price
+							raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+							good_price = raw_trade_price.text.split("\n")
+							formatted_trade_price = f"Trade good low: {good_price[0]} | Trade good high: {good_price[2]} "
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
+							navpoor.click();
+							try:
+								global poor_price
+								global formatted_poor_price
+								raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+								poor_price = raw_poor_price.text.split()
+								formatted_poor_price = f"Trade poor low: {poor_price[0]} | Trade poor high: {poor_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navbest = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[3]")))
+							navbest.click();
+							try:
+								global best_price
+								global formatted_best_price
+								raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+								best_price = raw_best_price.text.split()
+								formatted_best_price = f"Trade best low: {best_price[0]} | Trade best high: {best_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
+							navforeCourt.click();
+							try:
+								global foreCourt_price
+								global formatted_foreCourt_price
+								raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
+								foreCourt_price = raw_foreCourt_price.text.split()
+								formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | Forecourt High: {foreCourt_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navprivate = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]")))
+							navprivate.click();
+							try:
+								global private_price
+								global formatted_private_price
+								raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
+								private_price = raw_private_price.text.split()
+								formatted_private_price = f"Private Low: {private_price[0]} | Private High: {private_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						intents = discord.Intents.default()
+						client = discord.Client(intents=intents)
+						await message.channel.send(formatted_poor_price)
+						await message.channel.send(formatted_trade_price)
+						await message.channel.send(formatted_best_price)
+						await message.channel.send(formatted_foreCourt_price)
+						await message.channel.send(formatted_private_price)
+				except Exception as e:
+					logging.error(e,exc_info=True)
+			else:
+				await asyncio.sleep(2)
+				or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+				check_or_less = or_less_check.text
+				if "or less" in check_or_less:
+					await or_less()
+				else:
 					try:
-						hpi_span1_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-						hpi_span1_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-						global hpi_span1_low_data
-						global hpi_span1_high_data
-						hpi_span1_low_data = hpi_span1_low.text.strip()
-						hpi_span1_high_data = hpi_span1_high.text.strip()
-					except Exception as e:
+						cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
+						cookies.click();
+					except TimeoutException as e:
 						logging.error(e,exc_info=True)
-
+					try:
+						raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+						good_price = raw_trade_price.text.split("\n")
+						formatted_trade_price = f"Trade good low: {good_price[0]} | Trade good high: {good_price[2]} "
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
 					try:
 						navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
 						navpoor.click();
 						try:
-							time.sleep(2)
-							hpi_span_low_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-							hpi_span_high_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-							global hpi_span2_low_data
-							global hpi_span2_high_data
-							hpi_span2_low_data = hpi_span_low_poor.text.strip()
-							hpi_span2_high_data = hpi_span_high_poor.text.strip()
+							raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+							poor_price = raw_poor_price.text.split()
+							formatted_poor_price = f"Trade poor low: {poor_price[0]} | Trade poor high: {poor_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
-
 					try:
 						navbest = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[3]")))
 						navbest.click();
 						try:
-							time.sleep(2)
-							hpi_span_low_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-							hpi_span_high_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-							global hpi_span3_low_data
-							global hpi_span3_high_data
-							hpi_span3_low_data = hpi_span_low_best.text.strip()
-							hpi_span3_high_data = hpi_span_high_best.text.strip()
+							raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+							best_price = raw_best_price.text.split()
+							formatted_best_price = f"Trade best low: {best_price[0]} | Trade best high: {best_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -293,12 +387,9 @@ async def reg(message, *args):
 						navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
 						navforeCourt.click();
 						try:
-							global foreCourt_low_data
-							global foreCourt_high_data
-							foreCourt_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
-							foreCourt_low_data = foreCourt_low.text.split()
-							foreCourt_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
-							foreCourt_high_data = foreCourt_high.text.split()
+							raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
+							foreCourt_price = raw_foreCourt_price.text.split()
+							formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | Forecourt High: {foreCourt_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -307,116 +398,21 @@ async def reg(message, *args):
 						navprivate = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]")))
 						navprivate.click();
 						try:
-							global private_low_data
-							global private_high_data
-							private_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
-							private_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
-							private_low_data = private_low.text.split()
-							private_high_data = private_high.text.split()
+							raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
+							private_price = raw_private_price.text.split()
+							formatted_private_price = f"Private Low: {private_price[0]} | Private High: {private_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 					intents = discord.Intents.default()
 					client = discord.Client(intents=intents)
-					await message.channel.send(f"trade_poor_low: {hpi_span2_low_data}")
-					await message.channel.send(f"trade_poor_high: {hpi_span2_high_data}")
-					await message.channel.send(f"trade_good_low: {hpi_span1_low_data}")
-					await message.channel.send(f"trade_good_high:  {hpi_span1_high_data}")
-					await message.channel.send(f"trade_best_low: {hpi_span3_low_data}")
-					await message.channel.send(f"trade_best_high: {hpi_span3_high_data}")
-					await message.channel.send(f"foreCourt_low: {foreCourt_low_data}")
-					await message.channel.send(f"foreCourt_high: {foreCourt_high_data}")
-					await message.channel.send(f"private_low: {private_low_data}")
-					await message.channel.send(f"private_high: {private_high_data}")
+					await message.channel.send(formatted_poor_price)
+					await message.channel.send(formatted_trade_price)
+					await message.channel.send(formatted_best_price)
+					await message.channel.send(formatted_foreCourt_price)
+					await message.channel.send(formatted_private_price)
 					driver.quit()
-				except Exception as e:
-					#await message.channel.send("Failed to get evaluation link")
-					logging.error(e, exc_info=True)
-			else:
-				await asyncio.sleep(2)
-				try:
-					hpi_span1_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-					hpi_span1_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-					# global hpi_span1_low_data
-					# global hpi_span1_high_data
-					hpi_span1_low_data = hpi_span1_low.text.strip()
-					hpi_span1_high_data = hpi_span1_high.text.strip()
-				except Exception as e:
-					logging.error(e,exc_info=True)
-
-				try:
-					navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
-					navpoor.click();
-					try:
-						time.sleep(2)
-						hpi_span_low_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-						hpi_span_high_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-						# global hpi_span2_low_data
-						# global hpi_span2_high_data
-						hpi_span2_low_data = hpi_span_low_poor.text.strip()
-						hpi_span2_high_data = hpi_span_high_poor.text.strip()
-					except TimeoutException as e:
-						logging.error(e,exc_info=True)
-				except TimeoutException as e:
-					logging.error(e,exc_info=True)
-
-				try:
-					navbest = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[3]")))
-					navbest.click();
-					try:
-						time.sleep(2)
-						hpi_span_low_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-						hpi_span_high_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-						# global hpi_span3_low_data
-						# global hpi_span3_high_data
-						hpi_span3_low_data = hpi_span_low_best.text.strip()
-						hpi_span3_high_data = hpi_span_high_best.text.strip()
-					except TimeoutException as e:
-						logging.error(e,exc_info=True)
-				except TimeoutException as e:
-					logging.error(e,exc_info=True)
-				try:
-					navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
-					navforeCourt.click();
-					try:
-						# global foreCourt_low_data
-						# global foreCourt_high_data
-						foreCourt_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
-						foreCourt_low_data = foreCourt_low.text.split()
-						foreCourt_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
-						foreCourt_high_data = foreCourt_high.text.split()
-					except TimeoutException as e:
-						logging.error(e,exc_info=True)
-				except TimeoutException as e:
-					logging.error(e,exc_info=True)
-				try:
-					navprivate = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]")))
-					navprivate.click();
-					try:
-						# global private_low_data
-						# global private_high_data
-						private_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
-						private_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
-						private_low_data = private_low.text.split()
-						private_high_data = private_high.text.split()
-					except TimeoutException as e:
-						logging.error(e,exc_info=True)
-				except TimeoutException as e:
-					logging.error(e,exc_info=True)				
-				intents = discord.Intents.default()
-				client = discord.Client(intents=intents)
-				await message.channel.send(f"trade_poor_low: {hpi_span2_low_data}")
-				await message.channel.send(f"trade_poor_high: {hpi_span2_high_data}")
-				await message.channel.send(f"trade_good_low: {hpi_span1_low_data}")
-				await message.channel.send(f"trade_good_high:  {hpi_span1_high_data}")
-				await message.channel.send(f"trade_best_low: {hpi_span3_low_data}")
-				await message.channel.send(f"trade_best_high: {hpi_span3_high_data}")
-				await message.channel.send(f"foreCourt_low: {foreCourt_low_data}")
-				await message.channel.send(f"foreCourt_high: {foreCourt_high_data}")
-				await message.channel.send(f"private_low: {private_low_data}")
-				await message.channel.send(f"private_high: {private_high_data}")
-				driver.quit()
 		except Exception as e:
 			#await message.channel.send("Failed to get evaluation link")
 			logging.error(e, exc_info=True)
