@@ -64,6 +64,7 @@ foreCourt_low_data = ''
 foreCourt_high_data = ''
 private_low_data = ''
 private_high_data = ''
+hpi_span1_low = ''
 
 def ranFName():
 	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
@@ -217,6 +218,7 @@ async def reg(message, *args):
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
 			try:
+				global hpi_span1_low
 				hpi_span1_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
