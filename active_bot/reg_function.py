@@ -401,7 +401,6 @@ async def reg(message, *args):
 					logging.error(e,exc_info=True)				
 				intents = discord.Intents.default()
 				client = discord.Client(intents=intents)
-				hpi_trade_low = span.text.split()[0]
 				await message.channel.send(f"trade_poor_low: ", hpi_span2_low_data," | ","trade_poor_high: ", hpi_span2_high_data)
 				await message.channel.send(f"trade_good_low: ", hpi_span1_low_data," | ","trade_good_high: ", hpi_span1_high_data)
 				await message.channel.send(f"trade_best_low: ", hpi_span3_low_data," | ","trade_best_high: ", hpi_span3_high_data)
