@@ -121,8 +121,9 @@ with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\em
 ##########################
 # proxy_usage_counter = 0
 
-async def or_less():
-	driver=webdriver.Chrome()
+async def or_less(message):
+	intents = discord.Intents.default()
+	client = discord.Client(intents=intents)
 	try:
 		cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
 		cookies.click();
@@ -156,8 +157,6 @@ async def or_less():
 			logging.error(e,exc_info=True)
 	except TimeoutException as e:
 		logging.error(e,exc_info=True)
-	intents = discord.Intents.default()
-	client = discord.Client(intents=intents)
 	await message.channel.send(or_less_data)
 	await message.channel.send(formatted_foreCourt_price)
 	await message.channel.send(formatted_private_price)
@@ -179,6 +178,7 @@ async def reg(message, *args):
 		#await message.channel.send("Current proxy: "+proxy)
 		#await message.channel.send("Current user_agent: "+user_agent)
 		driver_options.add_argument("--start-maximized")
+		global driver
 		driver = webdriver.Chrome(options = driver_options)
 		try:
 			driver.get('https://hpivaluations.com')
