@@ -247,74 +247,74 @@ async def reg(message, *args):
 				try:
 					driver.get(val_link)
 					try:
-							hpi_span1_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-							hpi_span1_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-							global hpi_span1_low_data
-							global hpi_span1_high_data
-							hpi_span1_low_data = hpi_span1_low.text.strip()
-							hpi_span1_high_data = hpi_span1_high.text.strip()
-						except Exception as e:
-							logging.error(e,exc_info=True)
+						hpi_span1_low = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
+						hpi_span1_high = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
+						global hpi_span1_low_data
+						global hpi_span1_high_data
+						hpi_span1_low_data = hpi_span1_low.text.strip()
+						hpi_span1_high_data = hpi_span1_high.text.strip()
+					except Exception as e:
+						logging.error(e,exc_info=True)
 
+					try:
+						navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
+						navpoor.click();
 						try:
-							navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
-							navpoor.click();
-							try:
-								time.sleep(2)
-								hpi_span_low_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-								hpi_span_high_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-								global hpi_span2_low_data
-								global hpi_span2_high_data
-								hpi_span2_low_data = hpi_span_low_poor.text.strip()
-								hpi_span2_high_data = hpi_span_high_poor.text.strip()
-							except TimeoutException as e:
-								logging.error(e,exc_info=True)
+							time.sleep(2)
+							hpi_span_low_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
+							hpi_span_high_poor = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
+							global hpi_span2_low_data
+							global hpi_span2_high_data
+							hpi_span2_low_data = hpi_span_low_poor.text.strip()
+							hpi_span2_high_data = hpi_span_high_poor.text.strip()
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
 
+					try:
+						navbest = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[3]")))
+						navbest.click();
 						try:
-							navbest = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[3]")))
-							navbest.click();
-							try:
-								time.sleep(2)
-								hpi_span_low_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
-								hpi_span_high_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
-								global hpi_span3_low_data
-								global hpi_span3_high_data
-								hpi_span3_low_data = hpi_span_low_best.text.strip()
-								hpi_span3_high_data = hpi_span_high_best.text.strip()
-							except TimeoutException as e:
-								logging.error(e,exc_info=True)
+							time.sleep(2)
+							hpi_span_low_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]/span[1]")))
+							hpi_span_high_best = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]/span[1]")))
+							global hpi_span3_low_data
+							global hpi_span3_high_data
+							hpi_span3_low_data = hpi_span_low_best.text.strip()
+							hpi_span3_high_data = hpi_span_high_best.text.strip()
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+					try:
+						navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
+						navforeCourt.click();
 						try:
-							navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
-							navforeCourt.click();
-							try:
-								global foreCourt_low_data
-								global foreCourt_high_data
-								foreCourt_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
-								foreCourt_low_data = foreCourt_low.text.split()
-								foreCourt_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
-								foreCourt_high_data = foreCourt_high.text.split()
-							except TimeoutException as e:
-								logging.error(e,exc_info=True)
+							global foreCourt_low_data
+							global foreCourt_high_data
+							foreCourt_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
+							foreCourt_low_data = foreCourt_low.text.split()
+							foreCourt_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
+							foreCourt_high_data = foreCourt_high.text.split()
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+					try:
+						navprivate = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]")))
+						navprivate.click();
 						try:
-							navprivate = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]")))
-							navprivate.click();
-							try:
-								global private_low_data
-								global private_high_data
-								private_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
-								private_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
-								private_low_data = private_low.text.split()
-								private_high_data = private_high.text.split()
-							except TimeoutException as e:
-								logging.error(e,exc_info=True)
+							global private_low_data
+							global private_high_data
+							private_low = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[1]/span[1]")))
+							private_high = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div/div/span[3]/span[1]")))
+							private_low_data = private_low.text.split()
+							private_high_data = private_high.text.split()
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
 					intents = discord.Intents.default()
 					client = discord.Client(intents=intents)
 					await message.channel.send(f"trade_poor_low: ", hpi_span2_low_data," | ","trade_poor_high: ", hpi_span2_high_data,"\n",
