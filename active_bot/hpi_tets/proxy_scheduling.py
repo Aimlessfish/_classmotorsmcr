@@ -19,6 +19,8 @@ timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 session = requests.Session() 
 
 def testProxy():
+	now = datetime.datetime.now()
+	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
     print(f"[{timestamp}] {info_statement} [Console]: Checking proxies.")
     with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","r") as f:
         proxy_list = f.read().split('\n')
@@ -45,6 +47,8 @@ def testProxy():
     print(f"[{timestamp}] {info_statement} [Console]: proxies checked.")
 
 def get_newProxy():
+	now = datetime.datetime.now()
+	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
     print(f"[{timestamp}] {info_statement} [Console]: Clearing `working.txt`")
     with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","a") as f:
         f.truncate(0)
@@ -58,6 +62,8 @@ def get_newProxy():
     print(f"[{timestamp}] {info_statement} [Console]: new proxies added.")
 
 async def run_schedule():
+    print(f"[{timestamp}] {info_statement} [Console]: Starting schedule!")
+
 	schedule.every().day.at("06:00").do(get_newProxy)
 	schedule.every().day.at("06:02").do(testProxy)
 	#schedule.every().day.at("06:00").do(lambda: asyncio.create_task(startScrape()))
