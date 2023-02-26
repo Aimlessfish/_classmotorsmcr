@@ -37,10 +37,8 @@ async def on_message(message):
         return
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
-            args = message.content.split()[1]
-            arguments = "".join(args)
-            kwargs = message.content.split()[2]
-            miles = "".join(kwargs)
+            args = message.content.split()[1:3]
+            registration, miles = args
             now = datetime.datetime.now()
             timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
             print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {arguments}")
@@ -48,7 +46,7 @@ async def on_message(message):
             await message.channel.send("If I do not reply after 3 minuntes please retry.")
             with open('reg.txt', 'w') as f:
                 f.write(arguments)
-            await reg(message, *args)
+            await reg(message, registration, miles)
 
 
 @client.event
