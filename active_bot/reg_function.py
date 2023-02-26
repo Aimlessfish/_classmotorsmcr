@@ -317,7 +317,7 @@ async def reg(message, *args):
 							global formatted_trade_price
 							raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 							good_price = raw_trade_price.text.split("\n")
-							formatted_trade_price = f"Trade good low: {good_price[0]} | Trade good high: {good_price[2]} "
+							formatted_trade_price = f"Trade good low: {good_price[0]} | {good_price[2]} "
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
@@ -328,7 +328,7 @@ async def reg(message, *args):
 								global formatted_poor_price
 								raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 								poor_price = raw_poor_price.text.split()
-								formatted_poor_price = f"Trade poor low: {poor_price[0]} | Trade poor high: {poor_price[2]}"
+								formatted_poor_price = f"Trade poor low: {poor_price[0]} | {poor_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -341,7 +341,7 @@ async def reg(message, *args):
 								global formatted_best_price
 								raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 								best_price = raw_best_price.text.split()
-								formatted_best_price = f"Trade best low: {best_price[0]} | Trade best high: {best_price[2]}"
+								formatted_best_price = f"Trade best low: {best_price[0]} | {best_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -354,7 +354,7 @@ async def reg(message, *args):
 								global formatted_foreCourt_price
 								raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 								foreCourt_price = raw_foreCourt_price.text.split()
-								formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | Forecourt High: {foreCourt_price[2]}"
+								formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | {foreCourt_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -367,7 +367,7 @@ async def reg(message, *args):
 								global formatted_private_price
 								raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 								private_price = raw_private_price.text.split()
-								formatted_private_price = f"Private Low: {private_price[0]} | Private High: {private_price[2]}"
+								formatted_private_price = f"Private Low: {private_price[0]} | {private_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -408,7 +408,7 @@ async def reg(message, *args):
 					try:
 						raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 						good_price = raw_trade_price.text.split("\n")
-						formatted_trade_price = f"Trade good low: {good_price[0]} | Trade good high: {good_price[2]} "
+						formatted_trade_price = f"Trade good low: {good_price[0]} | {good_price[2]} "
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 					try:
@@ -417,7 +417,7 @@ async def reg(message, *args):
 						try:
 							raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 							poor_price = raw_poor_price.text.split()
-							formatted_poor_price = f"Trade poor low: {poor_price[0]} | Trade poor high: {poor_price[2]}"
+							formatted_poor_price = f"Trade poor low: {poor_price[0]} | {poor_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -428,7 +428,7 @@ async def reg(message, *args):
 						try:
 							raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 							best_price = raw_best_price.text.split()
-							formatted_best_price = f"Trade best low: {best_price[0]} | Trade best high: {best_price[2]}"
+							formatted_best_price = f"Trade best low: {best_price[0]} | {best_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -439,7 +439,7 @@ async def reg(message, *args):
 						try:
 							raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 							foreCourt_price = raw_foreCourt_price.text.split()
-							formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | Forecourt High: {foreCourt_price[2]}"
+							formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | {foreCourt_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -450,7 +450,7 @@ async def reg(message, *args):
 						try:
 							raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 							private_price = raw_private_price.text.split()
-							formatted_private_price = f"Private Low: {private_price[0]} | Private High: {private_price[2]}"
+							formatted_private_price = f"Private Low: {private_price[0]} | {private_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
