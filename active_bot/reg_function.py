@@ -309,7 +309,7 @@ async def reg(message, *args):
 							global formatted_mileage
 							milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 							mileage_cnt = milelage_str.text.split()
-							formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt}"
+							formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt[0]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
@@ -375,13 +375,13 @@ async def reg(message, *args):
 						intents = discord.Intents.default()
 						client = discord.Client(intents=intents)
 						await message.channel.send(formatted_mileage)
-						await message.channel.send(" ")
+						await message.channel.send("------------------------------------")
 						await message.channel.send(formatted_poor_price)
 						await message.channel.send(formatted_trade_price)
 						await message.channel.send(formatted_best_price)
-						await message.channel.send(" ")
+						await message.channel.send("------------------------------------")
 						await message.channel.send(formatted_private_price)
-						await message.channel.send(" ")
+						await message.channel.send("------------------------------------")
 						await message.channel.send(formatted_foreCourt_price)
 						driver.quit()
 				except Exception as e:
@@ -402,7 +402,7 @@ async def reg(message, *args):
 						#milage counter
 						milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 						mileage_cnt = milelage_str.text.split()
-						formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt}"
+						formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt[0]}"
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)						
 					try:
@@ -458,13 +458,13 @@ async def reg(message, *args):
 					intents = discord.Intents.default()
 					client = discord.Client(intents=intents)
 					await message.channel.send(formatted_mileage)
-					await message.channel.send(" ")
+					await message.channel.send("------------------------------------")
 					await message.channel.send(formatted_poor_price)
 					await message.channel.send(formatted_trade_price)
 					await message.channel.send(formatted_best_price)
-					await message.channel.send(" ")
+					await message.channel.send("------------------------------------")
 					await message.channel.send(formatted_private_price)
-					await message.channel.send(" ")
+					await message.channel.send("------------------------------------")
 					await message.channel.send(formatted_foreCourt_price)
 					driver.quit()
 		except Exception as e:
