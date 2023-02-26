@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
 import schedule
+import asyncio
 
 
 info_statement = "[INFO    ]"
@@ -154,3 +155,5 @@ async def run_schedule():
 	while True:
 	    schedule.run_pending()
 	    await asyncio.sleep(1)
+
+asyncio.run(run_schedule())
