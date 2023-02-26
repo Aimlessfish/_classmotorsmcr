@@ -309,7 +309,7 @@ async def reg(message, *args):
 							global formatted_mileage
 							milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 							mileage_cnt = milelage_str.text.split()
-							formatted_mileage = f"Mileage for reg {*args} | {mileage_cnt}"
+							formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
@@ -398,7 +398,7 @@ async def reg(message, *args):
 						#milage counter
 						milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 						mileage_cnt = milelage_str.text.split()
-						formatted_mileage = f"Mileage for reg {*args} | {mileage_cnt}"
+						formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt}"
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)						
 					try:
