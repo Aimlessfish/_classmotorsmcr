@@ -142,7 +142,7 @@ async def or_less(message):
 		try:
 			raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 			foreCourt_price = raw_foreCourt_price.text.split()
-			formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | Forecourt High: {foreCourt_price[2]}"
+			formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | High: {foreCourt_price[2]}"
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 	except TimeoutException as e:
@@ -153,7 +153,7 @@ async def or_less(message):
 		try:
 			raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 			private_price = raw_private_price.text.split()
-			formatted_private_price = f"Private Low: {private_price[0]} | Private High: {private_price[2]}"
+			formatted_private_price = f"Private Low: {private_price[0]} | High: {private_price[2]}"
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 	except TimeoutException as e:
@@ -321,7 +321,7 @@ async def reg(message, registration, miles):
 							global formatted_mileage
 							milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 							mileage_cnt = milelage_str.text.split()
-							formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt[0]}"
+							formatted_mileage = f"Mileage for reg {registration} | High: {mileage_cnt[0]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
@@ -329,7 +329,7 @@ async def reg(message, registration, miles):
 							global formatted_trade_price
 							raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 							good_price = raw_trade_price.text.split("\n")
-							formatted_trade_price = f"Trade good: {good_price[0]} | {good_price[2]} "
+							formatted_trade_price = f"Trade good Low: {good_price[0]} | High: {good_price[2]} "
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
@@ -340,7 +340,7 @@ async def reg(message, registration, miles):
 								global formatted_poor_price
 								raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 								poor_price = raw_poor_price.text.split()
-								formatted_poor_price = f"Trade poor: {poor_price[0]} | {poor_price[2]}"
+								formatted_poor_price = f"Trade poor Low: {poor_price[0]} | High: {poor_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -353,7 +353,7 @@ async def reg(message, registration, miles):
 								global formatted_best_price
 								raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 								best_price = raw_best_price.text.split()
-								formatted_best_price = f"Trade best: {best_price[0]} | {best_price[2]}"
+								formatted_best_price = f"Trade best Low: {best_price[0]} | High: {best_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -366,7 +366,7 @@ async def reg(message, registration, miles):
 								global formatted_foreCourt_price
 								raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 								foreCourt_price = raw_foreCourt_price.text.split()
-								formatted_foreCourt_price = f"Forecourt: {foreCourt_price[0]} | {foreCourt_price[2]}"
+								formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | High: {foreCourt_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -379,7 +379,7 @@ async def reg(message, registration, miles):
 								global formatted_private_price
 								raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 								private_price = raw_private_price.text.split()
-								formatted_private_price = f"Private: {private_price[0]} | {private_price[2]}"
+								formatted_private_price = f"Private: {private_price[0]} | High: {private_price[2]}"
 							except TimeoutException as e:
 								logging.error(e,exc_info=True)
 						except TimeoutException as e:
@@ -426,13 +426,13 @@ async def reg(message, registration, miles):
 						#milage counter
 						milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 						mileage_cnt = milelage_str.text.split()
-						formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt[0]}"
+						formatted_mileage = f"Mileage for reg {registration} | High: {mileage_cnt[0]}"
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)						
 					try:
 						raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 						good_price = raw_trade_price.text.split("\n")
-						formatted_trade_price = f"Trade good low: {good_price[0]} | {good_price[2]} "
+						formatted_trade_price = f"Trade good Low: {good_price[0]} | High: {good_price[2]} "
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 					try:
@@ -441,7 +441,7 @@ async def reg(message, registration, miles):
 						try:
 							raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 							poor_price = raw_poor_price.text.split()
-							formatted_poor_price = f"Trade poor: {poor_price[0]} | {poor_price[2]}"
+							formatted_poor_price = f"Trade poor Low: {poor_price[0]} | High: {poor_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -452,7 +452,7 @@ async def reg(message, registration, miles):
 						try:
 							raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 							best_price = raw_best_price.text.split()
-							formatted_best_price = f"Trade best: {best_price[0]} | {best_price[2]}"
+							formatted_best_price = f"Trade best Low: {best_price[0]} | High: {best_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -463,7 +463,7 @@ async def reg(message, registration, miles):
 						try:
 							raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 							foreCourt_price = raw_foreCourt_price.text.split()
-							formatted_foreCourt_price = f"Forecourt: {foreCourt_price[0]} | {foreCourt_price[2]}"
+							formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | High: {foreCourt_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
@@ -474,7 +474,7 @@ async def reg(message, registration, miles):
 						try:
 							raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
 							private_price = raw_private_price.text.split()
-							formatted_private_price = f"Private: {private_price[0]} | {private_price[2]}"
+							formatted_private_price = f"Private Low: {private_price[0]} | High: {private_price[2]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 					except TimeoutException as e:
