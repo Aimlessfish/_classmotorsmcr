@@ -31,13 +31,18 @@ print(f"[{timestamp}] {info_statement} [bot]: Loading...")
     #         f.write(arguments)
     #     await reg(message, *args)
 async def on_message(message):
+    now = datetime.datetime.now()
+    timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
     if message.author == client.user:
         return
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
             args = message.content.split()[1:]
             arguments = "".join(args)
+            now = datetime.datetime.now()
+            timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
             print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {arguments}")
+            await message.channel.send("Please wait while i get the values..")
             with open('reg.txt', 'w') as f:
                 f.write(arguments)
             await reg(message, *args)
@@ -45,6 +50,8 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+    now = datetime.datetime.now()
+    timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
     print(f'[{timestamp}] {info_statement} Logged in as [{client.user}]')
     await client.wait_until_ready()
     guilds = client.guilds
