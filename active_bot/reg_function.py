@@ -164,9 +164,9 @@ async def or_less(message):
 	await message.channel.send(formatted_private_price)
 
 
-async def reg(message, *args, **arg_miles):
+async def reg(message, *args, **kwargs):
 	registration = str(*args)
-	mileage = str(**arg_miles)
+	mileage = int(**kwargs)
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
