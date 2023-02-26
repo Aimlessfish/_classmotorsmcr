@@ -30,8 +30,6 @@ import datetime
 # global 
 # settings
 ##########
-now = datetime.datetime.now()
-timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 info_statement = "[INFO    ]"
 leads_channel_id = ""
 
@@ -56,17 +54,17 @@ class randoms:
 		pass
 
 	def ranFName(self):
-		with open(r"required_list\names.txt","r") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 			first = f.readlines()
 		return random.choice(first).strip()
 
 	def ranLName(self):
-		with open(r"required_list\names.txt","r") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 			last = f.readlines()
 		return random.choice(last).strip()
 
 	def randomEmail_name(self):
-	    with open(r"required_list\names.txt", "r") as f:
+	    with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt", "r") as f:
 	        names = f.readlines()
 	    return random.choice(names).strip()
 
@@ -77,7 +75,7 @@ class randoms:
 
 
 	def hpi_name(self):
-		with open(r"required_list\names.txt","r") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 			names = f.readlines()
 		name = random.choice(names).strip()
 		return name[:len(name)//2]+" "+name[len(name)//2]
@@ -88,7 +86,7 @@ class randoms:
 		return phone_number
 
 	def random_address(self):
-	    with open(r"required_list\addresses.txt","r") as f:
+	    with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\addresses.txt","r") as f:
 	        addresses = f.readlines()
 	        ranAdd = random.choice(addresses).strip('"\n')
 	    street_town, postcode = ranAdd.rsplit(',',1)
@@ -99,7 +97,7 @@ class randoms:
 
 	def createEmail(self):
 		ranEmail = self.randomEmail_name()+"."+self.random_phone()+"@yopmail.com"
-		with open(r"required_list\email.txt","w") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
 			f.write(ranEmail)
 			f.close()
 		return ranEmail
@@ -115,10 +113,10 @@ ranDom = randoms()
 ###############################
 
 async def evaltuate():
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\working.txt") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt") as f:
  		proxies = f.readlines()
  		proxy = random.choice(proxies).strip()
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\user-agents.txt") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
 		user_agents = f.readlines()
 		user_agent = random.choice(user_agents).strip()
 	driver_options.add_argument("--proxy-server=http://"+proxy)
@@ -126,7 +124,7 @@ async def evaltuate():
 	driver = webdriver.Chrome(options=driver_options)
 
 	#define url_pool as urls.txt
-	url_pool = open(r"C:\Users\notWill\Desktop\bot\cars\main\urls.txt","r").readlines()
+	url_pool = open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt","r").readlines()
 	i = 0
 	#handle cookies
 	driver.get("https://autotrader.co.uk")
@@ -356,7 +354,7 @@ async def evaltuate():
 			try:
 				find_nplate_P = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html[1]/body[1]/div[4]/div[2]/div[1]/div[2]/div[1]/p[2]")))
 				nplate = find_nplate_P.text.split()[-1]
-				with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\reg.txt","a") as f:
+				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\reg.txt","a") as f:
 					f.write(nplate+"\n")
 				#await message.channel.send(nplate)
 			except TimeoutException as e:
@@ -366,10 +364,10 @@ async def evaltuate():
 # get hpivaluation values
 ##########################
 			try:
-				with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\working.txt") as f:
+				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt") as f:
 					proxies = f.readlines()
 					proxy = random.choice(proxies).strip()
-				with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\user-agents.txt") as f:
+				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
 					user_agents = f.readlines()
 					user_agent = random.choice(user_agents).strip()
 				driver_options.add_argument("--proxy-server=http://"+proxy)
@@ -463,92 +461,145 @@ async def evaltuate():
 					logging.error(e, exc_info=True)
 					#get hpi_price 
 				try:
-					driver.get(val_link) #go to hpi valuation
-					await asyncio.sleep(2)
-					try:
-						WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler"))).click();
-					except TimeoutException as e:
-						logging.error(e,exc_info=True)
-					try:
-						span = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
-						hpi_trade_low = span.text.split()[0]
-					except TimeoutException as e:
-						logging.error(e, exc_info=True)
-					try:
-						listingInt = int(listing_price.replace("£", "").replace(",", ""))
-						if hpi_trade_low:
-							hpi_lowInt = int(hpi_trade_low.replace("£", "").replace(",", ""))
-						else:
-							print("Error: hpi_trade_low is an empty string.")
-						if (listingInt <= hpi_lowInt):
-							await leads_channel_id.send("--------------------------------------------------------")
-							await leads_channel_id.send("						new lead						")
-							await leads_channel_id.send("--------------------------------------------------------")
-							await leads_channel_id.send("Registration: "+nplate)
-							await leads_channel_id.send("Listing price: "+listing_price)
-							await leads_channel_id.send("HPI trade low: "+hpi_trade_low)
-							await leads_channel_id.send("--------------------------------------------------------")
-							await leads_channel_id.send("AutoTrader URL: "+auto_trader_url)
-					except Exception as e:
-						logging.error(e,exc_info=True)
+					driver.get('https://yopmail.com')
+				except TimeoutException as e:
+					logging.error(e, exc_info=True)							
+				try:
+					WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#accept"))).click();
+				except TimeoutException as e:
+					logging.error (e, exc_info=True)
+				try:
+					login=WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#login")))
+					login.click()
+					login.send_keys(ranEmail)
+					time.sleep(1)
+					WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,".material-icons-outlined.f36"))).click();
+					iframe = driver.find_element(By.ID,"ifmail")
+					driver.switch_to.frame(iframe)
+					valuation = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//a[normalize-space()='View valuation']")))
+					val_link = valuation.get_attribute("href")
+
 				except Exception as e:
-					#await message.channel.send("Failed to get evaluation link")
+					#await message.channel.send("Failed to retrieve mailbox.")
 					logging.error(e, exc_info=True)
+				#get hpi_price 
+				try:
+					driver.get(val_link)
+					or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+					check_or_less = or_less_check.text
+					if "or less" in check_or_less:
+						await or_less()
+					else:
+						try:
+							cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
+							cookies.click();
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						await asyncio.sleep(2)
+						try:
+							span_mileage = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]/span")))
+							span_mileage.click();
+							span_mileage_input = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/div/div/div/div/div/input")))
+							span_mileage_input.click();
+							span_mileage_input.clear()
+							span_mileage_input.send_keys(miles)
+							span_mileage_submit = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/div/div/div/div/button[2]")))
+							span_mileage_submit.click();
+							await asyncio.sleep(3)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)						
+						try:
+							#milage counter
+							global mileage_cnt
+							global formatted_mileage
+							milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
+							mileage_cnt = milelage_str.text.split()
+							formatted_mileage = f"Mileage for reg {registration} | High: {mileage_cnt[0]}"
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							global good_price
+							global formatted_trade_price
+							raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+							good_price = raw_trade_price.text.split("\n")
+							formatted_trade_price = f"Trade good Low: {good_price[0]} | High: {good_price[2]} "
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
+							navpoor.click();
+							try:
+								global poor_price
+								global formatted_poor_price
+								raw_poor_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+								poor_price = raw_poor_price.text.split()
+								formatted_poor_price = f"Trade poor Low: {poor_price[0]} | High: {poor_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navbest = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[3]")))
+							navbest.click();
+							try:
+								global best_price
+								global formatted_best_price
+								raw_best_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
+								best_price = raw_best_price.text.split()
+								formatted_best_price = f"Trade best Low: {best_price[0]} | High: {best_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
+							navforeCourt.click();
+							try:
+								global foreCourt_price
+								global formatted_foreCourt_price
+								raw_foreCourt_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
+								foreCourt_price = raw_foreCourt_price.text.split()
+								formatted_foreCourt_price = f"Forecourt Low: {foreCourt_price[0]} | High: {foreCourt_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							navprivate = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[1]")))
+							navprivate.click();
+							try:
+								global private_price
+								global formatted_private_price
+								raw_private_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]")))
+								private_price = raw_private_price.text.split()
+								formatted_private_price = f"Private: {private_price[0]} | High: {private_price[2]}"
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						intents = discord.Intents.default()
+						client = discord.Client(intents=intents)
+						await leads_channel.send("--------------NEW LEAD--------------")
+						await leads_channel.send(formatted_mileage)
+						await leads_channel.send("------------------------------------")
+						await leads_channel.send(formatted_poor_price)
+						await leads_channel.send(formatted_trade_price)
+						await leads_channel.send(formatted_best_price)
+						await leads_channel.send("------------------------------------")
+						await leads_channel.send(formatted_private_price)
+						await leads_channel.send("------------------------------------")
+						await leads_channel.send(formatted_foreCourt_price)
+						await leads_channel.send("------------------------------------")
+						await leads_channel.send(auto_trader_url)
+						driver.quit()
+				except Exception as e:
+					logging.error(e,exc_info=True)
 			except TimeoutException as e:
 				logging.error(e, exc_info=True)
 				#await message.channel.send("hpivaluations unavailable")
 		except TimeoutException as e:
 			logging.error(e, exc_info=True)
 			#await message.channel.send(f"Finance option unavailable.")
-
-
-
-
-
-
-		# 			await asyncio.sleep(2)
-		# 			try:
-		# 				WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler"))).click();
-		# 			except TimeoutException as e:
-		# 				logging.error(e,exc_info=True)
-		# 			try:
-		# 				global span2
-		# 				span2 = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[3]")))
-		# 			except TimeoutException as e:
-		# 				logging.error(e,exc_info=True)
-		# 			if not span2:
-		# 				span = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"valuation__value__price__content")))
-		# 				hpi_trade_low = span.text.split()[0]
-		# 			else:
-		# 				hpi_trade_low = span.text.split()[0]
-		# 				hpi_trade_hi = span2.text.split()[0]
-		# 				#await message.channel.send(hpi_trade_low + hpi_trade_hi)
-		# 			try:
-		# 				listingInt = int(listing_price.replace("£", "").replace(",", ""))
-		# 				if hpi_trade_low:
-		# 					hpi_lowInt = int(hpi_trade_low.replace("£", "").replace(",", ""))
-		# 				else:
-		# 					print("Error: hpi_trade_low is an empty string.")
-		# 				if (listingInt <= hpi_lowInt):
-		# 					await leads_channel_id.send("--------------------------------------------------------")
-		# 					await leads_channel_id.send("						new lead						")
-		# 					await leads_channel_id.send("--------------------------------------------------------")
-		# 					await leads_channel_id.send("Registration: "+nplate)
-		# 					await leads_channel_id.send("Listing price: "+listing_price)
-		# 					await leads_channel_id.send("HPI trade low: "+hpi_trade_low)
-		# 					await leads_channel_id.send("--------------------------------------------------------")
-		# 					await leads_channel_id.send("AutoTrader URL: "+auto_trader_url)
-		# 			except Exception as e:
-		# 				logging.error(e,exc_info=True)
-		# 		except Exception as e:
-		# 			#await message.channel.send("Failed to get evaluation link")
-		# 			logging.error(e, exc_info=True)
-		# 	except TimeoutException as e:
-		# 		logging.error(e, exc_info=True)
-		# 		#await message.channel.send("hpivaluations unavailable")
-		# except TimeoutException as e:
-		# 	logging.error(e, exc_info=True)
-		# 	#await message.channel.send(f"Finance option unavailable.")
 	pass
 
 
@@ -557,10 +608,10 @@ async def startScrape():
 	max_retry = 3
 	while retry_counter < max_retry:
 		print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
-		with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\proxy.txt") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
 			proxies = f.readlines()
 			proxy = random.choice(proxies).strip()
-		with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\user-agents.txt") as f:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
 			user_agents = f.readlines()
 			user_agent = random.choice(user_agents).strip()
 		driver_options.add_argument("--proxy-server=http://"+proxy)
@@ -638,10 +689,10 @@ async def startScrape():
 			html = driver.page_source
 			soup = BeautifulSoup(html, 'html.parser')
 
-			with open(r'required_list\urls.txt', 'r') as file:
+			with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'r') as file:
 				existing_urls = file.readlines()
 
-			with open(r'required_list\urls.txt', 'a') as file:
+			with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'a') as file:
 				for article in soup.find_all('article', class_='product-card js-standout-listing'):
 					a_tag = article.find('a', class_='js-click-handler listing-fpa-link tracking-standard-link')
 					if a_tag:
@@ -720,6 +771,8 @@ async def run_schedule():
 
 @client.event
 async def on_ready():
+	now = datetime.datetime.now()
+	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
     print(f'[{timestamp}] {info_statement} Logged in as [{client.user}]')
     await client.wait_until_ready()
     guilds = client.guilds
@@ -729,8 +782,8 @@ async def on_ready():
         for channel in guild.channels:
             if channel.name == 'leads':
                 print(f'[{timestamp}] {info_statement} - Found leads-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
-                global leads_channel_id
-                leads_channel_id = client.get_channel(channel.id)
+                global leads_channel
+                leads_channel = client.get_channel(channel.id)
     asyncio.create_task(run_schedule())
 
 if __name__ == '__main__':
