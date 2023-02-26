@@ -375,7 +375,7 @@ async def reg(message, *args):
 				or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 				check_or_less = or_less_check.text
 				if "or less" in check_or_less:
-					await or_less()
+					await or_less(message)
 				else:
 					try:
 						cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
