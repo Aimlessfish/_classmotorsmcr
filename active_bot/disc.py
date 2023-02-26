@@ -5,6 +5,9 @@ import logging
 import schedule
 import time
 import datetime
+import os 
+
+os.system("title !reg listener")
 
 info_statement = "[INFO    ]"
 now = datetime.datetime.now()

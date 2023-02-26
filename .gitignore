@@ -5,3 +5,5 @@ required_list/email.txt
 required_list/proxy.txt
 required_list/working.txt
 active_bot/errors.log
+*.log
+*.txt

@@ -10,6 +10,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import datetime
 import schedule
 import asyncio
+import os
+
+os.system("title ProxySchedule")
 
 
 info_statement = "[INFO    ]"
