@@ -604,6 +604,8 @@ async def evaltuate():
 
 
 async def startScrape():
+	now = datetime.datetime.now()
+	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
