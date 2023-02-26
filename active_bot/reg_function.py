@@ -165,8 +165,8 @@ async def or_less(message):
 
 
 async def reg(message, *args, **kwargs):
-	registration = str(*args)
-	mileage = int(**kwargs)
+	registration = (*args)
+	mileage = (**kwargs)
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
