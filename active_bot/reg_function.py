@@ -304,6 +304,15 @@ async def reg(message, *args):
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
+							#milage counter
+							global mileage_cnt
+							global formatted_mileage
+							milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
+							mileage_cnt = milelage_str.text.split()
+							formatted_mileage = f"Mileage for reg {*args} | {mileage_cnt}"
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
 							global good_price
 							global formatted_trade_price
 							raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
@@ -365,6 +374,7 @@ async def reg(message, *args):
 							logging.error(e,exc_info=True)
 						intents = discord.Intents.default()
 						client = discord.Client(intents=intents)
+						await message.channel.send(formatted_mileage)
 						await message.channel.send(formatted_poor_price)
 						await message.channel.send(formatted_trade_price)
 						await message.channel.send(formatted_best_price)
@@ -384,6 +394,13 @@ async def reg(message, *args):
 						cookies.click();
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
+					try:
+						#milage counter
+						milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
+						mileage_cnt = milelage_str.text.split()
+						formatted_mileage = f"Mileage for reg {*args} | {mileage_cnt}"
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)						
 					try:
 						raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 						good_price = raw_trade_price.text.split("\n")
@@ -436,6 +453,7 @@ async def reg(message, *args):
 						logging.error(e,exc_info=True)
 					intents = discord.Intents.default()
 					client = discord.Client(intents=intents)
+					await message.channel.send(formatted_mileage)
 					await message.channel.send(formatted_poor_price)
 					await message.channel.send(formatted_trade_price)
 					await message.channel.send(formatted_best_price)
