@@ -41,7 +41,7 @@ async def on_message(message):
             registration, miles = args
             now = datetime.datetime.now()
             timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-            print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {arguments}")
+            print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {registration} with milage: {miles}")
             await message.channel.send("Please wait while i get the values..")
             await message.channel.send("If I do not reply after 3 minuntes please retry.")
             with open('reg.txt', 'w') as f:
