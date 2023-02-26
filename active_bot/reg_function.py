@@ -133,6 +133,7 @@ async def or_less(message):
 		global or_less_data
 		or_less_span = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 		or_less_data = or_less_span.text
+		formatted_or_less = f"Trade price: {or_less_data}"
 	except TimeoutException as e:
 		logging.error(e,exc_info=True)
 	try:
@@ -157,7 +158,8 @@ async def or_less(message):
 			logging.error(e,exc_info=True)
 	except TimeoutException as e:
 		logging.error(e,exc_info=True)
-	await message.channel.send(or_less_data)
+	driver.quit()
+	await message.channel.send(formatted_or_less)
 	await message.channel.send(formatted_foreCourt_price)
 	await message.channel.send(formatted_private_price)
 
