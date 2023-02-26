@@ -39,6 +39,8 @@ async def on_message(message):
         if message.content.startswith('!reg'):
             args = message.content.split()[1:]
             arguments = "".join(args)
+            arg_miles = message.contant.split()[2:]
+            miles = "".join(arg_miles)
             now = datetime.datetime.now()
             timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
             print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {arguments}")

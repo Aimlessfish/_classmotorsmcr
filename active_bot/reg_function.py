@@ -164,8 +164,9 @@ async def or_less(message):
 	await message.channel.send(formatted_private_price)
 
 
-async def reg(message, *args):
+async def reg(message, *args, **arg_miles):
 	registration = str(*args)
+	mileage = str(**arg_miles)
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
@@ -303,6 +304,19 @@ async def reg(message, *args):
 							cookies.click();
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
+						await asyncio.sleep(2)
+						try:
+							span_mileage = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]/span")))
+							span_mileage.click();
+							span_mileage_input = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/div/div/div/div/div/input")))
+							span_mileage_input.click();
+							span_mileage_input.clear()
+							span_mileage_input.send_keys(mileage)
+							span_mileage_submit = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/div/div/div/div/button[2]")))
+							span_mileage_submit.click();
+							await asyncio.sleep(3)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)						
 						try:
 							#milage counter
 							global mileage_cnt

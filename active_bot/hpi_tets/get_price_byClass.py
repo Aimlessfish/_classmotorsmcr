@@ -30,6 +30,18 @@ async def get_values():
 			cookies.click();
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
+		#edit mileage
+		try:
+			span_mileage = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]/span")))
+			span_mileage.click();
+			span_mileage_input = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/div/div/div/div/div/input")))
+			span_mileage_input.click();
+			span_mileage_input.clear()
+			span_mileage_input.send_keys("60000")
+			span_mileage_submit = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/div/div/div/div/button[2]")))
+			span_mileage_submit.click();
+		except TimeoutException as e:
+			logging.error(e,exc_info=True)
 		try:
 			global good_price
 			global formatted_trade_price
@@ -107,7 +119,7 @@ async def or_less():
 		or_less_data = or_less_span.text
 	except TimeoutException as e:
 		logging.error(e,exc_info=True)
-			try:
+		try:
 			navforeCourt = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/ul/li[2]")))
 			navforeCourt.click();
 			try:
