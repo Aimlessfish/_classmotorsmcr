@@ -45,7 +45,7 @@ async def on_message(message):
             await message.channel.send("Please wait while i get the values..")
             await message.channel.send("If I do not reply after 3 minuntes please retry.")
             with open('reg.txt', 'w') as f:
-                f.write(arguments)
+                f.write(registration, miles)
             await reg(message, registration, miles)
 
 
