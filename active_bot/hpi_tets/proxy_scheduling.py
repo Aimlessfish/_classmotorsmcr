@@ -67,102 +67,111 @@ async def run_schedule():
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 	print(f"[{timestamp}] {info_statement} [Console]: Starting schedule!")
 
-	schedule.every().day.at("06:00").do(get_newProxy)
-	schedule.every().day.at("06:02").do(testProxy)
-	#schedule.every().day.at("06:00").do(lambda: asyncio.create_task(startScrape()))
+	times = ["06:00", "06:02", "07:00", "07:02", "07:30", "07:32", "08:00", "08:02", "09:00", "09:02", "09:30", "09:32", "10:00", "10:02", "10:30", "10:32", "12:00", "12:02", "12:30", "12:32", "13:00", "13:02", "13:30", "13:32", "14:00", "14:02", "14:30", "14:32", "15:00", "15:02", "15:30", "15:32", "16:00", "16:02", "16:30", "16:32", "17:00", "17:02", "17:30", "17:32", "18:00", "18:02", "18:30", "18:32", "19:00", "19:02", "19:30", "19:32", "20:00", "20:02", "20:30", "20:32", "21:00", "21:02", "21:30", "21:32", "22:00", "22:02", "22:30", "22:32"]
 
-	schedule.every().day.at("07:00").do(get_newProxy)
-	schedule.every().day.at("07:02").do(testProxy)
-
-	schedule.every().day.at("07:30").do(get_newProxy)
-	schedule.every().day.at("07:32").do(testProxy)
-
-	schedule.every().day.at("08:00").do(get_newProxy)
-	schedule.every().day.at("08:02").do(testProxy)
-
-	schedule.every().day.at("09:00").do(get_newProxy)
-	schedule.every().day.at("09:02").do(testProxy)
-
-	schedule.every().day.at("09:30").do(get_newProxy)
-	schedule.every().day.at("09:32").do(testProxy)
-
-	schedule.every().day.at("10:00").do(get_newProxy)
-	schedule.every().day.at("10:02").do(testProxy)
-
-	schedule.every().day.at("10:30").do(get_newProxy)
-	schedule.every().day.at("10:32").do(testProxy)
-
-	schedule.every().day.at("12:00").do(get_newProxy)
-	schedule.every().day.at("12:02").do(testProxy)
-
-	schedule.every().day.at("12:30").do(get_newProxy)
-	schedule.every().day.at("12:32").do(testProxy)
-
-	schedule.every().day.at("13:00").do(get_newProxy)
-	schedule.every().day.at("13:02").do(testProxy)
-
-	schedule.every().day.at("13:30").do(get_newProxy)
-	schedule.every().day.at("13:32").do(testProxy)
-
-	schedule.every().day.at("14:00").do(get_newProxy)
-	schedule.every().day.at("14:02").do(testProxy)
-
-	schedule.every().day.at("14:30").do(get_newProxy)
-	schedule.every().day.at("14:32").do(testProxy)
-
-	schedule.every().day.at("15:00").do(get_newProxy)
-	schedule.every().day.at("15:02").do(testProxy)
-
-	schedule.every().day.at("15:30").do(get_newProxy)
-	schedule.every().day.at("15:32").do(testProxy)
-
-	schedule.every().day.at("16:00").do(get_newProxy)
-	schedule.every().day.at("16:02").do(testProxy)
-
-	schedule.every().day.at("16:30").do(get_newProxy)
-	schedule.every().day.at("16:32").do(testProxy)
-
-	schedule.every().day.at("17:00").do(get_newProxy)
-	schedule.every().day.at("17:02").do(testProxy)
-
-	schedule.every().day.at("17:30").do(get_newProxy)
-	schedule.every().day.at("17:32").do(testProxy)
-
-	schedule.every().day.at("18:00").do(get_newProxy)
-	schedule.every().day.at("18:02").do(testProxy)
-
-	schedule.every().day.at("18:30").do(get_newProxy)
-	schedule.every().day.at("18:32").do(testProxy)
-
-	schedule.every().day.at("19:00").do(get_newProxy)
-	schedule.every().day.at("19:02").do(testProxy)
-
-	schedule.every().day.at("19:30").do(get_newProxy)
-	schedule.every().day.at("19:32").do(testProxy)
-
-	schedule.every().day.at("20:00").do(get_newProxy)
-	schedule.every().day.at("20:02").do(testProxy)
-
-	schedule.every().day.at("20:30").do(get_newProxy)
-	schedule.every().day.at("20:32").do(testProxy)
-
-	schedule.every().day.at("21:00").do(get_newProxy)
-	schedule.every().day.at("21:02").do(testProxy)
-
-	schedule.every().day.at("21:30").do(get_newProxy)
-	schedule.every().day.at("21:32").do(testProxy)
-
-	schedule.every().day.at("22:00").do(get_newProxy)
-	schedule.every().day.at("22:02").do(testProxy)
-
-	schedule.every().day.at("22:30").do(get_newProxy)
-	schedule.every().day.at("22:32").do(testProxy)
-
-
-
+	for t in times:
+	    schedule.every().day.at(t).do(get_newProxy)
+	    schedule.every().day.at(f"{t[:2]}:02").do(testProxy)
 
 	while True:
 	    schedule.run_pending()
 	    await asyncio.sleep(1)
 
 asyncio.run(run_schedule())
+
+	# schedule.every().day.at("06:00").do(get_newProxy)
+	# schedule.every().day.at("06:02").do(testProxy)
+
+	# schedule.every().day.at("07:00").do(get_newProxy)
+	# schedule.every().day.at("07:02").do(testProxy)
+
+	# schedule.every().day.at("07:30").do(get_newProxy)
+	# schedule.every().day.at("07:32").do(testProxy)
+
+	# schedule.every().day.at("08:00").do(get_newProxy)
+	# schedule.every().day.at("08:02").do(testProxy)
+
+	# schedule.every().day.at("09:00").do(get_newProxy)
+	# schedule.every().day.at("09:02").do(testProxy)
+
+	# schedule.every().day.at("09:30").do(get_newProxy)
+	# schedule.every().day.at("09:32").do(testProxy)
+
+	# schedule.every().day.at("10:00").do(get_newProxy)
+	# schedule.every().day.at("10:02").do(testProxy)
+
+	# schedule.every().day.at("10:30").do(get_newProxy)
+	# schedule.every().day.at("10:32").do(testProxy)
+
+	# schedule.every().day.at("12:00").do(get_newProxy)
+	# schedule.every().day.at("12:02").do(testProxy)
+
+	# schedule.every().day.at("12:30").do(get_newProxy)
+	# schedule.every().day.at("12:32").do(testProxy)
+
+	# schedule.every().day.at("13:00").do(get_newProxy)
+	# schedule.every().day.at("13:02").do(testProxy)
+
+	# schedule.every().day.at("13:30").do(get_newProxy)
+	# schedule.every().day.at("13:32").do(testProxy)
+
+	# schedule.every().day.at("14:00").do(get_newProxy)
+	# schedule.every().day.at("14:02").do(testProxy)
+
+	# schedule.every().day.at("14:30").do(get_newProxy)
+	# schedule.every().day.at("14:32").do(testProxy)
+
+	# schedule.every().day.at("15:00").do(get_newProxy)
+	# schedule.every().day.at("15:02").do(testProxy)
+
+	# schedule.every().day.at("15:30").do(get_newProxy)
+	# schedule.every().day.at("15:32").do(testProxy)
+
+	# schedule.every().day.at("16:00").do(get_newProxy)
+	# schedule.every().day.at("16:02").do(testProxy)
+
+	# schedule.every().day.at("16:30").do(get_newProxy)
+	# schedule.every().day.at("16:32").do(testProxy)
+
+	# schedule.every().day.at("17:00").do(get_newProxy)
+	# schedule.every().day.at("17:02").do(testProxy)
+
+	# schedule.every().day.at("17:30").do(get_newProxy)
+	# schedule.every().day.at("17:32").do(testProxy)
+
+	# schedule.every().day.at("18:00").do(get_newProxy)
+	# schedule.every().day.at("18:02").do(testProxy)
+
+	# schedule.every().day.at("18:30").do(get_newProxy)
+	# schedule.every().day.at("18:32").do(testProxy)
+
+	# schedule.every().day.at("19:00").do(get_newProxy)
+	# schedule.every().day.at("19:02").do(testProxy)
+
+	# schedule.every().day.at("19:30").do(get_newProxy)
+	# schedule.every().day.at("19:32").do(testProxy)
+
+	# schedule.every().day.at("20:00").do(get_newProxy)
+	# schedule.every().day.at("20:02").do(testProxy)
+
+	# schedule.every().day.at("20:30").do(get_newProxy)
+	# schedule.every().day.at("20:32").do(testProxy)
+
+	# schedule.every().day.at("21:00").do(get_newProxy)
+	# schedule.every().day.at("21:02").do(testProxy)
+
+	# schedule.every().day.at("21:30").do(get_newProxy)
+	# schedule.every().day.at("21:32").do(testProxy)
+
+	# schedule.every().day.at("22:00").do(get_newProxy)
+	# schedule.every().day.at("22:02").do(testProxy)
+
+	# schedule.every().day.at("22:30").do(get_newProxy)
+	# schedule.every().day.at("22:32").do(testProxy)
+
+
+
+
+
+
+
