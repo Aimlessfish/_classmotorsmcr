@@ -7,3 +7,6 @@ required_list/working.txt
 active_bot/errors.log
 *.log
 *.txt
+*.txt
+*.log
+*.pyc
