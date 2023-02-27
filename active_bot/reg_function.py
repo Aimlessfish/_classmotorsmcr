@@ -294,15 +294,32 @@ async def reg(message, registration, miles):
 					driver.get(val_link)
 					or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 					check_or_less = or_less_check.text
+#or less handler --------------------------------------------
 					if "or less" in check_or_less:
 						await or_less()
+#or less handler end ----------------------------------------
 					else:
 						try:
 							cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
 							cookies.click();
+							await asyncio.sleep(3)
+#popup handler ----------------------------------------------
+							try:
+								popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div")))
+								popup_text = popup.text
+								if "offers from dealers" in popup_text:
+									try:
+										popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
+										popup_no.click();
+									except TimeoutException as e:
+										logging.error(e,exc_info=True)
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+#popup handler end ------------------------------------------
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						await asyncio.sleep(2)
+#mileage handler --------------------------------------------
 						try:
 							span_mileage = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]/span")))
 							span_mileage.click();
@@ -314,7 +331,8 @@ async def reg(message, registration, miles):
 							span_mileage_submit.click();
 							await asyncio.sleep(3)
 						except TimeoutException as e:
-							logging.error(e,exc_info=True)						
+							logging.error(e,exc_info=True)	
+#mileage handler end ----------------------------------------			
 						try:
 							#milage counter
 							global mileage_cnt
@@ -410,6 +428,19 @@ async def reg(message, registration, miles):
 						cookies.click();
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
+#popup handler ----------------------------------------------
+					try:
+						popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div")))
+						popup_text = popup.text
+						if "offers from dealers" in popup_text:
+							try:
+								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
+								popup_no.click();
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+#popup handler end ------------------------------------------
 					try:
 						span_mileage = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]/span")))
 						span_mileage.click();
