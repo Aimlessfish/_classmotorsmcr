@@ -310,7 +310,7 @@ async def reg(message, registration, miles):
 						try:
 							popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 							popup_text = popup.text
-							if "offer" or "offers" in popup_text:
+							if "dealer" or "find " or "offer" or "offers" in popup_text:
 								try:
 									popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
 									popup_no.click();
@@ -435,7 +435,7 @@ async def reg(message, registration, miles):
 					try:
 						popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 						popup_text = popup.text
-						if "offer" or "offers" in popup_text:
+						if "dealer" or "find " or "offer" or "offers" in popup_text:
 							try:
 								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
 								popup_no.click();
