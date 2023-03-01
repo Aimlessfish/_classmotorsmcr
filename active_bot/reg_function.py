@@ -305,12 +305,12 @@ async def reg(message, registration, miles):
 							await asyncio.sleep(3)
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
-						await asyncio.sleep(2)
 #popup handler ----------------------------------------------
+						await asyncio.sleep(5)
 						try:
-							popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
+							popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 							popup_text = popup.text
-							if "offers from dealers" in popup_text:
+							if "offer" or "offers" in popup_text:
 								try:
 									popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
 									popup_no.click();
@@ -351,7 +351,9 @@ async def reg(message, registration, miles):
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
-							navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
+							# a.ranger__label__item:nth-child(1)
+							navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"a.ranger__label__item:nth-child(1)")))
+							#navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
 							navpoor.click();
 							try:
 								global poor_price
@@ -429,10 +431,11 @@ async def reg(message, registration, miles):
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
+					await asyncio.sleep(5)
 					try:
-						popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
+						popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 						popup_text = popup.text
-						if "offers from dealers" in popup_text:
+						if "offer" or "offers" in popup_text:
 							try:
 								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
 								popup_no.click();
