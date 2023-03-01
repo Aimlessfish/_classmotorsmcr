@@ -306,11 +306,20 @@ async def reg(message, registration, miles):
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
-						await asyncio.sleep(15)
 						try:
-							popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
-							popup_text = popup.text
-							if "dealer" or "find " or "offer" or "offers" in popup_text:
+							global popup
+							popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,"answers rounded secondary-background-color w-100")))
+							if popup:
+								try:
+									popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
+									popup_no.click();
+								except TimeoutException as e:
+									logging.error(e,exc_info=True)
+						except TimeoutException as e:
+							logging.error(e,exc_info=True)
+						try:
+							popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
+							if popup:
 								try:
 									popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
 									popup_no.click();
@@ -431,11 +440,20 @@ async def reg(message, registration, miles):
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
-					await asyncio.sleep(15)
+					await asyncio.sleep(5)
 					try:
-						popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
-						popup_text = popup.text
-						if "dealer" or "find " or "offer" or "offers" in popup_text:
+						popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
+						if popup:
+							try:
+								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
+								popup_no.click();
+							except TimeoutException as e:
+								logging.error(e,exc_info=True)
+					except TimeoutException as e:
+						logging.error(e,exc_info=True)
+					try:
+						popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
+						if popup:
 							try:
 								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
 								popup_no.click();
