@@ -480,7 +480,7 @@ async def getListings():
 		driver = webdriver.Chrome(options = driver_options)
 		try:
 			driver.get("https://autotrader.co.uk")
-			if "Free" in driver.title:
+			if "New and USed" in driver.title:
 				break  # exit loop if page loaded successfully
 		except Exception as e:
 			logging.error(e,exc_info=True)
