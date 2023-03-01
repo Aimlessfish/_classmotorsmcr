@@ -468,13 +468,13 @@ async def getListings():
 	max_retry = 3
 	while retry_counter < max_retry:
 		print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
-		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
-			proxies = f.readlines()
-			proxy = random.choice(proxies).strip()
+		# with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
+		# 	proxies = f.readlines()
+		# 	proxy = random.choice(proxies).strip()
 		# with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
 		# 	user_agents = f.readlines()
 		# 	user_agent = random.choice(user_agents).strip()
-		driver_options.add_argument("--proxy-server=http://"+proxy)
+		#driver_options.add_argument("--proxy-server=http://"+proxy)
 		#driver_options.add_argument("--user-agent="+user_agent)
 		driver_options.add_argument("--start-maximized")
 		driver = webdriver.Chrome(options = driver_options)
