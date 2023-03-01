@@ -75,7 +75,7 @@ def random_postCode():
 
 
 def hpi_name():
-	with open(r"C:\Users\notWill\Desktop\bot\cars\main\required_list\names.txt","r") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
 		names = f.readlines()
 	name = random.choice(names).strip()
 	return name[:len(name)//2]+" "+name[len(name)//2]
@@ -95,7 +95,7 @@ def random_address():
     houseNo = street.split()[0].strip()
     return houseNo, street, town, postcode
 
-ranEmail = randomEmail_name()+"."+random_phone()+"prc.cx"
+ranEmail = randomEmail_name()+random_phone()+"prc.cx"
 with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
 	f.write(ranEmail)
 	f.close()
