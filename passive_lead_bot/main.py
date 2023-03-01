@@ -764,7 +764,7 @@ async def run_schedule():
 
 	schedule.every().day.at("23:51").do(get_newProxy)
 	schedule.every().day.at("23:52").do(testProxy)
-	schedule.every().day.at("00:00").do(lambda: asyncio.create_task(startScrape()))
+	schedule.every().day.at("00:35").do(lambda: asyncio.create_task(startScrape()))
 
 	
 	while True:
