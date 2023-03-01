@@ -18,7 +18,7 @@ def testProxy():
     with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","r") as f:
         proxy_list = f.read().split('\n')
     #await message.channel.send("Checking 10 proxies..")
-    proxies = proxy_list[0:10]
+    proxies = proxy_list
     for proxy in proxies:
         print(f"[{timestamp}] {info_statement} [Console]: proxy checked.")
         try: 
@@ -52,5 +52,4 @@ def get_newProxy():
         f.write("\n"+proxies)
     print(f"[{timestamp}] {info_statement} [Console]: new proxies added.")
 
-get_newProxy()
 testProxy()

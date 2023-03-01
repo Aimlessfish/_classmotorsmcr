@@ -65,7 +65,6 @@ def get_newProxy():
 async def run_schedule():
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-	print(f"[{timestamp}] {info_statement} [Console]: Starting schedule!")
 
 	# times = ["06:00", "06:02", "07:00", "07:02", "07:30", "07:32", "08:00", "08:02", "09:00", "09:02", "09:30", "09:32", "10:00", "10:02", "10:30", "10:32", "12:00", "12:02", "12:30", "12:32", "13:00", "13:02", "13:30", "13:32", "14:00", "14:02", "14:30", "14:32", "15:00", "15:02", "15:30", "15:32", "16:00", "16:02", "16:30", "16:32", "17:00", "17:02", "17:30", "17:32", "18:00", "18:02", "18:30", "18:32", "19:00", "19:02", "19:30", "19:32", "20:00", "20:02", "20:30", "20:32", "21:00", "21:02", "21:30", "21:32", "22:00", "22:02", "22:30", "22:32"]
 
@@ -226,7 +225,8 @@ async def run_schedule():
 	schedule.every().day.at("23:46").do(testProxy)
 	while True:
 	    schedule.run_pending()
-	    await asyncio.sleep(1)
+    	print(f"[{timestamp}] {info_statement} [Console]: Starting schedule!")
+	    await asyncio.sleep(60)
 
 asyncio.run(run_schedule())
 
