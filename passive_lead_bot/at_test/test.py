@@ -20,8 +20,8 @@ import schedule
 driver_options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(options = driver_options)
 
-def geturl():
+async def geturl():
 	driver.get("https://autotrader.co.uk")
-	time.sleep(10)
+	await asyncio.sleep(10)
 
-geturl()
+asyncio.run(geturl())
