@@ -21,17 +21,17 @@ logging.basicConfig(filename='errors.log', level=logging.ERROR)
 print(f"[{timestamp}] {info_statement} [bot]: Loading...")
 
 @client.event
-# async def on_message(message):
-    # if message.content.startswith('!reg'):
-    #     args = message.content.split()[1:]
-    #     arguments = "".join(args)
-    #     with open('reg.txt', 'w') as f:
-    #         f.write(arguments)
-    #     await reg(message, *args)
 async def on_message(message):
+    if message.author == client.user:
+        return
     if message.content.startswith('!reg'):
         args = message.content.split()[1:]
         arguments = "".join(args)
+        now = datetime.datetime.now()
+        timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+        print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {arguments} ")
+        await message.channel.send("Please wait while i get the values..")
+        await message.channel.send("If I do not reply after 3 minutes something is wrong.")
         with open('reg.txt', 'w') as f:
             f.write(arguments)
         await reg(message, *args)
