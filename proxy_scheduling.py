@@ -51,7 +51,7 @@ def get_newProxy():
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 	print(f"[{timestamp}] {info_statement} [Console]: Clearing `working.txt`")
-	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","a") as f:
+	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","w") as f:
 		f.truncate(0)
 		f.close()
 	driver = webdriver.Chrome()
