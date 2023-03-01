@@ -308,7 +308,7 @@ async def reg(message, registration, miles):
 						await asyncio.sleep(2)
 #popup handler ----------------------------------------------
 						try:
-							popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div")))
+							popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 							popup_text = popup.text
 							if "offers from dealers" in popup_text:
 								try:
@@ -430,7 +430,7 @@ async def reg(message, registration, miles):
 						logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
 					try:
-						popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div")))
+						popup = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 						popup_text = popup.text
 						if "offers from dealers" in popup_text:
 							try:
