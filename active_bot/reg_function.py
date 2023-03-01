@@ -306,7 +306,7 @@ async def reg(message, registration, miles):
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
-						await asyncio.sleep(5)
+						await asyncio.sleep(15)
 						try:
 							popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 							popup_text = popup.text
@@ -431,7 +431,7 @@ async def reg(message, registration, miles):
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
-					await asyncio.sleep(5)
+					await asyncio.sleep(15)
 					try:
 						popup = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
 						popup_text = popup.text
