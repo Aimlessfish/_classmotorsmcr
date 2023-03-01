@@ -42,15 +42,25 @@ driver_options = webdriver.ChromeOptions()
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 reg_channel = client.get_channel(1076889006203207772)
-#driver_options.add_argument("--headless")
-#driver_options.add_argument("--disable-gpu")
 
 ##########
 # global
-# settings
+# variables
 ##########
 val_link = ''
-span = ''
+hpi_span1_low_data = ''
+hpi_span1_high_data = ''
+hpi_span2_low_data = ''
+hpi_span2_high_data = ''
+hpi_span3_low_data = ''
+hpi_span3_high_data = ''
+foreCourt_low_data = ''
+foreCourt_high_data = ''
+private_low_data = ''
+private_high_data = ''
+hpi_span1_low = ''
+
+
 
 def ranFName():
 	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt","r") as f:
@@ -155,8 +165,6 @@ async def reg(message, *args):
 			user_agent = random.choice(user_agents).strip()
 		driver_options.add_argument("--proxy-server=http://"+proxy)
 		driver_options.add_argument("--user-agent="+user_agent)
-		#await message.channel.send("Current proxy: "+proxy)
-		#await message.channel.send("Current user_agent: "+user_agent)
 		driver_options.add_argument("--start-maximized")
 		global driver
 		driver = webdriver.Chrome(options = driver_options)
@@ -245,6 +253,7 @@ async def reg(message, *args):
 				hpi_span1_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
+				pass
 			if not hpi_span1_low:
 				try:
 					driver.get('https://yopmail.com')
