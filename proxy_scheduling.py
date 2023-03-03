@@ -29,6 +29,8 @@ def testProxy():
 #await message.channel.send("Checking 10 proxies..")
 	proxies = proxy_list[0:10]
 	for proxy in proxies:
+		now = datetime.datetime.now()
+		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 		print(f"[{timestamp}] {info_statement} [Console]: proxy checked.")
 		try: 
 			response = session.get("http://ident.me/", proxies={'http': f"http://{proxy}"}, timeout=30)
@@ -46,6 +48,8 @@ def testProxy():
 			proxy_list.pop(proxy_list.index(proxy))
 			with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","w") as f:
 				f.write("\n".join(proxy_list))
+			now = datetime.datetime.now()
+			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"[{timestamp}] {info_statement} [Console]: proxies checked.")
 
 def get_newProxy():
