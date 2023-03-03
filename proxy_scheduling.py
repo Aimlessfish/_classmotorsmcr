@@ -61,6 +61,8 @@ def get_newProxy():
 	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","a") as f:
 		f.write("\n"+proxies)
 	print(f"[{timestamp}] {info_statement} [Console]: new proxies added.")
+	driver.quit()
+	time.sleep(10)
 	testProxy()
 
 async def run_schedule():
