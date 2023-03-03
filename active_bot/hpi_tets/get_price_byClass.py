@@ -49,6 +49,15 @@ async def get_values():
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 		try:
+			#milage counter
+			global mileage_cnt
+			global formatted_mileage
+			milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
+			mileage_cnt = milelage_str.text.split()
+			formatted_mileage = f"Mileage | {mileage_cnt[0]}"
+		except TimeoutException as e:
+			logging.error(e,exc_info=True)
+		try:
 			global good_price
 			global formatted_trade_price
 			raw_trade_price = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))

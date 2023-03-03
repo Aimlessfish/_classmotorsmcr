@@ -258,6 +258,7 @@ async def reg(message, registration, miles):
 		except Exception as e:
 			#await message.channel.send("Failed to enter phone number")
 			logging.error(e, exc_info=True)
+			await message.channel.send("Getting report...")
 		try:
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
@@ -334,7 +335,7 @@ async def reg(message, registration, miles):
 							global formatted_mileage
 							milelage_str = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]")))
 							mileage_cnt = milelage_str.text.split()
-							formatted_mileage = f"Mileage for reg {registration} | High: {mileage_cnt[0]}"
+							formatted_mileage = f"Mileage for reg {registration} | {mileage_cnt[0]}"
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
