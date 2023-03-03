@@ -358,9 +358,8 @@ async def reg(message, registration, miles):
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 						try:
-							# a.ranger__label__item:nth-child(1)
+							await asyncio.sleep(5)
 							navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"a.ranger__label__item:nth-child(1)")))
-							#navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
 							navpoor.click();
 							try:
 								global poor_price
@@ -471,6 +470,7 @@ async def reg(message, registration, miles):
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 					try:
+						await asyncio.sleep(5)
 						navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
 						navpoor.click();
 						try:
