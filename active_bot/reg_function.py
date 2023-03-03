@@ -41,6 +41,7 @@ capabilities = webdriver.DesiredCapabilities().CHROME
 capabilities['acceptInsecureCerts'] = True
 driver_options = webdriver.ChromeOptions()
 
+
 info_statement = "[INFO    ]"
 
 ##########
@@ -265,8 +266,6 @@ async def reg(message, registration, miles):
 			#await message.channel.send("Failed to enter phone number")
 			logging.error(e, exc_info=True)
 		await message.channel.send("Getting report...")
-		driver_options.pop_argument("--proxy-server=http://"+proxy)
-		driver_options.pop_argument("--user-agent="+user_agent)
 		try:
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
@@ -276,6 +275,10 @@ async def reg(message, registration, miles):
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
 			if not hpi_span1_low:
+				driver.quit()
+				driver_options.exclude_switches("--proxy-server=http://"+proxy)
+				driver_options.exclude_switches("--user-agent="+user_agent)
+				driver = webdriver.ChromeOptions(options = driver_options)
 				try:
 					driver.get('https://yopmail.com')
 				except TimeoutException as e:
