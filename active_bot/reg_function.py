@@ -114,7 +114,7 @@ def random_address():
     houseNo = street.split()[0].strip()
     return houseNo, street, town, postcode
 
-ranEmail = randomEmail_name()+random_phone()+"@prc.cx"
+ranEmail = randomEmail_name()+random_phone()+"@o--b.tk"
 with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
 	f.write(ranEmail)
 	f.close()
