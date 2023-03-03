@@ -276,8 +276,8 @@ async def reg(message, registration, miles):
 				logging.error(e,exc_info=True)
 			if not hpi_span1_low:
 				driver.quit()
-				driver_options.exclude_switches("--proxy-server=http://"+proxy)
-				driver_options.exclude_switches("--user-agent="+user_agent)
+				driver_options.add_argument("--proxy-server=")
+				driver_options.add_argument("--user-agent=")
 				driver = webdriver.ChromeOptions(options = driver_options)
 				try:
 					driver.get('https://yopmail.com')
