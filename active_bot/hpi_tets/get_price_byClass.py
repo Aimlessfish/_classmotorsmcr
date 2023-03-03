@@ -19,7 +19,7 @@ trade_price = ''
 async def get_values():
 	# driver.get("https://hpivaluations.com/report/view/VA25424604-PE06XYV")
 	driver.get("https://hpivaluations.com/report/view/VA25409334-FJ19RSV")
-	time.sleep(3)
+	await asyncio.sleep(10)
 	or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 	check_or_less = or_less_check.text
 	if "or less" in check_or_less:
@@ -31,6 +31,12 @@ async def get_values():
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 		#edit mileage
+		await asyncio.sleep(15)
+		try:
+			no_button = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[1]/div[1]/div[1]/div[3]/button[2]")))
+			no_button.click();
+		except TimeoutException as e:
+			logging.error(e,exc_info=True)
 		try:
 			span_mileage = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[1]/div[2]/span[3]/span")))
 			span_mileage.click();
@@ -51,7 +57,9 @@ async def get_values():
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 		try:
-			navpoor = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
+			await asyncio.sleep(5)
+			#navpoor = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/a[1]")))
+			navpoor = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"a.ranger__label__item:nth-child(1)")))
 			navpoor.click();
 			try:
 				global poor_price
@@ -102,7 +110,11 @@ async def get_values():
 				logging.error(e,exc_info=True)
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
+		print(formatted_poor_price)
+		print(formatted_trade_price)
+		print(formatted_best_price)
 		print(formatted_private_price)
+		print(formatted_foreCourt_price)
 		# await message.channel.send(formatted_poor_price)
 		# await message.channel.send(formatted_trade_price)
 		# await message.channel.send(formatted_best_price)

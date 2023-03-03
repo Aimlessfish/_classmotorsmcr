@@ -292,6 +292,7 @@ async def reg(message, registration, miles):
 				#get hpi_price 
 				try:
 					driver.get(val_link)
+					await asyncio.sleep(10)
 					or_less_check = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 					check_or_less = or_less_check.text
 #or less handler --------------------------------------------
@@ -306,25 +307,10 @@ async def reg(message, registration, miles):
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
+						await asyncio.sleep(15)
 						try:
-							global popup
-							popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,"answers rounded secondary-background-color w-100")))
-							if popup:
-								try:
-									popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
-									popup_no.click();
-								except TimeoutException as e:
-									logging.error(e,exc_info=True)
-						except TimeoutException as e:
-							logging.error(e,exc_info=True)
-						try:
-							popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
-							if popup:
-								try:
-									popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
-									popup_no.click();
-								except TimeoutException as e:
-									logging.error(e,exc_info=True)
+							no_button = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[1]/div[1]/div[1]/div[3]/button[2]")))
+							no_button.click();
 						except TimeoutException as e:
 							logging.error(e,exc_info=True)
 #popup handler end ------------------------------------------
@@ -440,25 +426,10 @@ async def reg(message, registration, miles):
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 #popup handler ----------------------------------------------
-					await asyncio.sleep(5)
+					await asyncio.sleep(15)
 					try:
-						popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
-						if popup:
-							try:
-								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
-								popup_no.click();
-							except TimeoutException as e:
-								logging.error(e,exc_info=True)
-					except TimeoutException as e:
-						logging.error(e,exc_info=True)
-					try:
-						popup = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME,"answers rounded secondary-background-color w-100")))
-						if popup:
-							try:
-								popup_no = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div/div[3]/button[2]")))
-								popup_no.click();
-							except TimeoutException as e:
-								logging.error(e,exc_info=True)
+						no_button = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[1]/div[1]/div[1]/div[3]/button[2]")))
+						no_button.click();
 					except TimeoutException as e:
 						logging.error(e,exc_info=True)
 #popup handler end ------------------------------------------
