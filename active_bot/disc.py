@@ -63,8 +63,8 @@ async def on_ready():
             if channel.name == 'reg':
                 print(f'[{timestamp}] {info_statement} - Found reg-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
                 reg_channel_id = client.get_channel(channel.id)
-                await reg_channel_id.send("I am ready to handle reg with milage!")
-                await reg_channel_id.send("Please use `DIRECT MESSAGE`")
+                #await reg_channel_id.send("I am ready to handle reg with milage!")
+                #await reg_channel_id.send("Please use `DIRECT MESSAGE`")
 
 
 async def run_bot():

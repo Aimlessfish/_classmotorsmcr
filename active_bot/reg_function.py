@@ -35,6 +35,10 @@ import asyncio
 import datetime
 
 logging.basicConfig(filename='errors.log', level=logging.ERROR)
+
+#-- chrome driver options
+capabilities = webdriver.DesiredCapabilities().CHROME
+capabilities['acceptInsecureCerts'] = True
 driver_options = webdriver.ChromeOptions()
 
 info_statement = "[INFO    ]"
@@ -260,6 +264,8 @@ async def reg(message, registration, miles):
 			#await message.channel.send("Failed to enter phone number")
 			logging.error(e, exc_info=True)
 		await message.channel.send("Getting report...")
+		driver_options.remove_argument("--proxy-server=http://"+proxy)
+		driver_options.remove_argument("--user-agent="+user_agent)
 		try:
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
