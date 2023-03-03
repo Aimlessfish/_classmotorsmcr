@@ -184,6 +184,7 @@ async def reg(message, registration, miles):
 		try:
 			driver.get('https://hpivaluations.com')
 			if "Free" in driver.title:
+				await message.channel.send("Connected to evaluation site. Stand by.")
 				break  # exit loop if page loaded successfully
 		except Exception as e:
 			now = datetime.datetime.now()
