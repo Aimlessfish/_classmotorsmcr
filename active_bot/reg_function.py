@@ -180,8 +180,6 @@ async def reg(message, registration, miles):
 			user_agent = random.choice(user_agents).strip()
 		driver_options.add_argument("--proxy-server=http://"+proxy)
 		driver_options.add_argument("--user-agent="+user_agent)
-		#await message.channel.send("Current proxy: "+proxy)
-		#await message.channel.send("Current user_agent: "+user_agent)
 		driver_options.add_argument("--start-maximized")
 		global driver
 		driver = webdriver.Chrome(options = driver_options)
@@ -195,10 +193,12 @@ async def reg(message, registration, miles):
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
 			logging.error(e, exc_info=True)
-			retry_counter = retry_counter+1
+			proxies.remove(proxy)  # remove proxy from list
+			with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
+				f.writelines(proxies)  # write updated list back to file
+			retry_counter += 1
 			await asyncio.sleep(2)
-		#wait for page to load
-		await asyncio.sleep(2)
+
 	if retry_counter == max_retry:
 		now = datetime.datetime.now()
 		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
