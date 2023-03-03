@@ -170,6 +170,22 @@ async def or_less(message):
 
 
 async def reg(message, registration, miles):
+	# Adding argument to disable the AutomationControlled flag 
+	driver_options.add_argument("--disable-blink-features=AutomationControlled") 
+	 
+	# Exclude the collection of enable-automation switches 
+	driver_options.add_experimental_option("excludeSwitches", ["enable-automation"]) 
+	 
+	# Turn-off userAutomationExtension 
+	driver_options.add_experimental_option("useAutomationExtension", False) 
+	 
+	# Setting the driver path and requesting a page 
+	driver = webdriver.Chrome(options=driver_options) 
+	 
+	# Changing the property of the navigator value for webdriver to undefined 
+	driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
+
+	driver = webdriver.Chrome(options = options)
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:

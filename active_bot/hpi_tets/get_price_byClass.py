@@ -12,6 +12,21 @@ import asyncio
 
 logging.basicConfig(filename='errors.log', level=logging.ERROR)
 options = webdriver.ChromeOptions()
+# Adding argument to disable the AutomationControlled flag 
+options.add_argument("--disable-blink-features=AutomationControlled") 
+ 
+# Exclude the collection of enable-automation switches 
+options.add_experimental_option("excludeSwitches", ["enable-automation"]) 
+ 
+# Turn-off userAutomationExtension 
+options.add_experimental_option("useAutomationExtension", False) 
+ 
+# Setting the driver path and requesting a page 
+driver = webdriver.Chrome(options=options) 
+ 
+# Changing the property of the navigator value for webdriver to undefined 
+driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
+
 driver = webdriver.Chrome(options = options)
 
 trade_price = ''
