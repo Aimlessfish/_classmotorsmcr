@@ -197,8 +197,9 @@ async def reg(message, registration, miles):
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
 			await message.channel.send("Retrying proxy..")
-			proxies.remove(proxy)  # remove proxy from list
-			with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
+			if proxy in proxies:
+				proxies.remove(proxy)  # remove proxy from list
+				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
 				f.writelines(proxies)  # write updated list back to file
 			await asyncio.sleep(2)
 
