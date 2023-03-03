@@ -200,7 +200,7 @@ async def reg(message, registration, miles):
 			if proxy in proxies:
 				proxies.remove(proxy)  # remove proxy from list
 				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
-				f.writelines(proxies)  # write updated list back to file
+					f.writelines(proxies)  # write updated list back to file
 			await asyncio.sleep(2)
 
 	if retry_counter == max_retry:
