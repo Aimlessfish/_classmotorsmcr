@@ -178,14 +178,7 @@ async def reg(message, registration, miles):
 	 
 	# Turn-off userAutomationExtension 
 	driver_options.add_experimental_option("useAutomationExtension", False) 
-	 
-	# Setting the driver path and requesting a page 
-	driver = webdriver.Chrome(options=driver_options) 
-	 
-	# Changing the property of the navigator value for webdriver to undefined 
-	driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 
-	driver = webdriver.Chrome(options = options)
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
@@ -199,8 +192,9 @@ async def reg(message, registration, miles):
 		driver_options.add_argument("--proxy-server=http://"+proxy)
 		driver_options.add_argument("--user-agent="+user_agent)
 		driver_options.add_argument("--start-maximized")
-		global driver
 		driver = webdriver.Chrome(options = driver_options)
+		# Changing the property of the navigator value for webdriver to undefined 
+		driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 		try:
 			driver.get('https://hpivaluations.com')
 			if "Free" in driver.title:
