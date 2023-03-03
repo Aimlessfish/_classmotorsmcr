@@ -189,14 +189,15 @@ async def reg(message, registration, miles):
 				await message.channel.send("Connected to evaluation site. Stand by.")
 				break  # exit loop if page loaded successfully
 		except Exception as e:
+			logging.error(e, exc_info=True)
+			retry_counter += 1
 			now = datetime.datetime.now()
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
-			logging.error(e, exc_info=True)
+			await message.channel.send("Retrying proxy..")
 			proxies.remove(proxy)  # remove proxy from list
 			with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
 				f.writelines(proxies)  # write updated list back to file
-			retry_counter += 1
 			await asyncio.sleep(2)
 
 	if retry_counter == max_retry:
