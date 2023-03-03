@@ -175,6 +175,7 @@ async def reg(message, registration, miles):
 	while retry_counter < max_retry:
 		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
 	 		proxies = f.readlines()
+	 		global proxy
 	 		proxy = random.choice(proxies).strip()
 		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
 			user_agents = f.readlines()
