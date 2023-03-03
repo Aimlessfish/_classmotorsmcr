@@ -165,6 +165,7 @@ async def run_schedule():
 	    schedule.run_pending()
 	    await asyncio.sleep(60)
 
+get_newProxy()
 asyncio.run(run_schedule())
 
 
