@@ -30,6 +30,9 @@ logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 
 #-----------selenium settings
 driver_options = webdriver.ChromeOptions()
+driver_options.add_argument("--disable-blink-features=AutomationControlled")
+driver_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+driver_options.add_experimental_option("useAutomationExtension", False)
 driver = webdriver.Chrome(options = driver_options) #- initialize instance
 driver.quit() #- close initial instance
 #-----------selenium settings
@@ -310,15 +313,116 @@ async def finance_handler():
 #------- finance handler end -------#
 
 
+#------- HPI Valuations nplate handler start -------#
+async def hpi_numplate():
+	retry_counter = 0
+	max_retry = 3
+	while retry_counter < max_retry:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
+	 		proxies = f.readlines()
+	 		global proxy
+	 		proxy = random.choice(proxies).strip()
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
+			user_agents = f.readlines()
+			user_agent = random.choice(user_agents).strip()
+		driver_options.add_argument("--proxy-server=http://"+proxy)
+		driver_options.add_argument("--user-agent="+user_agent)
+		driver_options.add_argument("--start-maximized")
+		driver = webdriver.Chrome(options = driver_options)
+		# Changing the property of the navigator value for webdriver to undefined 
+		driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
+		try:
+			driver.get('https://hpivaluations.com')
+			if "Free" in driver.title:
+				await message.channel.send("Connected to evaluation site. Stand by.")
+				break  # exit loop if page loaded successfully
+		except Exception as e:
+			logging.error(e, exc_info=True)
+			retry_counter += 1
+			now = datetime.datetime.now()
+			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
+			await message.channel.send("Retrying proxy..")
+			if proxy in proxies:
+				proxies.remove(proxy)  # remove proxy from list
+				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
+					f.writelines(proxies)  # write updated list back to file
+			await asyncio.sleep(2)
+
+	if retry_counter == max_retry:
+		now = datetime.datetime.now()
+		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running hpi_numplate")
+	else:
+		try:
+			# driver.find_element((By.ID,'onetrust-button-group-parent'))
+			# driver.find_element((By.CLASS_NAME,'ot-sdk-three ot-sdk-columns has-reject-all-button'))
+			cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
+			cookies.click()
+		except Exception as e:
+			#await message.channel.send("Failed to accept cookes") 
+			logging.error(e, exc_info=True)
+		#enter reg
+		await asyncio.sleep(2)
+		try:
+			enter_reg = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH,"//input[@placeholder='Enter Reg...']")))
+			enter_reg.click();
+			enter_reg.send_keys(nplate)
+			await asyncio.sleep(2)
+			WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
+		except Exception as e:
+			#await message.channel.send("Failed to search. Error finding search button.")
+			logging.error(e, exc_info=True)
+		await asyncio.sleep(2)
+		try:
+			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,'//span[normalize-space()="I don\'t own this car"]'))).click();
+			await asyncio.sleep(2)
+			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='hpiconsentCheckbox']"))).click();
+			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='consentCheckbox']"))).click();
+			await asyncio.sleep(2)
+			WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary radius js-modal-terms-cta']"))).click();
+			await asyncio.sleep(2)
+		except Exception as e:
+			#await message.channel.send("Failed to declare ownership & accept terms")
+			logging.error(e, exc_info=True)
+		try:
+			name = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formName']")))
+			name.click();
+			name.send_keys(hpi_name())
+		except Exception as e:
+			#await message.channel.send("Failed to enter name")
+			logging.error(e, exc_info=True)
+		try:
+			email = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formEmail']")))
+			email.click();
+			email.send_keys(ranEmail)
+		except Exception as e:
+			#await message.channel.send("Failed to enter email")
+			logging.error(e, exc_info=True)
+		try:
+			postal = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
+			postal.click();
+			postal.send_keys(random_postCode())
+		except Exception as e:
+			#await message.channel.send("Failed to enter postcode")
+			logging.error(e, exc_info=True)
+		try:
+			phone = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formTelephone']")))
+			phone.click();
+			phone.send_keys(random_phone())
+		except Exception as e:
+			#await message.channel.send("Failed to enter phone number")
+			logging.error(e, exc_info=True)
+
+#------- HPI Valuations nplate handler end -------#
 
 
 
 
 
 
-
-#------- HPI Valuations handler start -------#
-async def getHPI(leads_channel):
+#------- HPI Valuations Email handler start -------#
+async def getHPI_Email(leads_channel):
 	try:
 		driver.get('https://yopmail.com')
 	except TimeoutException as e:
@@ -468,14 +572,6 @@ async def getListings():
 	max_retry = 3
 	while retry_counter < max_retry:
 		print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
-		# with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
-		# 	proxies = f.readlines()
-		# 	proxy = random.choice(proxies).strip()
-		# with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
-		# 	user_agents = f.readlines()
-		# 	user_agent = random.choice(user_agents).strip()
-		#driver_options.add_argument("--proxy-server=http://"+proxy)
-		#driver_options.add_argument("--user-agent="+user_agent)
 		driver_options.add_argument("--start-maximized")
 		driver = webdriver.Chrome(options = driver_options)
 		try:
@@ -620,13 +716,15 @@ async def start():
 			else:
 				await finance_handler()
 				await asyncio.sleep(2)
-				await getHPI(leads_channel)
+				await hpi_numplate()
+				await asyncio.sleep(2)
+				await getHPI_Email(leads_channel)
 
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 
 async def run_schedule():
-	schedule.every().day.at("15:10").do(lambda: asyncio.create_task(start()))
+	schedule.every(15).minutes.do(lambda: asyncio.create_task(start()))
 	while True:
 	    schedule.run_pending()
 	    await asyncio.sleep(1)
