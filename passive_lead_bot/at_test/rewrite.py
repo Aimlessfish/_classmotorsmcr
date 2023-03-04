@@ -104,6 +104,8 @@ ranDom = randoms()
 
 #------- finance handler start  -------#
 async def finance_handler():
+	driver = webdriver.Chrome(options = driver_options)
+	driver.quit()
 	await asyncio.sleep(5)
 	try:
 		#ok lets go button
@@ -423,6 +425,8 @@ async def hpi_numplate():
 
 #------- HPI Valuations Email handler start -------#
 async def getHPI_Email(leads_channel):
+	driver = webdriver.Chrome(options = driver_options)
+	driver.quit()
 	try:
 		driver.get('https://yopmail.com')
 	except TimeoutException as e:
@@ -566,6 +570,8 @@ async def getHPI_Email(leads_channel):
 
 #------- Listing handler start -------#
 async def getListings():
+	driver = webdriver.Chrome(options = driver_options)
+	driver.quit()
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 	print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
@@ -671,6 +677,8 @@ async def getListings():
 #------- Listing handler end -------#
 
 async def start():
+	driver = webdriver.Chrome(options = driver_options)
+	driver.quit()
 	await getListings()
 	await asyncio.sleep(2)
 	global auto_trader_url
