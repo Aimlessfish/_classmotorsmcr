@@ -423,8 +423,6 @@ async def hpi_numplate():
 
 #------- HPI Valuations Email handler start -------#
 async def getHPI_Email(leads_channel):
-	driver_options.add_argument("--start-maximized")
-	driver = driver.Chrome(options = driver_options)
 	try:
 		driver.get('https://yopmail.com')
 	except TimeoutException as e:
@@ -570,12 +568,10 @@ async def getHPI_Email(leads_channel):
 async def getListings():
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+	print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
-		print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
-		driver_options.add_argument("--start-maximized")
-		driver = webdriver.Chrome(options = driver_options)
 		try:
 			driver.get("https://autotrader.co.uk")
 			if "Auto Trader UK" in driver.title:
@@ -675,7 +671,6 @@ async def getListings():
 #------- Listing handler end -------#
 
 async def start():
-	driver = webdriver.Chrome(options = driver_options)
 	await getListings()
 	await asyncio.sleep(2)
 	global auto_trader_url
@@ -716,7 +711,6 @@ async def start():
 				finance_option = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/main/div/div[2]/aside/section[3]/div/div/section/div/div[2]/div/button")))
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
-			if not finance_option:
 				driver.quit()
 			else:
 				await finance_handler()
