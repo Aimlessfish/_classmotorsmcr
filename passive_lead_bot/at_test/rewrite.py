@@ -336,7 +336,6 @@ async def hpi_numplate():
 		try:
 			driver.get('https://hpivaluations.com')
 			if "Free" in driver.title:
-				await message.channel.send("Connected to evaluation site. Stand by.")
 				break  # exit loop if page loaded successfully
 		except Exception as e:
 			logging.error(e, exc_info=True)
@@ -599,7 +598,6 @@ async def getListings():
 			now = datetime.datetime.now()
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
-			await message.channel.send("Retrying proxy..")
 			if proxy in proxies:
 				proxies.remove(proxy)  # remove proxy from list
 				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
@@ -731,7 +729,6 @@ async def start():
 				now = datetime.datetime.now()
 				timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 				print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
-				await message.channel.send("Retrying proxy..")
 				if proxy in proxies:
 					proxies.remove(proxy)  # remove proxy from list
 					with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
