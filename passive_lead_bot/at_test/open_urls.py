@@ -104,11 +104,6 @@ async def start():
 			logging.error(e,exc_info=True)
 			driver.quit()
 
-
-async def main():
-    asyncio.create_task(start())
-
-
 @client.event
 async def on_ready():
 	now = datetime.datetime.now()
