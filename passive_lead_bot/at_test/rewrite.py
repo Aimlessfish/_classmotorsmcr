@@ -586,7 +586,7 @@ async def getListings():
 		# Changing the property of the navigator value for webdriver to undefined 
 		driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 		try:
-			driver.get(auto_trader_url)
+			driver.get('https://autotrader.co.uk')
 			if "Auto Trader UK" in driver.title:
 				print("Connected to AutoTrader..")
 				break  # exit loop if page loaded successfully
