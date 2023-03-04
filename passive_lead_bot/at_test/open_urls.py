@@ -106,9 +106,8 @@ async def start():
 
 
 async def main():
-    task = asyncio.create_task(start())
-    # do other work while the task is running
-    await task
+    asyncio.create_task(start())
+
 
 if __name__ == '__main__':
     asyncio.run(main())
