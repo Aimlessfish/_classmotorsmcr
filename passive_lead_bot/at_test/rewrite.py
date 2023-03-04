@@ -686,6 +686,7 @@ async def start():
 		await asyncio.sleep(1)
 		try:
 			driver.get(auto_trader_url)
+			await asyncio.sleep(5)
 			try: #cookies
 			 	WebDriverWait(driver, 3).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
 			 	WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
@@ -693,8 +694,9 @@ async def start():
 				logging.error(e, exc_info=True)
 			try: #get price_text
 				global listing_price
-				find_price = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
-				listing_price = find_price.text
+				find_price = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
+				if find_price:
+					listing_price = find_price.text
 			except InvalidArgumentException as e: #end get price
 				logging.error(e, exc_info=True)
 			i = 0
