@@ -632,7 +632,7 @@ async def getListings():
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='minYear']"))).click();
 			driver.find_element(By.XPATH,"//select[@id='minYear']/option[@value='2007']").click();
 			await asyncio.sleep(1)
-			driver.execute_script("window.scrollTo(0, 2000)");
+			driver.execute_script("window.scrollTo(0, 2500)");
 			WebDriverWait(driver,6).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='showWriteOff']"))).click();
 			driver.find_element(By.XPATH,"//select[@id='showWriteOff']/option[@value='false']").click();
 			WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"//button[@type='submit']//*[name()='svg']"))).click();
