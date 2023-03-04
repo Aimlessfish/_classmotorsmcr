@@ -724,7 +724,7 @@ async def start():
 			logging.error(e,exc_info=True)
 
 async def run_schedule():
-	schedule.every(15).minutes.do(lambda: asyncio.create_task(start()))
+	schedule.every().hour.do(lambda: asyncio.create_task(start()))
 	while True:
 	    schedule.run_pending()
 	    await asyncio.sleep(1)
