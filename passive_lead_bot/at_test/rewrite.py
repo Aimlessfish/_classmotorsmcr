@@ -697,7 +697,7 @@ async def start():
 				listing_price = find_price.text
 			except InvalidArgumentException as e: #end get price
 				logging.error(e, exc_info=True)
-
+			i = 0
 			while i < 1:
 				try: 
 					WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
