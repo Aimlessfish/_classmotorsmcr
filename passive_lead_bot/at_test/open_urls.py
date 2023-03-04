@@ -57,12 +57,11 @@ def start():
 			driver = webdriver.Chrome(options = driver_options)
 			# Changing the property of the navigator value for webdriver to undefined 
 			driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
-			try:
-				driver.get(auto_trader_url)
-				if "Auto Trader UK" in driver.title:
-					print("Connected to AutoTrader..")
-					break  # exit loop if page loaded successfully
-			except Exception as e:
+			driver.get(url)
+			if "Auto Trader UK" in driver.title:
+				print("Connected to AutoTrader..")
+				break  # exit loop if page loaded successfully
+			else:
 				logging.error(e, exc_info=True)
 				retry_counter += 1
 				now = datetime.datetime.now()
@@ -72,32 +71,32 @@ def start():
 					proxies.remove(proxy)  # remove proxy from list
 					with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
 						f.writelines(proxies)  # write updated list back to file
-			try: #get price_text
-				global listing_price
-				find_price = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
-				if find_price:
-					listing_price = find_price.text
-			except InvalidArgumentException as e: #end get price
-				logging.error(e, exc_info=True)
-			i = 0
-			while i < 1:
-				try: 
-					WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
-					WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
-					i = i+1
-				except TimeoutException as e:
-					i = i+1
-					#await message.channel.send("Time-out finding cookies element.")
-					logging.error(e, exc_info=True)
-					break
-			driver.execute_script("window.scrollTo(0, 800)")
-			try:
-				global finance_option
-				finance_option = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/main/div/div[2]/aside/section[3]/div/div/section/div/div[2]/div/button")))
-				finance__text = finance_option.text
-				print(finance__text)
+		try: #get price_text
+			global listing_price
+			find_price = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
+			if find_price:
+				listing_price = find_price.text
+		except InvalidArgumentException as e: #end get price
+			logging.error(e, exc_info=True)
+		i = 0
+		while i < 1:
+			try: 
+				WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
+				WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
+				i = i+1
 			except TimeoutException as e:
-				logging.error(e,exc_info=True)
-				driver.quit()
+				i = i+1
+				#await message.channel.send("Time-out finding cookies element.")
+				logging.error(e, exc_info=True)
+				break
+		driver.execute_script("window.scrollTo(0, 800)")
+		try:
+			global finance_option
+			finance_option = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/main/div/div[2]/aside/section[3]/div/div/section/div/div[2]/div/button")))
+			finance__text = finance_option.text
+			print(finance__text)
+		except TimeoutException as e:
+			logging.error(e,exc_info=True)
+			driver.quit()
 
 start()
