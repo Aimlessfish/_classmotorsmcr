@@ -36,13 +36,12 @@ driver_options.add_experimental_option("useAutomationExtension", False)
 driver = webdriver.Chrome(options = driver_options) #- initialize instance
 #-----------selenium settings
 
-async def start():
+def start():
 	global auto_trader_url
 	with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'r') as file:
 		url_pool = file.readlines()
 	for url in url_pool:
 		auto_trader_url = url
-		await asyncio.sleep(1)
 		retry_counter = 0
 		max_retry = 3
 		while retry_counter < max_retry:
@@ -74,7 +73,6 @@ async def start():
 					proxies.remove(proxy)  # remove proxy from list
 					with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
 						f.writelines(proxies)  # write updated list back to file
-				await asyncio.sleep(2)
 		try: #get price_text
 			global listing_price
 			find_price = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
@@ -103,26 +101,4 @@ async def start():
 			logging.error(e,exc_info=True)
 			driver.quit()
 
-@client.event
-async def on_ready():
-	now = datetime.datetime.now()
-	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-	print(f'[{timestamp}] {info_statement} Logged in as [{client.user}]')
-	guilds = client.guilds
-	print(f'[{timestamp}] {info_statement} Connected to {len(guilds)} guild(s):')
-	for guild in guilds:
-		print(f'[{timestamp}] {info_statement} - {guild.name} (ID: {guild.id})')
-		for channel in guild.channels:
-			if channel.name == 'leads':
-				print(f'[{timestamp}] {info_statement} - Found leads-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
-				global leads_channel
-				leads_channel = client.get_channel(channel.id)
-	# asyncio.create_task(run_schedule())
-	try:
-		asyncio.create_task(start())
-	except Exception as e:
-		logging.error(e,exc_info=True)
-		
-if __name__ == '__main__':
-    clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
-    client.run(clientID)
+start()
