@@ -104,8 +104,6 @@ ranDom = randoms()
 
 #------- finance handler start  -------#
 async def finance_handler():
-	driver = webdriver.Chrome(options = driver_options)
-	driver.quit()
 	await asyncio.sleep(5)
 	try:
 		#ok lets go button
@@ -572,8 +570,8 @@ async def getListings():
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 	retry_counter = 0
-	max_retry = 3
-	while retry_counter < max_retry:
+	max_retry = 10
+	while retry_counter != max_retry:
 		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
 	 		proxies = f.readlines()
 	 		global proxy
