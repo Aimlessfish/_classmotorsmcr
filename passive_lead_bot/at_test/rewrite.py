@@ -423,6 +423,8 @@ async def hpi_numplate():
 
 #------- HPI Valuations Email handler start -------#
 async def getHPI_Email(leads_channel):
+	driver_options.add_argument("--start-maximized")
+	driver = driver.Chrome(options = driver_options)
 	try:
 		driver.get('https://yopmail.com')
 	except TimeoutException as e:
@@ -610,12 +612,12 @@ async def getListings():
 			#await message.channel.send("Failed to go to `more search options`")
 		#basically an if statement trying to wait and switch to the iframe and
 		#accept cookies IF it comes up
-		try: 
-			WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
-			WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"button.message-component.message-button.no-children.focusable.sp_choice_type_11.last-focusable-el"))).click();
-			await asyncio.sleep(5)
-		except Exception as e:
-			logging.error(e, exc_info=True)
+		# try: 
+		# 	WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
+		# 	WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"button.message-component.message-button.no-children.focusable.sp_choice_type_11.last-focusable-el"))).click();
+		# 	await asyncio.sleep(5)
+		# except Exception as e:
+		# 	logging.error(e, exc_info=True)
 		try:
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//label[@for='Hatchback']//span[@class='body-type-selector__label atds-type-prius']"))).click();
 			WebDriverWait(driver,6).until(EC.element_to_be_clickable((By.XPATH,"//label[@for='Estate']//span[@class='body-type-selector__label atds-type-prius']"))).click();
@@ -673,6 +675,7 @@ async def getListings():
 #------- Listing handler end -------#
 
 async def start():
+	driver = webdriver.Chrome(options = driver_options)
 	await getListings()
 	await asyncio.sleep(2)
 	global auto_trader_url
