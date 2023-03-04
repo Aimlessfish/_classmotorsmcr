@@ -576,7 +576,7 @@ async def getListings():
 		driver = webdriver.Chrome(options = driver_options)
 		try:
 			driver.get("https://autotrader.co.uk")
-			if "New and USed" in driver.title:
+			if "Auto Trader UK" in driver.title:
 				break  # exit loop if page loaded successfully
 		except Exception as e:
 			logging.error(e,exc_info=True)
@@ -723,11 +723,11 @@ async def start():
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 
-async def run_schedule():
-	schedule.every().hour.do(lambda: asyncio.create_task(start()))
-	while True:
-	    schedule.run_pending()
-	    await asyncio.sleep(1)
+# async def run_schedule():
+# 	schedule.every().hour.do(lambda: asyncio.create_task(start()))
+# 	while True:
+# 	    schedule.run_pending()
+# 	    await asyncio.sleep(1)
 
 @client.event
 async def on_ready():
@@ -743,7 +743,8 @@ async def on_ready():
 				print(f'[{timestamp}] {info_statement} - Found leads-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
 				global leads_channel
 				leads_channel = client.get_channel(channel.id)
-	asyncio.create_task(run_schedule())
+	# asyncio.create_task(run_schedule())
+	asyncio.create_task(start())
 
 if __name__ == '__main__':
     clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
