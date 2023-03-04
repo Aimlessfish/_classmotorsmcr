@@ -628,7 +628,7 @@ async def getListings():
 			WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='maxMileage']"))).click();
 			driver.find_element(By.XPATH,"//select[@id='maxMileage']/option[@value='150000']").click();
 			await asyncio.sleep(2)
-			driver.execute_script("window.scrollTo(0, 400)");
+			driver.execute_script("window.scrollTo(0, 900)");
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='minYear']"))).click();
 			driver.find_element(By.XPATH,"//select[@id='minYear']/option[@value='2007']").click();
 			await asyncio.sleep(1)
