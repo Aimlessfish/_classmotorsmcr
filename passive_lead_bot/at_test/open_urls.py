@@ -107,4 +107,11 @@ async def start():
 			logging.error(e,exc_info=True)
 			driver.quit()
 
-asyncio.create_task(start())
+
+async def main():
+    task = asyncio.create_task(start())
+    # do other work while the task is running
+    await task
+
+if __name__ == '__main__':
+    asyncio.run(main())
