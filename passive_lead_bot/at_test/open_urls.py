@@ -34,7 +34,6 @@ driver_options.add_argument("--disable-blink-features=AutomationControlled")
 driver_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 driver_options.add_experimental_option("useAutomationExtension", False)
 driver = webdriver.Chrome(options = driver_options) #- initialize instance
-driver.quit() #- close initial instance
 #-----------selenium settings
 
 async def start():
@@ -119,8 +118,11 @@ async def on_ready():
 				global leads_channel
 				leads_channel = client.get_channel(channel.id)
 	# asyncio.create_task(run_schedule())
-	asyncio.create_task(start())
-
+	try:
+		asyncio.create_task(start())
+	except Exception as e:
+		logging.error(e,exc_info=True)
+		
 if __name__ == '__main__':
     clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
     client.run(clientID)
