@@ -570,23 +570,41 @@ async def getHPI_Email(leads_channel):
 
 #------- Listing handler start -------#
 async def getListings():
-	driver = webdriver.Chrome(options = driver_options)
-	driver.quit()
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-	print(f"[{timestamp}] {info_statement} [Console]: Started scrape.")
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
+	 		proxies = f.readlines()
+	 		global proxy
+	 		proxy = random.choice(proxies).strip()
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
+			user_agents = f.readlines()
+			user_agent = random.choice(user_agents).strip()
+		driver_options.add_argument("--proxy-server=http://"+proxy)
+		driver_options.add_argument("--user-agent="+user_agent)
+		driver_options.add_argument("--start-maximized")
+		driver = webdriver.Chrome(options = driver_options)
+		# Changing the property of the navigator value for webdriver to undefined 
+		driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 		try:
-			driver.get("https://autotrader.co.uk")
+			driver.get(auto_trader_url)
 			if "Auto Trader UK" in driver.title:
+				print("Connected to AutoTrader..")
 				break  # exit loop if page loaded successfully
 		except Exception as e:
-			logging.error(e,exc_info=True)
-			retry_counter = retry_counter+1
+			logging.error(e, exc_info=True)
+			retry_counter += 1
+			now = datetime.datetime.now()
+			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
+			await message.channel.send("Retrying proxy..")
+			if proxy in proxies:
+				proxies.remove(proxy)  # remove proxy from list
+				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
+					f.writelines(proxies)  # write updated list back to file
 			await asyncio.sleep(2)
-	# wait for page to load
 	await asyncio.sleep(2)
 	if retry_counter == max_retry:
 		now = datetime.datetime.now()
@@ -677,8 +695,7 @@ async def getListings():
 #------- Listing handler end -------#
 
 async def start():
-	driver = webdriver.Chrome(options = driver_options)
-	driver.quit()
+	await asyncio.sleep(5)
 	await getListings()
 	await asyncio.sleep(2)
 	global auto_trader_url
@@ -687,46 +704,70 @@ async def start():
 	for url in url_pool:
 		auto_trader_url = url
 		await asyncio.sleep(1)
-		try:
-			driver.get(auto_trader_url)
-			await asyncio.sleep(5)
-			try: #cookies
-			 	WebDriverWait(driver, 3).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
-			 	WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
-			except TimeoutException as e: #end cookies
-				logging.error(e, exc_info=True)
-			try: #get price_text
-				global listing_price
-				find_price = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
-				if find_price:
-					listing_price = find_price.text
-			except InvalidArgumentException as e: #end get price
-				logging.error(e, exc_info=True)
-			i = 0
-			while i < 1:
-				try: 
-					WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
-					WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
-					i = i+1
-				except TimeoutException as e:
-					i = i+1
-					#await message.channel.send("Time-out finding cookies element.")
-					logging.error(e, exc_info=True)
-					break
-			driver.execute_script("window.scrollTo(0, 800)")
+		retry_counter = 0
+		max_retry = 3
+		while retry_counter < max_retry:
+			with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
+		 		proxies = f.readlines()
+		 		global proxy
+		 		proxy = random.choice(proxies).strip()
+			with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
+				user_agents = f.readlines()
+				user_agent = random.choice(user_agents).strip()
+			driver_options.add_argument("--proxy-server=http://"+proxy)
+			driver_options.add_argument("--user-agent="+user_agent)
+			driver_options.add_argument("--start-maximized")
+			driver = webdriver.Chrome(options = driver_options)
+			# Changing the property of the navigator value for webdriver to undefined 
+			driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 			try:
-				global finance_option
-				finance_option = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/main/div/div[2]/aside/section[3]/div/div/section/div/div[2]/div/button")))
+				driver.get(auto_trader_url)
+				if "Auto Trader UK" in driver.title:
+					print("Connected to AutoTrader..")
+					break  # exit loop if page loaded successfully
+			except Exception as e:
+				logging.error(e, exc_info=True)
+				retry_counter += 1
+				now = datetime.datetime.now()
+				timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+				print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
+				await message.channel.send("Retrying proxy..")
+				if proxy in proxies:
+					proxies.remove(proxy)  # remove proxy from list
+					with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
+						f.writelines(proxies)  # write updated list back to file
+				await asyncio.sleep(2)
+		try: #get price_text
+			global listing_price
+			find_price = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH,"/html[1]/body[1]/div[2]/main[1]/div[1]/div[2]/aside[1]/section[1]/div[1]/div[1]/h2[1]")))
+			if find_price:
+				listing_price = find_price.text
+		except InvalidArgumentException as e: #end get price
+			logging.error(e, exc_info=True)
+		i = 0
+		while i < 1:
+			try: 
+				WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
+				WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
+				i = i+1
 			except TimeoutException as e:
-				logging.error(e,exc_info=True)
-				driver.quit()
-			else:
-				await finance_handler()
-				await asyncio.sleep(2)
-				await hpi_numplate()
-				await asyncio.sleep(2)
-				await getHPI_Email(leads_channel)
-
+				i = i+1
+				#await message.channel.send("Time-out finding cookies element.")
+				logging.error(e, exc_info=True)
+				break
+		driver.execute_script("window.scrollTo(0, 800)")
+		try:
+			global finance_option
+			finance_option = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/main/div/div[2]/aside/section[3]/div/div/section/div/div[2]/div/button")))
+		except TimeoutException as e:
+			logging.error(e,exc_info=True)
+			driver.quit()
+		else:
+			await finance_handler()
+			await asyncio.sleep(2)
+			await hpi_numplate()
+			await asyncio.sleep(2)
+			await getHPI_Email(leads_channel)
 		except TimeoutException as e:
 			logging.error(e,exc_info=True)
 
