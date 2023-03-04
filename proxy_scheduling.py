@@ -55,10 +55,10 @@ def testProxy():
 def get_newProxy():
 	now = datetime.datetime.now()
 	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-	print(f"[{timestamp}] {info_statement} [Console]: Clearing `working.txt`")
-	with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","w") as f:
-		f.truncate(0)
-		f.close()
+	# print(f"[{timestamp}] {info_statement} [Console]: Clearing `working.txt`")
+	# with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","w") as f:
+	# 	f.truncate(0)
+	# 	f.close()
 	driver = webdriver.Chrome()
 	driver.get("http://list.didsoft.com/get?email=sales@classmotorsmcr.co.uk&pass=Soontoberich1&pid=http3000&showcountry=no&https=yes&excludedcountry=CN|RU")
 	proxyList = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"body > pre:nth-child(1)")))
