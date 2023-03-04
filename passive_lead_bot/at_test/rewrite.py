@@ -768,8 +768,7 @@ async def start():
 			await hpi_numplate()
 			await asyncio.sleep(2)
 			await getHPI_Email(leads_channel)
-		except TimeoutException as e:
-			logging.error(e,exc_info=True)
+
 
 # async def run_schedule():
 # 	schedule.every().hour.do(lambda: asyncio.create_task(start()))
