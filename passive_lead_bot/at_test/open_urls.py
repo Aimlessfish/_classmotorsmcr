@@ -38,9 +38,6 @@ driver.quit() #- close initial instance
 #-----------selenium settings
 
 async def start():
-	await asyncio.sleep(5)
-	await getListings()
-	await asyncio.sleep(2)
 	global auto_trader_url
 	with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'r') as file:
 		url_pool = file.readlines()
