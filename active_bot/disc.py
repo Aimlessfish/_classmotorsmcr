@@ -1,6 +1,7 @@
 import discord
 import asyncio
 from reg_function import reg
+from reg_nomiles import nomiles
 import logging
 import schedule
 import time
@@ -35,19 +36,30 @@ async def on_message(message):
     timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
     if message.author == client.user:
         return
+    # if isinstance(message.channel, discord.DMChannel):
+    #     if message.content.startswith('!reg'):
+    #         args = message.content.split()[1:3]
+    #         registration, miles = args
+    #         now = datetime.datetime.now()
+    #         timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+    #         print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {registration} with milage: {miles}")
+    #         await message.channel.send("Please wait while i get the values..")
+    #         await message.channel.send("If I do not reply after 5 minutes something is wrong.")
+    #         with open('reg.txt', 'w') as f:
+    #             f.write(registration)
+    #         await reg(message, registration, miles)
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
             args = message.content.split()[1:3]
-            registration, miles = args
+            registration = args
             now = datetime.datetime.now()
             timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-            print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {registration} with milage: {miles}")
+            print(f"{timestamp} {info_statement} [Console]: !reg command recieved for reg: {registration}")
             await message.channel.send("Please wait while i get the values..")
-            await message.channel.send("If I do not reply after 5 minutes something is wrong.")
+            await message.channel.send("If I do not reply after 2 minutes something is wrong.")
             with open('reg.txt', 'w') as f:
                 f.write(registration)
-            await reg(message, registration, miles)
-
+            await nomiles(message, registration)
 
 @client.event
 async def on_ready():
@@ -63,8 +75,8 @@ async def on_ready():
             if channel.name == 'reg':
                 print(f'[{timestamp}] {info_statement} - Found reg-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
                 reg_channel_id = client.get_channel(channel.id)
-                #await reg_channel_id.send("I am ready to handle reg with milage!")
-                #await reg_channel_id.send("Please use `DIRECT MESSAGE`")
+                await reg_channel_id.send("I am ready to handle !reg reg")
+                await reg_channel_id.send("Please use `DIRECT MESSAGE`")
 
 
 async def run_bot():

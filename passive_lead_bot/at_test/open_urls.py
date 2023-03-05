@@ -105,40 +105,11 @@ logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 # start()
 
 def main():
-	with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'r') as file:
+	with open(r'C:\Users\notWill\Desktop\bot\cars\_classmotorsmain\required_list\urls.txt', 'r') as file:
 		url_pool = file.readlines()
 	for url in url_pool:
-		retry_counter = 0
-		max_retry = 3
-		while retry_counter < max_retry:
-			try:
-				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
-					proxies = f.readlines()
-					global proxy
-					proxy = random.choice(proxies).strip()
-				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt") as f:
-					user_agents = f.readlines()
-					user_agent = random.choice(user_agents).strip()
-				driver_options = webdriver.ChromeOptions()
-				driver_options.add_argument("--proxy-server=http://"+proxy
-				driver_options.add_argument("--user-agent="+user_agent)
-				driver_options.add_argument("--start-maximized")
-				driver_options.add_argument("--disable-blink-features=AutomationControlled")
-				driver_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-				driver_options.add_experimental_option("useAutomationExtension", False)
-				driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-				driver_options = webdriver.ChromeOptions()
-				driver = webdriver.Chrome(options = driver_options)
-				driver.get(url)
-				if "Auto Trader UK" in driver.title:
-					print(f"Connected to AutoTrader: {url}")
-					break  # exit loop if page loaded successfully
-			except Exception as e:
-				logging.error(e, exc_info=True)
-				retry_counter += 1
-				now = datetime.datetime.now()
-				timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-				print(f"{timestamp} {info_statement} [Console]: Connection failed: retrying. {retry_counter}")
+		driver_options = webdriver.ChromeOptions()
+		driver = webdriver.Chrome(options = driver_options)
+		driver.get(url)
 
-if __name__ == 'main':
-	main()
+main()
