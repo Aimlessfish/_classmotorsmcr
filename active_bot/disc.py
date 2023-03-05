@@ -50,7 +50,7 @@ async def on_message(message):
     #         await reg(message, registration, miles)
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
-            args = message.content.split()[1:3]
+            args = message.content.split()[1]
             registration = args
             now = datetime.datetime.now()
             timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
