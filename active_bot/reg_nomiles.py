@@ -153,7 +153,7 @@ async def or_less(message):
 
 
 async def nomiles(message, registration):
-	Adding argument to disable the AutomationControlled flag 
+	#Adding argument to disable the AutomationControlled flag 
 	driver_options.add_argument("--disable-blink-features=AutomationControlled") 
 	 
 	# Exclude the collection of enable-automation switches 
