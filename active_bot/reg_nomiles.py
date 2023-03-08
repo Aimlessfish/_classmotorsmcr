@@ -41,6 +41,8 @@ reg_channel = client.get_channel(1076889006203207772)
 # global
 # variables
 ##########
+max_width = 2560
+max_height = 1600
 val_link = ''
 hpi_span1_low_data = ''
 hpi_span1_high_data = ''
@@ -97,11 +99,15 @@ def random_address():
     houseNo = street.split()[0].strip()
     return houseNo, street, town, postcode
 
-ranEmail = randomEmail_name()+random_phone()+"@o--b.tk"
+ranEmail = random_phone()+ranLName()+"@o--b.tk"
 with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
 	f.write(ranEmail)
 	f.close()
 
+def randSize():
+	global width, height
+	width = random.randint(200, max_width)
+	height = random.randint(200, max_height)
 ##########################
 # define !reg {args}
 # input numplate 
@@ -165,6 +171,7 @@ async def nomiles(message, registration):
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
+		randSize()
 		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
 	 		proxies = f.readlines()
 	 		global proxy
@@ -174,7 +181,7 @@ async def nomiles(message, registration):
 			user_agent = random.choice(user_agents).strip()
 		driver_options.add_argument("--proxy-server=http://"+proxy)
 		driver_options.add_argument("--user-agent="+user_agent)
-		driver_options.add_argument("--start-maximized")
+		driver_options.add_argument("--window-size={},{}".format(width, height))
 		driver = webdriver.Chrome(options = driver_options)
 		# Changing the property of the navigator value for webdriver to undefined 
 		driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
