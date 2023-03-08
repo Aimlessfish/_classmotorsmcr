@@ -183,6 +183,8 @@ async def nomiles(message, registration):
 			if "Free" in driver.title:
 				await message.channel.send("Connected to evaluation site. Stand by.")
 				break  # exit loop if page loaded successfully
+			else:
+				pass
 		except Exception as e:
 			logging.error(e, exc_info=True)
 			retry_counter += 1
