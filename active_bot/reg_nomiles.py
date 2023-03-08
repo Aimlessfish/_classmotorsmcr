@@ -201,10 +201,10 @@ async def nomiles(message, registration):
 		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running !reg")
 	else:
+		await asyncio.sleep(5)
 		try:
-			# driver.find_element((By.ID,'onetrust-button-group-parent'))
-			# driver.find_element((By.CLASS_NAME,'ot-sdk-three ot-sdk-columns has-reject-all-button'))
 			cookies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
+			await asyncio.sleep(3)
 			cookies.click()
 		except Exception as e:
 			#await message.channel.send("Failed to accept cookes") 
@@ -212,10 +212,11 @@ async def nomiles(message, registration):
 		#enter reg
 		await asyncio.sleep(2)
 		try:
-			enter_reg = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH,"//input[@placeholder='Enter Reg...']")))
+			enter_reg = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.XPATH,"//input[@placeholder='Enter Reg...']")))
 			enter_reg.click();
+			await asyncio.sleep(5)
 			enter_reg.send_keys(registration)
-			await asyncio.sleep(2)
+			await asyncio.sleep(7)
 			WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
 		except Exception as e:
 			#await message.channel.send("Failed to search. Error finding search button.")
@@ -224,16 +225,17 @@ async def nomiles(message, registration):
 		try:
 			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,'//span[normalize-space()="I don\'t own this car"]'))).click();
 			await asyncio.sleep(2)
-			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='hpiconsentCheckbox']"))).click();
-			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='consentCheckbox']"))).click();
-			await asyncio.sleep(2)
-			WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary radius js-modal-terms-cta']"))).click();
-			await asyncio.sleep(2)
+			WebDriverWait(driver,8).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='hpiconsentCheckbox']"))).click();
+			WebDriverWait(driver,6).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='consentCheckbox']"))).click();
+			await asyncio.sleep(1)
+			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary radius js-modal-terms-cta']"))).click();
+			await asyncio.sleep(10)
 		except Exception as e:
 			#await message.channel.send("Failed to declare ownership & accept terms")
 			logging.error(e, exc_info=True)
 		try:
 			name = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formName']")))
+			await asyncio.sleep(10)
 			name.click();
 			name.send_keys(hpi_name())
 		except Exception as e:
@@ -242,13 +244,16 @@ async def nomiles(message, registration):
 		try:
 			email = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formEmail']")))
 			email.click();
+			await asyncio.sleep(5)
 			email.send_keys(ranEmail)
 		except Exception as e:
 			#await message.channel.send("Failed to enter email")
 			logging.error(e, exc_info=True)
 		try:
-			postal = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
+			postal = WebDriverWait(driver,8).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
+			await asyncio.sleep(5)
 			postal.click();
+			await asyncio.sleep(6)
 			postal.send_keys(random_postCode())
 		except Exception as e:
 			#await message.channel.send("Failed to enter postcode")
@@ -256,6 +261,7 @@ async def nomiles(message, registration):
 		try:
 			phone = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formTelephone']")))
 			phone.click();
+			await asyncio.sleep(10)
 			phone.send_keys(random_phone())
 		except Exception as e:
 			#await message.channel.send("Failed to enter phone number")
@@ -263,7 +269,7 @@ async def nomiles(message, registration):
 		await message.channel.send("Getting report...")
 		try:
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
-			await asyncio.sleep(2)
+			await asyncio.sleep(6)
 			try:
 				global hpi_span1_low
 				hpi_span1_low = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div/span[1]")))

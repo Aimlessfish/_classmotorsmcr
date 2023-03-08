@@ -218,6 +218,7 @@ async def reg(message, registration, miles):
 		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running !reg")
 	else:
+		await asyncio.sleep(10)
 		try:
 			# driver.find_element((By.ID,'onetrust-button-group-parent'))
 			# driver.find_element((By.CLASS_NAME,'ot-sdk-three ot-sdk-columns has-reject-all-button'))
@@ -229,22 +230,22 @@ async def reg(message, registration, miles):
 		#enter reg
 		await asyncio.sleep(2)
 		try:
-			enter_reg = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH,"//input[@placeholder='Enter Reg...']")))
+			enter_reg = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"//input[@placeholder='Enter Reg...']")))
 			enter_reg.click();
 			enter_reg.send_keys(registration)
-			await asyncio.sleep(2)
-			WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
+			await asyncio.sleep(3)
+			WebDriverWait(driver, 7).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.icon.icon-navigateright'))).click();
 		except Exception as e:
 			#await message.channel.send("Failed to search. Error finding search button.")
 			logging.error(e, exc_info=True)
-		await asyncio.sleep(2)
+		await asyncio.sleep(6)
 		try:
-			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,'//span[normalize-space()="I don\'t own this car"]'))).click();
+			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,'//span[normalize-space()="I don\'t own this car"]'))).click();
 			await asyncio.sleep(2)
-			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='hpiconsentCheckbox']"))).click();
-			WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='consentCheckbox']"))).click();
+			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='hpiconsentCheckbox']"))).click();
+			WebDriverWait(driver,7).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='consentCheckbox']"))).click();
 			await asyncio.sleep(2)
-			WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary radius js-modal-terms-cta']"))).click();
+			WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary radius js-modal-terms-cta']"))).click();
 			await asyncio.sleep(2)
 		except Exception as e:
 			#await message.channel.send("Failed to declare ownership & accept terms")
@@ -252,20 +253,23 @@ async def reg(message, registration, miles):
 		try:
 			name = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formName']")))
 			name.click();
+			await asyncio.sleep(5)
 			name.send_keys(hpi_name())
 		except Exception as e:
 			#await message.channel.send("Failed to enter name")
 			logging.error(e, exc_info=True)
 		try:
 			email = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formEmail']")))
+			await asyncio.sleep(6)
 			email.click();
 			email.send_keys(ranEmail)
 		except Exception as e:
 			#await message.channel.send("Failed to enter email")
 			logging.error(e, exc_info=True)
 		try:
-			postal = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
+			postal = WebDriverWait(driver,8).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
 			postal.click();
+			await asyncio.sleep(5)
 			postal.send_keys(random_postCode())
 		except Exception as e:
 			#await message.channel.send("Failed to enter postcode")
@@ -273,12 +277,14 @@ async def reg(message, registration, miles):
 		try:
 			phone = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formTelephone']")))
 			phone.click();
+			await asyncio.sleep(3)
 			phone.send_keys(random_phone())
 		except Exception as e:
 			#await message.channel.send("Failed to enter phone number")
 			logging.error(e, exc_info=True)
 		await message.channel.send("Getting report...")
 		try:
+			await asyncio.sleep(11)
 			WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='btn btn-primary onboarding__btn onboarding__btn--next']"))).click();
 			await asyncio.sleep(2)
 			try:
