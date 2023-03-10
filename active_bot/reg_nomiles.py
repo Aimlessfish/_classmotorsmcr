@@ -172,6 +172,9 @@ async def nomiles(message, registration):
 	max_retry = 3
 	while retry_counter < max_retry:
 		randSize()
+		if width < 1020 or height < 1680:
+		    # Set the minimum screen size to 1020x1680
+		    driver.set_window_size(1020, 1680)
 		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt") as f:
 	 		proxies = f.readlines()
 	 		global proxy
