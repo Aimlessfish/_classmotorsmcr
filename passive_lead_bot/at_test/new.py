@@ -123,7 +123,7 @@ class ProxyManager:
 		    f.writelines(self.proxies)
 
 async def scrapeAT():
-	random = randoms()
+	random = RandomManager()
 	proxy = ProxyManager()
 	driver_options = webdriver.ChromeOptions()
 	retry_counter = 0
