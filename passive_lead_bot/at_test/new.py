@@ -97,6 +97,7 @@ class ProxyManager:
 		self.useragents = []
 		self.proxies = []
 		self.load_proxies()
+		self.load_UA()
 
 	def load_proxies(self):
 		with open(self.proxyfile, "r") as f:
@@ -157,10 +158,82 @@ async def scrapeAT():
 		now = datetime.datetime.now()
 		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running scrapeAT")
+	await asyncio.sleep(10)
+
+	try:
+		WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
+		WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"button.message-component.message-button.no-children.focusable.sp_choice_type_11.last-focusable-el"))).click();
+	except TimeoutException as e:
+		logging.error(e, exc_info=True)
+		#await message.channel.send("Failed to accept cookies.")
+	#navigate to refine search options
+	try:
+		more = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"atds-hero__more-options")))
+		more.click();
+		postcode = driver.find_element(by=By.ID, value="postcode")
+		postcode.click();
+		postcode.send_keys(randommanage.get_random_postcode())
+	except TimeoutException as e:
+		logging.error(e, exc_info=True)
+	await asyncio.sleep(5)
+	try:
+		WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//label[@for='Hatchback']//span[@class='body-type-selector__label atds-type-prius']"))).click();
+		WebDriverWait(driver,6).until(EC.element_to_be_clickable((By.XPATH,"//label[@for='Estate']//span[@class='body-type-selector__label atds-type-prius']"))).click();
+		WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='minPrice']"))).click();
+		driver.find_element(By.XPATH,"//select/option[@value='1500']").click();
+		await asyncio.sleep(2)
+		# WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='maxPrice']"))).click();
+		# driver.find_element(By.XPATH,"//select[@id='maxPrice']/option[@value='7500']").click();
+		await asyncio.sleep(2)
+		WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='maxMileage']"))).click();
+		driver.find_element(By.XPATH,"//select[@id='maxMileage']/option[@value='150000']").click();
+		await asyncio.sleep(2)
+		driver.execute_script("window.scrollTo(0, 900)");
+		WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='minYear']"))).click();
+		driver.find_element(By.XPATH,"//select[@id='minYear']/option[@value='2007']").click();
+		await asyncio.sleep(1)
+		driver.execute_script("window.scrollTo(0, 2500)");
+		WebDriverWait(driver,6).until(EC.element_to_be_clickable((By.XPATH,"//select[@id='showWriteOff']"))).click();
+		driver.find_element(By.XPATH,"//select[@id='showWriteOff']/option[@value='false']").click();
+		WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"//button[@type='submit']//*[name()='svg']"))).click();
+		await asyncio.sleep(1)
+		#await message.channel.send("Searching for new listings...")
+	except TimeoutException as e:
+		logging.error(e, exc_info=True)
+		#await message.channel.send("failed to refine search")
+	pageCount=5
+	i=0
+	while i < pageCount:
+		html = driver.page_source
+		soup = BeautifulSoup(html, 'html.parser')
+
+		with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'r') as file:
+			existing_urls = file.readlines()
+
+		with open(r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt', 'a') as file:
+			for article in soup.find_all('article', class_='product-card js-standout-listing'):
+				a_tag = article.find('a', class_='js-click-handler listing-fpa-link tracking-standard-link')
+				if a_tag:
+					url = a_tag['href']
+					if 'http://autotrader.co.uk' + url + '\n' not in existing_urls:
+						file.write('http://autotrader.co.uk' + url + '\n')
+		try:
+			next_page_button = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"a[class='paginationMini--right__active'] i[class='icon']")))
+			if next_page_button:
+				next_page_button.click()
+				i = i+1
+				await asyncio.sleep(2)
+		except TimeoutException as e:
+			logging.error(e, exc_info=True)
+			i = i+1
+			#await message.channel.send("Couldn't get next page of listings")
+	driver.quit()
 
 async def start(leads_channel):
 	await scrapeAT()
-
+	print("finished......")
+	await asyncio.sleep(10)
+	
 @client.event
 async def on_ready():
 	now = datetime.datetime.now()
