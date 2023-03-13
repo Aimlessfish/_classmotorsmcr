@@ -140,21 +140,21 @@ class FileManager():
 		self.loadvalid()
 
 	def loadurl(self):
-		with open(self.urlfile, "+") as f:
+		with open(self.urlfile, "r") as f:
 			self.urls = [line.strip() for line in f]
 		return self.urls
 
 	def loadvalid(self):
-		with open(self.validfile, "+") as f:
+		with open(self.validfile, "r") as f:
 			self.validurls = [line.strip() for line in f]
 		return self.validurls
 
 	def write_url(self, url):
-		with open(self.urlfile, "+") as f:
+		with open(self.urlfile, "a") as f:
 			f.write(url+"\n")
 
 	def write_valid(self, valid_url):
-		with open(self.validfile, "+") as f:
+		with open(self.validfile, "a") as f:
 			f.write(valid_url+"\n")
 
 async def scrapeAT():
