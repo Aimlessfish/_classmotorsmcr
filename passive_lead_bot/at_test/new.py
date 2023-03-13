@@ -38,17 +38,17 @@ class RandomManager:
 		self.addresses = []
 
 	def load_names(self):
-		with open(self.namesfile) as f:
+		with open(self.namesfile, "r") as f:
 			self.names = [line.strip() for line in f]
 			f.close()
 
 	def load_postcodes(self):
-		with open(self.postcodefile) as f:
+		with open(self.postcodefile, "r") as f:
 			self.postcodes = [line.strip() for line in f]
 			f.close()
 
 	def load_addresses(self):
-		with open(self.addressfile) as f:
+		with open(self.addressfile, "r") as f:
 			self.addresses = [line.strip() for line in f]
 			f.close()
 
@@ -99,11 +99,11 @@ class ProxyManager:
 		self.load_proxies()
 
 	def load_proxies(self):
-		with open(self.proxyfile) as f:
+		with open(self.proxyfile, "r") as f:
 			self.proxies = [line.strip() for line in f]
 
 	def load_UA(self):
-		with open(self.uafile) as f:
+		with open(self.uafile, "r") as f:
 			self.useragents = [line.strip() for line in f]
 
 	def get_random_UA(self):
@@ -117,20 +117,23 @@ class ProxyManager:
 		return random.choice(self.proxies)
 
 	def remove_proxy(self, proxy):
-		if proxy in self.proxies:
-			self.proxies.remove(proxy)
-		with open(self.filename, "w") as f:
-		    f.writelines(self.proxies)
+	    if proxy in self.proxies:
+	        self.proxies.remove(proxy)
+	        with open(self.proxyfile, "w") as f:
+	            f.writelines(self.proxies)
+	    else:
+	        print(f"{proxy} not found in proxy list.")
 
 async def scrapeAT():
-	random = RandomManager()
-	proxy = ProxyManager()
+	randommanage = RandomManager()
+	proxymanage = ProxyManager()
 	driver_options = webdriver.ChromeOptions()
-	retry_counter = 0
+	i = 0
 	max_retry = 3
-	while retry_counter < max_retry:
-		driver_options.add_argument("--proxy-server=http://"+proxy.get_random_proxy())
-		driver_options.add_argument("--user-agent="+proxy.get_random_UA())
+	while i < max_retry:
+		proxy = proxymanage.get_random_proxy()
+		driver_options.add_argument("--proxy-server=http://"+proxy)
+		driver_options.add_argument("--user-agent="+proxymanage.get_random_UA())
 		driver_options.add_argument("--start-maximized")
 		driver_options.add_argument("--disable-blink-features=AutomationControlled")
 		driver_options.add_experimental_option("excludeSwitches", ["enable-automation"])
@@ -143,15 +146,11 @@ async def scrapeAT():
 				break  # exit loop if page loaded successfully
 		except Exception as e:
 			logging.error(e, exc_info=True)
-			retry_counter += 1
+			i += 1
 			now = datetime.datetime.now()
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
-			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
-			await message.channel.send("Retrying proxy..")
-			if proxy in proxies:
-				proxies.remove(proxy)  # remove proxy from list
-				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt", "w") as f:
-					f.writelines(proxies)  # write updated list back to file
+			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {i}")
+			proxy.remove_proxy(proxy)
 			await asyncio.sleep(2)
 
 	if retry_counter == max_retry:
