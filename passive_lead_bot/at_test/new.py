@@ -151,7 +151,7 @@ async def scrapeAT():
 			now = datetime.datetime.now()
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {i}")
-			proxy.remove_proxy(proxy)
+			proxymanage.remove_proxy(proxy)
 			await asyncio.sleep(2)
 
 	if retry_counter == max_retry:
@@ -233,7 +233,7 @@ async def start(leads_channel):
 	await scrapeAT()
 	print("finished......")
 	await asyncio.sleep(10)
-	
+
 @client.event
 async def on_ready():
 	now = datetime.datetime.now()
