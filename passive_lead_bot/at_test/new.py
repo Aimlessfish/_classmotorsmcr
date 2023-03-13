@@ -154,7 +154,7 @@ async def scrapeAT():
 			proxymanage.remove_proxy(proxy)
 			await asyncio.sleep(2)
 
-	if retry_counter == max_retry:
+	if i == max_retry:
 		now = datetime.datetime.now()
 		timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running scrapeAT")
