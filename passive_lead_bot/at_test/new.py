@@ -183,7 +183,7 @@ async def scrapeAT():
 			now = datetime.datetime.now()
 			timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {i}")
-			proxymanage.remove_proxy(proxy)
+			proxymanager.remove_proxy(proxy)
 			await asyncio.sleep(2)
 
 	if i == max_retry:
@@ -293,7 +293,7 @@ async def checkFinance():
 				now = datetime.datetime.now()
 				timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 				print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
-				proxymanage.remove_proxy()
+				proxymanager.remove_proxy()
 				await asyncio.sleep(2)
 		try: #get price_text
 			global listing_price
