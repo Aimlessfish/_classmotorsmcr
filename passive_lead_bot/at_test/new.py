@@ -177,7 +177,7 @@ async def on_ready():
 				global leads_channel
 				leads_channel = client.get_channel(channel.id)
 	# asyncio.create_task(run_schedule())
-	asyncio.create_task(start())
+	asyncio.create_task(start(leads_channel))
 
 if __name__ == '__main__':
     clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
