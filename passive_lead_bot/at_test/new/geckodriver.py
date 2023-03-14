@@ -100,7 +100,7 @@ async def ffscrapeAT():
 		more.click();
 		postcode = driver.find_element(by=By.ID, value="postcode")
 		postcode.click();
-		postcode.send_keys(randommanager.get_random_postcode())
+		postcode.send_keys(randomManager.get_random_postcode())
 	except TimeoutException as e:
 		logging.error(e, exc_info=True)
 	await asyncio.sleep(5)
@@ -143,7 +143,7 @@ async def ffscrapeAT():
 			if a_tag:
 				url = a_tag['href']
 				if 'http://autotrader.co.uk' + url + '\n' not in existing_urls:
-					filemanager.write_url('http://autotrader.co.uk' + url)
+					fileManager.write_url('http://autotrader.co.uk' + url)
 
 		try:
 			next_page_button = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"a[class='paginationMini--right__active'] i[class='icon']")))
