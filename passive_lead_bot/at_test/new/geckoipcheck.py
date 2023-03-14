@@ -22,9 +22,9 @@ gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
 binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla Firefox', 'firefox.exe'))
 firefox_service = FirefoxService(executable_path = gecko_path)
 binary_location = binary_path
-info_statement = "[INFO    ]"
 proxy = proxyManager.get_random_proxy()
 driver_options = webdriver.FirefoxOptions()
+driver_options.set_preference('network.proxy.type', 1)
 driver_options.add_argument("--proxy-server=http://"+proxy)
 driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
