@@ -65,8 +65,6 @@ async def ffscrapeAT():
 		driver_options.add_argument("-purgecaches")
 		driver_options.add_argument("-private-window")
 		driver_options.add_argument("--disable-blink-features=AutomationControlled")
-		driver_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-		driver_options.add_experimental_option("useAutomationExtension", False)
 		driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
 		driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 		try:
