@@ -28,7 +28,7 @@ client = discord.Client(intents=intents)
 
 #-----------global settings
 gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
-binary_path = os.path.join(os.environ['SystemRoot'], 'firefox.exe')
+binary_path = 'C:/Progra~1/Mozilla Firefox/firefox.exe'
 # gecko = r'%SystemRoot%\geckodriver.exe'
 firefox_service = FirefoxService(executable_path = gecko_path)
 driver_options = webdriver.FirefoxOptions()
