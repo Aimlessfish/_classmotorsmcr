@@ -26,7 +26,8 @@ client = discord.Client(intents=intents)
 #-----------discord settings
 
 #-----------global settings
-firefox_service = FirefoxService(executable_path = r'%SystemRoot%\geckodriver.exe')
+#firefox_service = FirefoxService(executable_path = r'%SystemRoot%\geckodriver.exe')
+firefox_service = r'%SystemRoot%\geckodriver.exe'
 driver_options = webdriver.FirefoxOptions()
 info_statement = "[INFO    ]"
 logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
@@ -44,6 +45,7 @@ driver_options.add_argument("--proxy-server=http://"+proxy)
 driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 driver_options.add_argument("-purgecaches")
 driver_options.add_argument("-private-window")
-driver = webdriver.Firefox(options=driver_options, service=firefox_service)
+#driver = webdriver.Firefox(options=driver_options, service=firefox_service)
+driver = webdriver.Firefox(options=driver_options, executable_path = firefox_service)
 driver.get("https://google.com")
 driver.quit()
