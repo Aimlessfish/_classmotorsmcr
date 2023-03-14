@@ -27,10 +27,12 @@ client = discord.Client(intents=intents)
 #-----------discord settings
 
 #-----------global settings
-gecko = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
+gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
+binary_path = r'C:\Program Files\Mozilla Firefox\firefox.exe'
 # gecko = r'%SystemRoot%\geckodriver.exe'
-firefox_service = FirefoxService(executable_path = gecko)
+firefox_service = FirefoxService(executable_path = gecko_path)
 driver_options = webdriver.FirefoxOptions()
+driver_options.binary_location = binary_path
 info_statement = "[INFO    ]"
 logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 #-----------global settings
