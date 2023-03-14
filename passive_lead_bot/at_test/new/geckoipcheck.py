@@ -24,7 +24,9 @@ binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla
 firefox_service = FirefoxService(executable_path = gecko_path)
 binary_location = binary_path
 rawproxy = proxyManager.get_random_proxy()
+print(rawproxy)
 proxy, port = rawproxy.split(':')
+print(f"{proxy} {port}")
 driver_options = webdriver.FirefoxOptions()
 driver_options.set_preference('network.proxy.type', 1)
 driver_options.set_preference("network.proxy.http", proxy)
