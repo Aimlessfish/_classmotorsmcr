@@ -89,10 +89,12 @@ async def ffscrapeAT():
 	try:
 		WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[3]/iframe")))
 		WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
+		driver.switch_to.default_content()
 	except TimeoutException as e:
 		logging.error(e, exc_info=True)
 		#await message.channel.send("Failed to accept cookies.")
 	#navigate to refine search options
+	driver.switch_to.default_content()
 	try:
 		more = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.CLASS_NAME,"atds-hero__more-options")))
 		more.click();
