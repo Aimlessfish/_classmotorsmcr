@@ -32,7 +32,6 @@ gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
 binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla Firefox', 'firefox.exe'))
 firefox_service = FirefoxService(executable_path = gecko_path)
 binary_location = binary_path
-driver_options = webdriver.FirefoxOptions()
 info_statement = "[INFO    ]"
 logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 #-----------global settings
@@ -57,10 +56,10 @@ async def ffscrapeAT():
 	randomManager = RandomManager()
 	proxyManager = ProxyManager()
 	filemanager = FileManager()
-	driver_options = webdriver.ChromeOptions()
 	i = 0
 	while i < max_retry:
 		proxy = proxyManager.get_random_proxy()
+		driver_options = webdriver.FirefoxOptions()
 		driver_options.add_argument("--proxy-server=http://"+proxy)
 		driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 		driver_options.add_argument("-purgecaches")
