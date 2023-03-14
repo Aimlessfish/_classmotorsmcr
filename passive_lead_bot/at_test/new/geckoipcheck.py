@@ -1,4 +1,5 @@
 import os
+import time
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from selenium import webdriver
@@ -22,14 +23,15 @@ gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
 binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla Firefox', 'firefox.exe'))
 firefox_service = FirefoxService(executable_path = gecko_path)
 binary_location = binary_path
-proxy = proxyManager.get_random_proxy()
+rawproxy = proxyManager.get_random_proxy()
+proxy, port = rawproxy.split(':')
 driver_options = webdriver.FirefoxOptions()
 driver_options.set_preference('network.proxy.type', 1)
-driver_options.add_argument("--proxy-server=http://"+proxy)
-driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
+driver_options.set_preference("network.proxy.http", proxy)
+driver_options.set_preference("network.proxy.http_port", int(port))
+driver_options.set_preference("--user-agent="+proxyManager.get_random_UA())
 driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
 
 driver.get('https://www.whatismybrowser.com/')
-user_agent = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,'//div[@class="string-major"]')))
-ip_address = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,'//div[@class="string-minor"]')))
-print(f"{user_agent.text} {ip_address.text}")
+time.sleep(10)
+
