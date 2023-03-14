@@ -49,7 +49,7 @@ max_retry = 5
 # driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 driver_options.add_argument("-purgecaches")
 driver_options.add_argument("-private-window")
-driver = webdriver.Firefox(options=driver_options, binary_location=binary_location, service=firefox_service)
+driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
 # driver = webdriver.Firefox(options=driver_options, executable_path = firefox_service)
 driver.get("https://google.com")
 driver.quit()
