@@ -1,0 +1,140 @@
+import random
+
+max_width = 2560
+max_height = 1600
+
+class RandomManager:
+	def __init__(self):
+		self.namesfile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\names.txt"
+		self.postcodefile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\postcode.txt"
+		self.addressfile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\addresses.txt"
+		self.names = []
+		self.postcodes = []
+		self.addresses = []
+		self.load_names()
+		self.load_postcodes()
+		self.load_addresses()
+
+	def load_names(self):
+		with open(self.namesfile, "r") as f:
+			self.names = [line.strip() for line in f]
+			f.close()
+
+	def load_postcodes(self):
+		with open(self.postcodefile, "r") as f:
+			self.postcodes = [line.strip() for line in f]
+			f.close()
+
+	def load_addresses(self):
+		with open(self.addressfile, "r") as f:
+			self.addresses = [line.strip() for line in f]
+			f.close()
+
+	def randSize(self):
+		width = random.randint(200, max_width)
+		height = random.randint(200, max_height)
+		if width < 1020 or height < 1680:
+		# Set the minimum screen size to 1020x1680
+			width = 1020
+			height = 1680
+		return width, height
+
+	def get_random_name(self):
+		if not self.names:
+			self.load_names()
+		return random.choice(self.names)
+
+	def get_random_postcode(self):
+		if not self.postcodes:
+			self.load_postcodes()
+		return random.choice(self.postcodes)
+
+	def get_random_address(self):
+		ranAdd = random.choice(self.addresses).strip('"\n')
+		street_town, postcode = ranAdd.rsplit(',',1)
+		town = street_town.rsplit(',',1)[-1].strip()
+		street = street_town.rsplit(',',1)[0].strip()
+		houseNo = street.split()[0].strip()
+		return houseNo, street, town, postcode
+
+	def create_hpi_name(self):
+		if not self.names:
+			self.load_names()
+		hpi_name = random.choice(self.names).strip()
+		return name[:len(name)//2]+" "+name[len(name)//2]
+
+	def random_phone(self):
+		phone_suffix = str(random.randint(0,999999999)).zfill(9)
+		phone_number= "07"+phone_suffix
+		return phone_number
+
+	def createEmail(self):
+		global ranEmail
+		ranEmail = self.randomEmail_name()+self.random_postCode()+"@prc.cx"
+		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
+			f.write(ranEmail)
+			f.close()
+		return ranEmail
+
+
+class ProxyManager:
+	def __init__(self):
+		self.proxyfile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt"
+		self.uafile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt"
+		self.useragents = []
+		self.proxies = []
+		self.load_proxies()
+		self.load_UA()
+
+	def load_proxies(self):
+		with open(self.proxyfile, "r") as f:
+			self.proxies = [line.strip() for line in f]
+
+	def load_UA(self):
+		with open(self.uafile, "r") as f:
+			self.useragents = [line.strip() for line in f]
+
+	def get_random_UA(self):
+		if not self.useragents:
+			self.load_UA()
+		return random.choice(self.useragents)
+
+	def get_random_proxy(self):
+		if not self.proxies:
+			self.load_proxies()
+		return random.choice(self.proxies)
+
+	def remove_proxy(self, proxy):
+	    if proxy in self.proxies:
+	        self.proxies.remove(proxy)
+	        with open(self.proxyfile, "w") as f:
+	            f.writelines(self.proxies)
+	    else:
+	        print(f"{proxy} not found in proxy list.")
+
+class FileManager():
+	def __init__(self):
+		self.urlfile = r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\urls.txt'
+		self.validfile = r'C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\valid_url.txt'
+		self.urls = []
+		self.validurls = []
+		self.loadurl()
+		self.loadvalid()
+
+	def loadurl(self):
+		with open(self.urlfile, "r") as f:
+			self.urls = [line.strip() for line in f]
+		return self.urls
+
+	def loadvalid(self):
+		with open(self.validfile, "r") as f:
+			self.validurls = [line.strip() for line in f]
+		return self.validurls
+
+	def write_url(self, url):
+		with open(self.urlfile, "a") as f:
+			f.write(url+"\n")
+
+	def write_valid(self, valid_url):
+		with open(self.validfile, "a") as f:
+			f.write(valid_url+"\n")
