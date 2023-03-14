@@ -19,6 +19,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import InvalidArgumentException
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from classManager import *
 
 #-----------discord settings
