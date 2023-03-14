@@ -27,7 +27,6 @@ proxy = proxyManager.get_random_proxy()
 driver_options = webdriver.FirefoxOptions()
 driver_options.add_argument("--proxy-server=http://"+proxy)
 driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
-logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
 
 driver.get('https://www.whatismybrowser.com/')
