@@ -41,7 +41,7 @@ fileManager = FileManager()
 #-------------------------
 proxy = proxyManager.get_random_proxy()
 driver_options.add_argument("--proxy-server=http://"+proxy)
-driver_options.add_argument("--user-agent="+proxymanager.get_random_UA())
+driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 driver_options.add_argument("-purgecaches")
 driver_options.add_argument("-private-window")
 driver = webdriver.Firefox(options=driver_options, service=firefox_service)
