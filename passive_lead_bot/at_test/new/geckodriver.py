@@ -53,7 +53,7 @@ fileManager = FileManager()
 # driver.get("https://google.com")
 # driver.quit()
 
-async def scrapeAT():
+async def ffscrapeAT():
 	randomManager = RandomManager()
 	proxyManager = ProxyManager()
 	filemanager = FileManager()
@@ -157,3 +157,29 @@ async def scrapeAT():
 			i += 1
 			#await message.channel.send("Couldn't get next page of listings")
 	driver.quit()
+
+async def start(leads_channel):
+	await ffscrapeAT()
+	print("finished......")
+	await asyncio.sleep(10)
+
+@client.event
+async def on_ready():
+	now = datetime.datetime.now()
+	timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
+	print(f'[{timestamp}] {info_statement} Logged in as [{client.user}]')
+	guilds = client.guilds
+	print(f'[{timestamp}] {info_statement} Connected to {len(guilds)} guild(s):')
+	for guild in guilds:
+		print(f'[{timestamp}] {info_statement} - {guild.name} (ID: {guild.id})')
+		for channel in guild.channels:
+			if channel.name == 'leads':
+				print(f'[{timestamp}] {info_statement} - Found leads-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
+				global leads_channel
+				leads_channel = client.get_channel(channel.id)
+	# asyncio.create_task(run_schedule())
+	asyncio.create_task(start(leads_channel))
+
+if __name__ == '__main__':
+    clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
+    client.run(clientID)
