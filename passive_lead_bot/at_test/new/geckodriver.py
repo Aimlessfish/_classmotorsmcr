@@ -87,7 +87,7 @@ async def ffscrapeAT():
 	await asyncio.sleep(10)
 
 	try:
-		WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[4]/iframe")))
+		WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"/html/body/div[3]/iframe")))
 		WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div/div[2]/div[3]/div[2]/button[2]"))).click();
 	except TimeoutException as e:
 		logging.error(e, exc_info=True)
