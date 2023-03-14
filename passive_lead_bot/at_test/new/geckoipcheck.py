@@ -29,7 +29,7 @@ driver_options = webdriver.FirefoxOptions()
 driver_options.set_preference('network.proxy.type', 1)
 driver_options.set_preference("network.proxy.http", proxy)
 driver_options.set_preference("network.proxy.http_port", int(port))
-driver_options.set_preference("--user-agent="+proxyManager.get_random_UA())
+options.set_preference("general.useragent.override", proxyManager.get_random_UA())
 driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
 
 driver.get('https://www.whatismybrowser.com/')
