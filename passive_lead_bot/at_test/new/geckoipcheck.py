@@ -30,5 +30,6 @@ driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 driver = webdriver.Firefox(options=driver_options, firefox_binary=binary_location, service=firefox_service)
 
 driver.get('https://www.whatismybrowser.com/')
-user_agent = driver.find_element_by_xpath('//div[@class="string-major"]')
-ip_address = driver.find_element_by_xpath('//div[@class="string-minor"]')
+user_agent = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,'//div[@class="string-major"]')))
+ip_address = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,'//div[@class="string-minor"]')))
+print(f"{user_agent.text} {ip_address.text}")
