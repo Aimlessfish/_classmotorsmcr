@@ -7,6 +7,7 @@ import random
 import asyncio
 import schedule
 import datetime
+import os
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from selenium import webdriver
@@ -26,8 +27,9 @@ client = discord.Client(intents=intents)
 #-----------discord settings
 
 #-----------global settings
-firefox_service = FirefoxService(executable_path = r'%SystemRoot%\geckodriver.exe')
-# firefox_service = r'%SystemRoot%\geckodriver.exe'
+gecko = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
+# gecko = r'%SystemRoot%\geckodriver.exe'
+firefox_service = FirefoxService(executable_path = gecko)
 driver_options = webdriver.FirefoxOptions()
 info_statement = "[INFO    ]"
 logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
@@ -40,9 +42,9 @@ randomManager = RandomManager()
 proxyManager = ProxyManager()
 fileManager = FileManager()
 #-------------------------
-# proxy = proxyManager.get_random_proxy()
-# driver_options.add_argument("--proxy-server=http://"+proxy)
-# driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
+proxy = proxyManager.get_random_proxy()
+driver_options.add_argument("--proxy-server=http://"+proxy)
+driver_options.add_argument("--user-agent="+proxyManager.get_random_UA())
 driver_options.add_argument("-purgecaches")
 driver_options.add_argument("-private-window")
 driver = webdriver.Firefox(options=driver_options, service=firefox_service)
