@@ -1,6 +1,6 @@
 import random
 import os
-from selenium.webdriver import Firefox, FirefoxOptions, Proxy, ProxyType
+from selenium.webdriver import Firefox, FirefoxOptions, Proxy
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
 
@@ -155,7 +155,7 @@ class FirefoxDriver:
         self.options.set_preference("browser.cache.memory.enable", not disable_cache)
         self.options.set_preference("network.cookie.cookieBehavior", block_cookies)
         if proxy:
-            self.options.proxy = Proxy({'proxyType': ProxyType.MANUAL, 'httpProxy': proxy, 'sslProxy': proxy})
+            self.options.proxy = Proxy({'proxyType': 'manual', 'httpProxy': proxy, 'sslProxy': proxy})
 
     def get_driver(self):
         return Firefox(options=self.options, service=self.firefox_service)
