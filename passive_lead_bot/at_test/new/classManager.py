@@ -144,19 +144,18 @@ class FileManager():
 			f.write(valid_url+"\n")
 
 class FirefoxDriver:
-	def __init__(self, headless=False, private_mode=True, disable_cache=True, block_cookies=True, proxy=None):
-		self.gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
-		self.binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla Firefox', 'firefox.exe'))
-		self.firefox_service = FirefoxService(executable_path=self.gecko_path)
-		self.binary_location = self.binary_path
-		self.options = FirefoxOptions()
-		self.options.set_preference("browser.privatebrowsing.autostart", private_mode)
-		self.options.set_preference("browser.cache.disk.enable", not disable_cache)
-		self.options.set_preference("browser.cache.memory.enable", not disable_cache)
-		self.options.set_preference("network.cookie.cookieBehavior", block_cookies)
-		if proxy:
-			self.profile.set_proxy(Proxy({'proxyType': ProxyType.MANUAL, 'httpProxy': proxy, 'sslProxy': proxy}))
-			self.options.profile = self.profile
+    def __init__(self, headless=False, private_mode=True, disable_cache=True, block_cookies=True, proxy=None):
+        self.gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
+        self.binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla Firefox', 'firefox.exe'))
+        self.firefox_service = FirefoxService(executable_path=self.gecko_path)
+        self.binary_location = self.binary_path
+        self.options = FirefoxOptions()
+        self.options.set_preference("browser.privatebrowsing.autostart", private_mode)
+        self.options.set_preference("browser.cache.disk.enable", not disable_cache)
+        self.options.set_preference("browser.cache.memory.enable", not disable_cache)
+        self.options.set_preference("network.cookie.cookieBehavior", block_cookies)
+        if proxy:
+            self.options.proxy = Proxy({'proxyType': ProxyType.MANUAL, 'httpProxy': proxy, 'sslProxy': proxy})
 
-def get_driver(self):
-	return Firefox(options=self.options, service=self.firefox_service)
+    def get_driver(self):
+        return Firefox(options=self.options, service=self.firefox_service)
