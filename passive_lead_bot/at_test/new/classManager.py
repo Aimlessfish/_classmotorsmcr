@@ -2,9 +2,7 @@ import random
 import os
 from selenium.webdriver import Firefox, FirefoxOptions, Proxy
 from selenium.webdriver.firefox.service import Service as FirefoxService
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+
 
 max_width = 2560
 max_height = 1600
@@ -152,12 +150,10 @@ class FirefoxDriver:
         self.firefox_service = FirefoxService(executable_path=self.gecko_path)
         self.binary_location = self.binary_path
         self.options = FirefoxOptions()
-        self.options.headless = headless
-        self.profile = FirefoxProfile()
-        self.profile.set_preference("browser.privatebrowsing.autostart", private_mode)
-        self.profile.set_preference("browser.cache.disk.enable", not disable_cache)
-        self.profile.set_preference("browser.cache.memory.enable", not disable_cache)
-        self.profile.set_preference("network.cookie.cookieBehavior", block_cookies)
+		self.options.set_preference("browser.privatebrowsing.autostart", private_mode)
+        self.options.set_preference("browser.cache.disk.enable", not disable_cache)
+        self.options.set_preference("browser.cache.memory.enable", not disable_cache)
+        self.options.set_preference("network.cookie.cookieBehavior", block_cookies)
         if proxy:
             self.profile.set_proxy(Proxy({'proxyType': ProxyType.MANUAL, 'httpProxy': proxy, 'sslProxy': proxy}))
         self.options.profile = self.profile
