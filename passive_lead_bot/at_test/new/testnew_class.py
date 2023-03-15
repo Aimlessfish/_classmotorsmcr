@@ -1,4 +1,4 @@
-from classManager import *
+from classManager import ProxyManager
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
