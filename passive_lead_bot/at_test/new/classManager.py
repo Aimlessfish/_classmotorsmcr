@@ -1,4 +1,10 @@
 import random
+import os
+from selenium.webdriver import Firefox, FirefoxOptions, Proxy
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 max_width = 2560
 max_height = 1600
@@ -138,3 +144,23 @@ class FileManager():
 	def write_valid(self, valid_url):
 		with open(self.validfile, "a") as f:
 			f.write(valid_url+"\n")
+
+class FirefoxDriver:
+    def __init__(self, headless=False, private_mode=True, disable_cache=True, block_cookies=True, proxy=None):
+        self.gecko_path = os.path.join(os.environ['SystemRoot'], 'geckodriver.exe')
+        self.binary_path = os.path.normpath(os.path.join(os.environ['ProgramFiles'], 'Mozilla Firefox', 'firefox.exe'))
+        self.firefox_service = FirefoxService(executable_path=self.gecko_path)
+        self.binary_location = self.binary_path
+        self.options = FirefoxOptions()
+        self.options.headless = headless
+        self.profile = FirefoxProfile()
+        self.profile.set_preference("browser.privatebrowsing.autostart", private_mode)
+        self.profile.set_preference("browser.cache.disk.enable", not disable_cache)
+        self.profile.set_preference("browser.cache.memory.enable", not disable_cache)
+        self.profile.set_preference("network.cookie.cookieBehavior", block_cookies)
+        if proxy:
+            self.profile.set_proxy(Proxy({'proxyType': ProxyType.MANUAL, 'httpProxy': proxy, 'sslProxy': proxy}))
+        self.options.profile = self.profile
+
+    def get_driver(self):
+        return Firefox(options=self.options, service=self.firefox_service)
