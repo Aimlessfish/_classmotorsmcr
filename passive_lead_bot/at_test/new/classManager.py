@@ -1,6 +1,6 @@
 import random
 import os
-from selenium.webdriver import Firefox, FirefoxOptions, Proxy
+from selenium.webdriver import Firefox, FirefoxOptions, Proxy, ProxyType
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
 
