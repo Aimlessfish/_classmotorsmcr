@@ -118,7 +118,7 @@ class RandomManager:
 
 class ProxyManager:
 	def __init__(self):
-		self.proxyfile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt"
+		self.proxyfile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt"
 		self.uafile = r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\user-agents.txt"
 		self.useragents = []
 		self.proxies = []
