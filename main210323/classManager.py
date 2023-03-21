@@ -32,10 +32,14 @@ class ChromeDriver:
 		self.ChromeDriver = webdriver.Chrome(options = chromeOptions)
 
 		def chromeOptions(self):
-			self.chromeOptions = webdriver.ChromeOptions()
+			return self.chromeOptions
 
 		def chromeDriver(self):
-			self.ChromeDriver = webdriver.Chrome(options = chromeOptions)
+			return self.ChromeDriver
+
+		@classmethod
+		def create(cls):
+			return cls()
 		
 #---------------------------Broswer Managers END---------------------------#
 class RandomManager:
