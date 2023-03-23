@@ -40,6 +40,6 @@ while i != 5:
 		proxy_manager.remove_proxy(proxy)
 		chrome_driver.quit()
 		i +=1
-	raw_ipv4 = WebDriverWait(chrome_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
-	ipv4 = raw_ipv4.text
-	print(ipv4)
+raw_ipv4 = WebDriverWait(chrome_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
+ipv4 = raw_ipv4.text
+print(ipv4)
