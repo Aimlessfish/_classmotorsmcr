@@ -21,13 +21,25 @@ while i != maxretry:
 	else:
 		proxy_manager.remove_proxy(proxy)
 		fox_driver.quit()
-time.sleep(5)
+		i +=1
 raw_ipv4 = WebDriverWait(fox_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
 ipv4 = raw_ipv4.text
 print(ipv4)
-makeChrome = ChromeDriver.create()
-chrome_driver = makeChrome.chromeDriver()
-chrome_driver.get("https://whatsmyip.com")
-raw_ipv4 = WebDriverWait(chrome_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
-ipv4 = raw_ipv4.text
-print(ipv4)
+fox_driver.quit()
+i =0
+while i != 5:
+	proxy = proxy_manager.get_random_proxy()
+	makeChrome = ChromeDriver.create()
+	chromeOptions = ChromeDriver.chromeOptions()
+	chrome_driver = makeChrome.chromeDriver()
+	chromeOptions.add_argument("--proxy-server="+proxy)
+	chrome_driver.get("https://whatsmyip.com")
+	if "Whats My" in chrome_driver.title:
+		break
+	else:
+		proxy_manager.remove_proxy(proxy)
+		chrome_driver.quit()
+		i +=1
+	raw_ipv4 = WebDriverWait(chrome_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
+	ipv4 = raw_ipv4.text
+	print(ipv4)
