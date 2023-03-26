@@ -26,10 +26,13 @@ try:
 				print(e)
 			fox_driver.quit()
 			i +=1
-	raw_ipv4 = WebDriverWait(fox_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
-	ipv4 = raw_ipv4.text
-	print(ipv4)
-	fox_driver.quit()			
+	try:
+		raw_ipv4 = WebDriverWait(fox_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
+		ipv4 = raw_ipv4.text
+		print(ipv4)
+		fox_driver.quit()
+	except Exception as e:
+		print(e)			
 except Exception as e:
 	print(e)
 i =0
@@ -50,8 +53,12 @@ try:
 				print(e)
 			chrome_driver.quit()
 			i +=1
-	raw_ipv4 = WebDriverWait(chrome_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
-	ipv4 = raw_ipv4.text
-	print(ipv4)
+	try:
+		raw_ipv4 = WebDriverWait(chrome_driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/section/div/div/div/div[2]/p[1]')))
+		ipv4 = raw_ipv4.text
+		print(ipv4)
+		fox_driver.quit()
+	except Exception as e:
+		print(e)	
 except Exception as e:
 	print(e)
