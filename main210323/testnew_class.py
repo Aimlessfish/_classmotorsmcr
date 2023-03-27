@@ -3,6 +3,7 @@ from classManager import FirefoxDriver
 from classManager import ChromeDriver
 from classManager import RandomManager
 import time
+import random
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

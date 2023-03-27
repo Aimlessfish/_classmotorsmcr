@@ -35,6 +35,8 @@ info_statement = f"[INFO    {current_time()}]"
 logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 proxyManager = ProxyManager()
 fileManager = FileManager()
+ChromeDriver = ChromeDriver()
+FirefoxDriver = FirefoxDriver()
 max_retry = 5
 #-----------global settings
 
