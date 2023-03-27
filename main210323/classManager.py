@@ -31,15 +31,15 @@ class ChromeDriver:
 		self.chromeOptions.add_argument("--start-maximized")
 		self.ChromeDriver = webdriver.Chrome(options = self.chromeOptions)
 
-		def chromeOptions(self):
-			return self.chromeOptions
+	def chromeOptions(self):
+		return self.chromeOptions
 
-		def get_driver(self):
-			return self.ChromeDriver
+	def get_driver(self):
+		return self.ChromeDriver
 
-		@classmethod
-		def create(cls):
-			return cls()
+	@classmethod
+	def create(cls):
+		return cls()
 		
 #---------------------------Broswer Managers END---------------------------#
 class RandomManager:

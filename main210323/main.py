@@ -41,7 +41,7 @@ max_retry = 5
 #-----------Driver Settings
 drivers = [ChromeDriver, FirefoxDriver]
 selected_driver = random.choice(drivers)
-activeDriver = selected_driver.get_driver()
+activeDriver = selected_driver.create()
 # if selected_driver == ChromeDriver:
 # 	makeChrome = ChromeDriver.create()
 # 	chromeOptions = ChromeDriver.chromeOptions()
