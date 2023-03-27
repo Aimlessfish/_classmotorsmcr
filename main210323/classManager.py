@@ -29,7 +29,7 @@ class ChromeDriver:
 	def __init__(self):
 		self.chromeOptions = webdriver.ChromeOptions()
 		self.chromeOptions.add_argument("--start-maximized")
-		self.ChromeDriver = webdriver.Chrome(options = chromeOptions)
+		self.ChromeDriver = webdriver.Chrome(options = self.chromeOptions)
 
 		def chromeOptions(self):
 			return self.chromeOptions
