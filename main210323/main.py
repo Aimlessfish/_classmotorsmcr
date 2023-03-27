@@ -29,12 +29,23 @@ client = discord.Client(intents=intents)
 #-----------discord settings
 
 #-----------global settings
-info_statement = "[INFO    ]"
+def current_time():
+	return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+info_statement = f"[INFO    {current_time()}]"
 logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
 proxyManager = ProxyManager()
 fileManager = FileManager()
 max_retry = 5
-global activeDriver
 #-----------global settings
 
-			
+#-----------Driver Settings
+drivers = [ChromeDriver, FirefoxDriver]
+selected_driver = random.choice(drivers)
+activeDriver = selected_driver.create().get_driver()
+driver_info = f"[SELECTED DRIVER    {selected_driver}]"
+#-----------Driver Settings
+
+print(f"{info_statement} {driver_info}")
+
+
+	

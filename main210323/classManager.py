@@ -178,3 +178,4 @@ class FileManager():
 		with open(self.validfile, "a") as f:
 			f.write(valid_url+"\n")
 
+
