@@ -25,6 +25,10 @@ class FirefoxDriver:
     def get_driver(self):
         return Firefox(options=self.options, firefox_binary=self.binary_location, service=self.firefox_service)
 
+	@classmethod
+	def create(cls):
+		return cls()
+		
 class ChromeDriver:
 	def __init__(self):
 		self.chromeOptions = webdriver.ChromeOptions()

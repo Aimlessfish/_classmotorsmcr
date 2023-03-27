@@ -41,7 +41,7 @@ max_retry = 5
 #-----------Driver Settings
 drivers = [ChromeDriver, FirefoxDriver]
 selected_driver = random.choice(drivers)
-activeDriver = selected_driver.create()
+driverInstance = selected_driver.create()
 # if selected_driver == ChromeDriver:
 # 	makeChrome = ChromeDriver.create()
 # 	chromeOptions = ChromeDriver.chromeOptions()
@@ -49,7 +49,7 @@ activeDriver = selected_driver.create()
 # else:
 # 	proxy = proxy_manager.get_random_proxy()
 # 	activeDriver = FirefoxDriver(proxy=proxy).get_driver()
-driver_info = f"[SELECTED DRIVER    {selected_driver}]"
+driver_info = f"[SELECTED DRIVER    {driverInstance}]"
 #-----------Driver Settings
 
 print(f"{info_statement} {driver_info}")
