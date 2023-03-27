@@ -34,7 +34,7 @@ class ChromeDriver:
 		def chromeOptions(self):
 			return self.chromeOptions
 
-		def chromeDriver(self):
+		def get_driver(self):
 			return self.ChromeDriver
 
 		@classmethod
