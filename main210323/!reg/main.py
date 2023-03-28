@@ -217,7 +217,7 @@ async def reg(message, registration, miles):
 				except TimeoutException as e:
 					logging.error (e, exc_info=True)
 				try:
-					fileManager.
+					fileManager = FileManager()
 					login=WebDriverWait(activeDriver,5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#login")))
 					login.click()
 					login.send_keys(fileManager.loademail())
