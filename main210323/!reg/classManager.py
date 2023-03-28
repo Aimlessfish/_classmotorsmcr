@@ -21,15 +21,15 @@ class FirefoxDriver:
         self.options.set_preference("network.cookie.cookieBehavior", block_cookies)
         if proxy:
             self.options.proxy = Proxy({'proxyType': 'manual', 'httpProxy': proxy, 'sslProxy': proxy})
-		if useragent:
-			self.options.set_preference("general.useragent.override", useragent)
+        if useragent:
+            self.options.set_preference("general.useragent.override", useragent)
 
     def get_driver(self):
         return Firefox(options=self.options, firefox_binary=self.binary_location, service=self.firefox_service)
 
-	@classmethod
-	def create(cls):
-		return cls()
+    @classmethod
+    def create(cls):
+        return cls()
 
 class ChromeDriver:
 	def __init__(self, proxy=None, useragent=None):
@@ -51,7 +51,7 @@ class ChromeDriver:
 
 	@classmethod
 	def create(cls):
-		return cls()
+            return cls()
 		
 #---------------------------Broswer Managers END---------------------------#
 class RandomManager:

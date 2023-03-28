@@ -1,7 +1,6 @@
 import discord
 import asyncio
 from main import reg
-from main import nomiles
 import logging
 import schedule
 import time
