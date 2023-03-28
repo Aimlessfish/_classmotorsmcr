@@ -37,7 +37,7 @@ async def on_message(message):
             await message.channel.send("If I do not reply after 2 minutes something is wrong.")
             with open('reg.txt', 'w') as f:
                 f.write(registration)
-            await nomiles(message, registration)
+            await reg(message, registration)
 
 @client.event
 async def on_ready():
