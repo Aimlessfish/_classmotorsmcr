@@ -32,7 +32,7 @@ client = discord.Client(intents=intents)
 def current_time():
 	return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 info_statement = f"[INFO    {current_time()}]"
-logging.basicConfig(filename='lead_bot_errors.log', level=logging.ERROR)
+logging.basicConfig(filename='!reg/error.log', level=logging.ERROR)
 proxyManager = ProxyManager()
 max_retry = 5
 #-----------global settings
