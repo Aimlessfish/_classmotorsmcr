@@ -7,6 +7,8 @@ import schedule
 import time
 import datetime
 import os 
+from classManager import FirefoxDriver
+from classManager import ChromeDriver
 
 os.system("title !reg listener")
 
@@ -30,6 +32,13 @@ async def on_message(message):
 
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
+            drivers = [ChromeDriver, FirefoxDriver]
+            selected_driver = random.choice(drivers)
+            driverInstance = selected_driver.create()
+            activeDriver = driverInstance.get_driver()
+            driver_info = f"[SELECTED DRIVER    {driverInstance}]"
+            print(driver_info)
+            activeDriver.quit()
             args = message.content.split()[1]
             registration = args
             try:
@@ -43,14 +52,12 @@ async def on_message(message):
                 await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                 with open('reg.txt', 'w') as f:
                     f.write(registration)
-                await reg(message, registration, miles)
-            else:
                 print(f"{info} [Console]: !reg command recieved for reg: {registration}")
                 await message.channel.send("Please wait while i get the values..")
                 await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                 with open('reg.txt', 'w') as f:
                     f.write(registration)
-                await reg_nomiles(message, registration)
+                await reg_nomiles(message, registration, activeDriver)
 
 @client.event
 async def on_ready():
