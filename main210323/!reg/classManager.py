@@ -43,6 +43,10 @@ class ChromeDriver:
 			self.chromeOptions.add_argument("--proxy-server=http://"+proxy)
 		self.ChromeDriver = webdriver.Chrome(options = self.chromeOptions)
 
+	def loadSize(self):
+        self.height=random.randint(800, 2560)
+        self.width=random.randint(800,1920)
+        return self.height, self.width
 	def chromeOptions(self):
 		return self.chromeOptions
 
