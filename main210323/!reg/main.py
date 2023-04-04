@@ -61,7 +61,7 @@ hpi_span1_low = ''
 # driver_info = f"[SELECTED DRIVER    {driverInstance}]"
 #-----------Driver Settings
 
-print(f"{info_statement} {driver_info}")
+# print(f"{info_statement} {driver_info}")
 
 
 async def or_less(message):
