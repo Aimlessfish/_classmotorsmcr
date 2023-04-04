@@ -123,13 +123,13 @@ async def reg(message, registration, miles, activeDriver):
 		except Exception as e:
 			logging.error(e, exc_info=True)
 			retry_counter += 1
-			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
+			print(f"{info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
 			await message.channel.send("Retrying proxy..")
 			proxyManager.remove_proxy(proxy)
 			await asyncio.sleep(2)
 
 	if retry_counter == max_retry:
-		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running !reg")
+		print(f"{info_statement} [console]: Maximum retries met while running !reg")
 	else:
 		await asyncio.sleep(10)
 		try:
@@ -476,13 +476,13 @@ async def reg_nomiles(message, registration, activeDriver):
 		except Exception as e:
 			logging.error(e, exc_info=True)
 			retry_counter += 1
-			print(f"{timestamp} {info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
+			print(f"{info_statement} [Console]: Proxy connection failed: retrying. {retry_counter}")
 			await message.channel.send("Retrying proxy..")
 			proxyManager.remove_proxy(proxy)
 			await asyncio.sleep(2)
 
 	if retry_counter == max_retry:
-		print(f"{timestamp} {info_statement} [console]: Maximum retries met while running !reg")
+		print(f"{info_statement} [console]: Maximum retries met while running !reg")
 	else:
 		await asyncio.sleep(10)
 		try:

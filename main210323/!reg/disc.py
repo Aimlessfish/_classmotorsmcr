@@ -39,7 +39,6 @@ async def on_message(message):
             activeDriver = driverInstance.get_driver()
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
-            activeDriver.quit()
             if len(message.content) == 2:
                 args = message.content.split()[1]
                 registration = args
