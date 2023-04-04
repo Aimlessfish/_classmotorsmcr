@@ -1,6 +1,7 @@
 import discord
 import asyncio
 from main import reg
+from main import reg_nomiles
 import logging
 import schedule
 import time
@@ -31,13 +32,25 @@ async def on_message(message):
         if message.content.startswith('!reg'):
             args = message.content.split()[1]
             registration = args
-
-            print(f"{info} [Console]: !reg command recieved for reg: {registration}")
-            await message.channel.send("Please wait while i get the values..")
-            await message.channel.send("If I do not reply after 2 minutes something is wrong.")
-            with open('reg.txt', 'w') as f:
-                f.write(registration)
-            await reg(message, registration)
+            try:
+                kwarg = message.content.split()[2]
+                miles = kwarg
+            except Exception as e:
+                logging.error(e,exc_info=True)
+            if miles:
+                print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
+                await message.channel.send("Please wait while i get the values..")
+                await message.channel.send("If I do not reply after 2 minutes something is wrong.")
+                with open('reg.txt', 'w') as f:
+                    f.write(registration)
+                await reg(message, registration, miles)
+            elif:
+                print(f"{info} [Console]: !reg command recieved for reg: {registration}")
+                await message.channel.send("Please wait while i get the values..")
+                await message.channel.send("If I do not reply after 2 minutes something is wrong.")
+                with open('reg.txt', 'w') as f:
+                    f.write(registration)
+                await reg_nomiles(message, registration)
 
 @client.event
 async def on_ready():
