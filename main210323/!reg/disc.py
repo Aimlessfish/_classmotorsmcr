@@ -47,18 +47,21 @@ async def on_message(message):
                 miles = kwarg
             except Exception as e:
                 logging.error(e,exc_info=True)
-            if miles:
-                print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
-                await message.channel.send("Please wait while i get the values..")
-                await message.channel.send("If I do not reply after 2 minutes something is wrong.")
-                with open('reg.txt', 'w') as f:
-                    f.write(registration)
+            if not miles:
                 print(f"{info} [Console]: !reg command recieved for reg: {registration}")
                 await message.channel.send("Please wait while i get the values..")
                 await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                 with open('reg.txt', 'w') as f:
                     f.write(registration)
                 await reg_nomiles(message, registration, activeDriver)
+            else:
+                print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
+                await message.channel.send("Please wait while i get the values..")
+                await message.channel.send("If I do not reply after 2 minutes something is wrong.")
+                with open('reg.txt', 'w') as f:
+                    f.write(registration)
+                await reg(messgage, registration, miles, activeDriver)
+
 
 @client.event
 async def on_ready():
