@@ -53,12 +53,12 @@ hpi_span1_low = ''
 #-----------global variables
 
 #-----------Driver Settings
-drivers = [ChromeDriver, FirefoxDriver]
-selected_driver = random.choice(drivers)
-driverInstance = selected_driver.create()
-activeDriver = driverInstance.get_driver()
-activeDriver.quit()
-driver_info = f"[SELECTED DRIVER    {driverInstance}]"
+# drivers = [ChromeDriver, FirefoxDriver]
+# selected_driver = random.choice(drivers)
+# driverInstance = selected_driver.create()
+# activeDriver = driverInstance.get_driver()
+# activeDriver.quit()
+# driver_info = f"[SELECTED DRIVER    {driverInstance}]"
 #-----------Driver Settings
 
 print(f"{info_statement} {driver_info}")
@@ -107,7 +107,7 @@ async def or_less(message):
 	await message.channel.send(formatted_private_price)
 
 
-async def reg(message, registration, miles):
+async def reg(message, registration, miles, activeDriver):
 	fileManager = FileManager()
 	randomManager = RandomManager()
 	retry_counter = 0
@@ -460,7 +460,7 @@ async def reg(message, registration, miles):
 			#await message.channel.send("Failed to get evaluation link")
 			logging.error(e, exc_info=True)
 
-async def reg_nomiles(message, registration):
+async def reg_nomiles(message, registration, activeDriver):
 	fileManager = FileManager()
 	randomManager = RandomManager()
 	retry_counter = 0
