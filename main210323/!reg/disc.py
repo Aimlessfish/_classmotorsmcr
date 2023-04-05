@@ -37,26 +37,29 @@ async def on_message(message):
             driverInstance = selected_driver.create()
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
-            if len(message.content) == 2:
-                args = message.content.split()[1]
-                registration = args
-                kwarg = message.content.split()[2]
-                miles = kwarg
-                print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
-                await message.channel.send("Please wait while i get the values..")
-                await message.channel.send("If I do not reply after 2 minutes something is wrong.")
-                with open('reg.txt', 'w') as f:
-                    f.write(registration)
-                await reg(messgage, registration, miles, driverInstance)
-            else:
-                args = message.content.split()[1]
-                registration = args
-                print(f"{info} [Console]: !reg command recieved for reg: {registration}")
-                await message.channel.send("Please wait while i get the values..")
-                await message.channel.send("If I do not reply after 2 minutes something is wrong.")
-                with open('reg.txt', 'w') as f:
-                    f.write(registration)
-                await reg_nomiles(message, registration, driverInstance)
+            try:
+                if len(message.content) == 2:
+                    args = message.content.split()[1]
+                    registration = args
+                    kwarg = message.content.split()[2]
+                    miles = kwarg
+                    print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
+                    await message.channel.send("Please wait while i get the values..")
+                    await message.channel.send("If I do not reply after 2 minutes something is wrong.")
+                    with open('reg.txt', 'w') as f:
+                        f.write(registration)
+                    await reg(messgage, registration, miles, driverInstance)
+                else:
+                    args = message.content.split()[1]
+                    registration = args
+                    print(f"{info} [Console]: !reg command recieved for reg: {registration}")
+                    await message.channel.send("Please wait while i get the values..")
+                    await message.channel.send("If I do not reply after 2 minutes something is wrong.")
+                    with open('reg.txt', 'w') as f:
+                        f.write(registration)
+                    await reg_nomiles(message, registration, driverInstance)
+            except Exception as e:
+                logging.error(e, exc_info=True)
 
 
 @client.event
