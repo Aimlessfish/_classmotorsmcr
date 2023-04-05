@@ -48,7 +48,7 @@ async def on_message(message):
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     with open('reg.txt', 'w') as f:
                         f.write(registration)
-                    await reg(messgage, registration, miles, driverInstance)
+                    await reg(message, registration, miles, driverInstance)
                 else:
                     args = message.content.split()[1]
                     registration = args
