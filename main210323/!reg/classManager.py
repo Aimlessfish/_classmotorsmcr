@@ -31,13 +31,13 @@ class FirefoxDriver:
     def create(cls, proxy=None, user_agent=None):
     	instance = cls()
         if proxy:
-            instance.options.set_preference("network.proxy.type", 1)
-            instance.options.set_preference("network.proxy.http", proxy.split(":")[0])
-            instance.options.set_preference("network.proxy.http_port", int(proxy.split(":")[1]))
-        if user_agent:
-            instance.options.set_preference("general.useragent.override", user_agent)
-        driver = Firefox(options = instance.options, firefox_binary=instance.binary_location, service=instance.firefox_service)
-        return instance
+			instance.options.set_preference("network.proxy.type", 1)
+			instance.options.set_preference("network.proxy.http", proxy.split(":")[0])
+			instance.options.set_preference("network.proxy.http_port", int(proxy.split(":")[1]))
+		if user_agent:
+			instance.options.set_preference("general.useragent.override", user_agent)
+		driver = Firefox(options = instance.options, firefox_binary=instance.binary_location, service=instance.firefox_service)
+		return instance
 
 class ChromeDriver:
 	def __init__(self, proxy=None, useragent=None):
@@ -65,12 +65,12 @@ class ChromeDriver:
 	@classmethod
 	def create(cls, proxy=None, user_agent=None):
 		instance = cls()
-        if proxy:
-            instance.chromeOptions.add_argument(f"--proxy-server=http://{proxy}")
-        if user_agent:
-            instance.chromeOptions.add_argument(f"--user-agent={user_agent}")
-        driver = Chrome(options=options)
-        return instance
+		if proxy:
+			instance.chromeOptions.add_argument(f"--proxy-server=http://{proxy}")
+		if user_agent:
+			instance.chromeOptions.add_argument(f"--user-agent={user_agent}")
+		driver = Chrome(options=options)
+		return instance
 		
 #---------------------------Broswer Managers END---------------------------#
 class RandomManager:
