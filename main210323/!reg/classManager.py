@@ -117,7 +117,7 @@ class RandomManager:
 		if not self.names:
 			self.load_names()
 		hpi_name = random.choice(self.names).strip()
-		return name[:len(name)//2]+" "+name[len(name)//2]
+		return hpi_name[:len(hpi_name)//2]+" "+hpi_name[len(hpi_name)//2]
 
 	def random_phone(self):
 		phone_suffix = str(random.randint(0,999999999)).zfill(9)
