@@ -125,7 +125,7 @@ class RandomManager:
 		return phone_number
 
 	def createEmail(self):
-		ranEmail = self.get_random_name()+self.get_random_postcode()+"@mynes.com"
+		ranEmail = self.get_random_name()+self.random_phone()+"@mynes.com"
 		with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\email.txt","w") as f:
 			f.write(ranEmail)
 			f.close()

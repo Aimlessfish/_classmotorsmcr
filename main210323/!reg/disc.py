@@ -38,7 +38,7 @@ async def on_message(message):
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
             try:
-                if len(message.content) == 2:
+                if len(message.content) > 1:
                     args = message.content.split()[1]
                     registration = args
                     kwarg = message.content.split()[2]

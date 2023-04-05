@@ -184,7 +184,7 @@ async def reg(message, registration, miles, driverInstance):
 			postal = WebDriverWait(activeDriver,8).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
 			postal.click();
 			await asyncio.sleep(5)
-			postal.send_keys(randomManager.get_random_postCode())
+			postal.send_keys(randomManager.get_random_postcode())
 		except Exception as e:
 			#await message.channel.send("Failed to enter postcode")
 			logging.error(e, exc_info=True)
@@ -538,7 +538,7 @@ async def reg_nomiles(message, registration, driverInstance):
 			postal = WebDriverWait(activeDriver,8).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='formPostcode']")))
 			postal.click();
 			await asyncio.sleep(5)
-			postal.send_keys(randomManager.get_random_postCode())
+			postal.send_keys(randomManager.get_random_postcode())
 		except Exception as e:
 			#await message.channel.send("Failed to enter postcode")
 			logging.error(e, exc_info=True)
