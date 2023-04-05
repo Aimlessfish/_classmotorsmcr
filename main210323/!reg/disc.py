@@ -9,6 +9,7 @@ import datetime
 import os 
 from classManager import FirefoxDriver
 from classManager import ChromeDriver
+from classManager import ProxyManager
 import random
 
 os.system("title !reg listener")
@@ -30,11 +31,15 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    proxyManager = ProxyManager()
+
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
             drivers = [ChromeDriver, FirefoxDriver]
             selected_driver = random.choice(drivers)
-            driverInstance = selected_driver.create()
+            proxy = proxyManager.get_random_proxy()
+            useragent = proxyManager.get_random_UA()
+            driverInstance = selected_driver.create(proxy, useragent)
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
             try:
