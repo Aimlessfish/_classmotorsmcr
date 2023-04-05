@@ -207,8 +207,6 @@ async def reg(message, registration, miles, driverInstance):
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
 			if not hpi_span1_low:
-				activeDriver.quit()
-				activeDriver = webdriver.ChromeOptions(options = driver_options)
 				try:
 					activeDriver.get('https://yopmail.com')
 				except TimeoutException as e:
@@ -561,8 +559,6 @@ async def reg_nomiles(message, registration, driverInstance):
 			except TimeoutException as e:
 				logging.error(e,exc_info=True)
 			if not hpi_span1_low:
-				activeDriver.quit()
-				activeDriver = webdriver.ChromeOptions(options = driver_options)
 				try:
 					activeDriver.get('https://yopmail.com')
 				except TimeoutException as e:
