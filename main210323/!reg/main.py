@@ -114,8 +114,6 @@ async def reg(message, registration, miles, driverInstance):
 	retry_counter = 0
 	max_retry = 3
 	while retry_counter < max_retry:
-		proxy = proxyManager.get_random_proxy()
-		ua = proxyManager.get_random_UA()
 		try:
 			activeDriver.get('https://hpivaluations.com')
 			if "Free" in activeDriver.title:
