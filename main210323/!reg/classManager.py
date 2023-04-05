@@ -69,7 +69,7 @@ class ChromeDriver:
 			instance.chromeOptions.add_argument(f"--proxy-server=http://{proxy}")
 		if user_agent:
 			instance.chromeOptions.add_argument(f"--user-agent={user_agent}")
-		driver = webdriver.Chrome(options=options)
+		driver = webdriver.Chrome(options=instance.chromeOptions)
 		return instance
 		
 #---------------------------Broswer Managers END---------------------------#
