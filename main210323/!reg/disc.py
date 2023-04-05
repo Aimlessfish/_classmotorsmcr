@@ -21,7 +21,7 @@ intents = discord.Intents.default()
 intents.guilds = True
 client = discord.Client(intents=intents)
 
-logging.basicConfig(filename='errors.log', level=logging.ERROR)
+logging.basicConfig(filename='discord_errors.log', level=logging.ERROR)
 
 print(f"[{info}] [bot]: Loading...")
 
