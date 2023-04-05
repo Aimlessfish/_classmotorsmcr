@@ -20,7 +20,6 @@ info = f"[INFO    {current_time()}]"
 intents = discord.Intents.default()
 intents.guilds = True
 client = discord.Client(intents=intents)
-general_ID = '1068572399177584702'
 
 logging.basicConfig(filename='errors.log', level=logging.ERROR)
 
@@ -36,7 +35,6 @@ async def on_message(message):
             drivers = [ChromeDriver, FirefoxDriver]
             selected_driver = random.choice(drivers)
             driverInstance = selected_driver.create()
-            activeDriver = driverInstance.get_driver()
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
             if len(message.content) == 2:
@@ -49,7 +47,7 @@ async def on_message(message):
                 await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                 with open('reg.txt', 'w') as f:
                     f.write(registration)
-                await reg(messgage, registration, miles, activeDriver)
+                await reg(messgage, registration, miles, driverInstance)
             else:
                 args = message.content.split()[1]
                 registration = args
@@ -58,7 +56,7 @@ async def on_message(message):
                 await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                 with open('reg.txt', 'w') as f:
                     f.write(registration)
-                await reg_nomiles(message, registration, activeDriver)
+                await reg_nomiles(message, registration, driverInstance)
 
 
 @client.event

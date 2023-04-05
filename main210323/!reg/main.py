@@ -64,7 +64,7 @@ hpi_span1_low = ''
 # print(f"{info_statement} {driver_info}")
 
 
-async def or_less(message):
+async def or_less(message, activeDriver):
 	intents = discord.Intents.default()
 	client = discord.Client(intents=intents)
 	try:
@@ -107,7 +107,8 @@ async def or_less(message):
 	await message.channel.send(formatted_private_price)
 
 
-async def reg(message, registration, miles, activeDriver):
+async def reg(message, registration, miles, driverInstance):
+	activeDriver = driverInstance.get_driver()
 	fileManager = FileManager()
 	randomManager = RandomManager()
 	retry_counter = 0
@@ -460,7 +461,8 @@ async def reg(message, registration, miles, activeDriver):
 			#await message.channel.send("Failed to get evaluation link")
 			logging.error(e, exc_info=True)
 
-async def reg_nomiles(message, registration, activeDriver):
+async def reg_nomiles(message, registration, driverInstance):
+	activeDriver = driverInstance.get_driver()
 	fileManager = FileManager()
 	randomManager = RandomManager()
 	retry_counter = 0
@@ -592,7 +594,7 @@ async def reg_nomiles(message, registration, activeDriver):
 					check_or_less = or_less_check.text
 #or less handler --------------------------------------------
 					if "or less" in check_or_less:
-						await or_less()
+						await or_less(message, activeDriver)
 #or less handler end ----------------------------------------
 					else:
 						try:
@@ -698,7 +700,7 @@ async def reg_nomiles(message, registration, activeDriver):
 				or_less_check = WebDriverWait(activeDriver,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div")))
 				check_or_less = or_less_check.text
 				if "or less" in check_or_less:
-					await or_less(message)
+					await or_less(message, activeDriver)
 				else:
 					try:
 						cookies = WebDriverWait(activeDriver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,"#onetrust-accept-btn-handler")))
