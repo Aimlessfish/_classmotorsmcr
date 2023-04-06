@@ -44,7 +44,7 @@ async def on_message(message):
             randomProxy = proxyManager.get_random_proxy()
             proxy = proxyManager.testProxy(randomProxy)
             while not proxy:
-                proxyManager.remove_proxy(randomProxy)
+                remove = proxyManager.remove_proxy(randomProxy)
                 randomProxy = proxyManager.get_random_proxy()
                 proxy = proxyManager.testProxy(randomProxy)
             await message.channel.send("Proxy Selection Completed!")
