@@ -197,8 +197,8 @@ class ProxyManager:
 				else:
 					return randomProxy
 			except requests.exceptions.RequestException:
-			attempts +=1
-			print(f"{randomProxy} connection aborted. Retrying ({attempts}/5)...")
+				attempts +=1
+				print(f"{randomProxy} connection aborted. Retrying ({attempts}/5)...")
 		print(f"{randomProxy} could not be verified after {attempts} attempts.")
 		return None
 
