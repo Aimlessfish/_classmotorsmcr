@@ -190,7 +190,7 @@ class ProxyManager:
 		attempts = 0
 		while attempts < 5:
 			try:
-				self.response = requests.get(randomProxy)
+				self.response = requests.get(f"http://{randomProxy}")
 				if self.response.status_code == 200:
 					return randomProxy
 				else:
