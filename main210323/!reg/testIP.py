@@ -17,7 +17,7 @@ while not proxy:
     randomProxy = proxyManager.get_random_proxy()
     proxy = proxyManager.testProxy(randomProxy)
 
-driverInstance = selected_driver.create(proxy=proxy, useragent=useragent)
+driverInstance = selected_driver.create(proxy, useragent)
 driver_info = f"[SELECTED DRIVER    {driverInstance}]"
 activeDriver = driverInstance.get_driver()
 
