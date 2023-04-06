@@ -39,8 +39,8 @@ async def on_message(message):
         if message.content.startswith('!reg'):
             drivers = [ChromeDriver, FirefoxDriver]
             selected_driver = random.choice(drivers)
-            randomProxy = proxyManager.get_random_proxy()
             useragent = proxyManager.get_random_UA()
+            randomProxy = proxyManager.get_random_proxy()
             proxy = proxyManager.testProxy(randomProxy)
             while not testproxy:
                 randomProxy = proxyManager.get_random_proxy()
