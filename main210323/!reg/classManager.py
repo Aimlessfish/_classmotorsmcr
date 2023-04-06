@@ -34,7 +34,7 @@ class FirefoxDriver:
         return Firefox(options=self.options, firefox_binary=self.binary_location, service=self.firefox_service)
 
     @classmethod
-	def create(cls, proxy=None, user_agent=None):
+    def create(cls, proxy=None, user_agent=None):
 		instance = cls()
 		if proxy:
 			firefox_profile = FirefoxProfile()
