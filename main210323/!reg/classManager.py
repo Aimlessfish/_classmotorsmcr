@@ -36,16 +36,20 @@ class FirefoxDriver:
     @classmethod
     def create(cls, proxy=None, user_agent=None):
         instance = cls()
+        capabilities = DesiredCapabilities.FIREFOX.copy()
         if proxy:
-            firefox_profile = FirefoxProfile()
-            firefox_profile.set_preference('network.proxy.type', 1)
-            firefox_profile.set_preference('network.proxy.http', proxy.split(':')[0])
-            firefox_profile.set_preference('network.proxy.http_port', int(proxy.split(':')[1]))
-            instance.firefox_profile = firefox_profile
+        	capabilities['acceptInsecureCerts'] = True
+        	capabilities['proxy'] = {'proxyType': 'manual',
+			'httpProxy': f'http://{proxy}',
+			'sslProxy': f'http://{proxy}'}
         if user_agent:
-            instance.options.set_preference('general.useragent.override', user_agent)
-        driver = Firefox(firefox_profile=instance.firefox_profile, options=instance.options,
-                         firefox_binary=instance.binary_location, service=instance.firefox_service)
+        	options = webdriver.FirefoxOptions()
+        	options.set_preference('general.useragent.override', user_agent)
+        else:
+        	options = None
+        driver = Firefox(firefox_profile=instance.firefox_profile, options=options,
+                         capabilities=capabilities, firefox_binary=instance.binary_location, 
+                         service=instance.firefox_service)
         return instance
 
 class ChromeDriver:
