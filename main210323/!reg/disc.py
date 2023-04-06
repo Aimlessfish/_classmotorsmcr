@@ -96,6 +96,6 @@ async def run_bot():
         #await client.close()
     except Exception as e:
         logging.error(e, exc_info=True)
-        
+
 asyncio.run(run_bot())
 
