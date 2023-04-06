@@ -3,6 +3,7 @@ import requests
 import logging
 import os
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver import Firefox, FirefoxOptions, Proxy
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver import FirefoxProfile
