@@ -1,9 +1,13 @@
 import random
 import requests
+import logging
 import os
 from selenium import webdriver
 from selenium.webdriver import Firefox, FirefoxOptions, Proxy
 from selenium.webdriver.firefox.service import Service as FirefoxService
+
+logging.basicConfig(filename='cManager_errors.log', level=logging.ERROR)
+
 
 
 max_width = 2560
@@ -185,12 +189,15 @@ class ProxyManager:
 	def testProxy(self, randomProxy):
 		attempts = 0
 		while attempts < 5:
-			self.response = requests.get(randomProxy)
-			if self.response.status_code == 200:
-				return randomProxy
-			else:
-				attempts += 1
-				print(f"{randomProxy} not online. Retrying ({attempts}/5)...")
+			try:
+				self.response = requests.get(randomProxy)
+				if self.response.status_code == 200:
+					return randomProxy
+				else:
+					attempts += 1
+					print(f"{randomProxy} not online. Retrying ({attempts}/5)...")
+			except Exception as e:
+				logging.error(e,exc_info=True)
 		print(f"{randomProxy} could not be verified after {attempts} attempts.")
 		return None
 
