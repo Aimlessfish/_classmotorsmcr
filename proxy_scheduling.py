@@ -39,7 +39,7 @@ def testProxy():
 				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","w") as f:
 					f.write("\n".join(proxy_list))
 				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\working.txt","a") as f:
-					f.write(f"{proxy} \n")
+					f.write(proxy+"\n")
 			else:
 				proxy_list.pop(proxy_list.index(proxy))
 				with open(r"C:\Users\Administrator\Desktop\_classmotorsmcr-main\required_list\proxy.txt","w") as f:
