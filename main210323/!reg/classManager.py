@@ -189,15 +189,12 @@ class ProxyManager:
 	def testProxy(self, randomProxy):
 		attempts = 0
 		while attempts < 5:
-			try:
-				self.response = requests.get(f"http://{randomProxy}")
-				if self.response.status_code == 200:
-					return randomProxy
-				else:
-					attempts += 1
-					print(f"{randomProxy} not online. Retrying ({attempts}/5)...")
-			except Exception as e:
-				logging.error(e,exc_info=True)
+			self.response = requests.get(f"http://{randomProxy}")
+			if self.response.status_code == 200:
+				return randomProxy
+			else:
+				attempts += 1
+				print(f"{randomProxy} not online. Retrying ({attempts}/5)...")
 		print(f"{randomProxy} could not be verified after {attempts} attempts.")
 		return None
 
