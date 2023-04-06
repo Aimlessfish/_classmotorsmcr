@@ -39,12 +39,15 @@ async def on_message(message):
         if message.content.startswith('!reg'):
             drivers = [ChromeDriver, FirefoxDriver]
             selected_driver = random.choice(drivers)
-            useragent = proxyManager.get_random_UA()
-            randomProxy = proxyManager.get_random_proxy()
-            proxy = proxyManager.testProxy(randomProxy)
-            while not testproxy:
+            try:
+                useragent = proxyManager.get_random_UA()
                 randomProxy = proxyManager.get_random_proxy()
                 proxy = proxyManager.testProxy(randomProxy)
+                while not testproxy:
+                    randomProxy = proxyManager.get_random_proxy()
+                    proxy = proxyManager.testProxy(randomProxy)
+            except Exception as e:
+                logging.error(e,exc_info=True)
             driverInstance = selected_driver.create(proxy, useragent)
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
