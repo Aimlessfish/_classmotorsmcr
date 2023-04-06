@@ -11,6 +11,7 @@ from classManager import FirefoxDriver
 from classManager import ChromeDriver
 from classManager import ProxyManager
 import random
+import requests
 
 os.system("title !reg listener")
 
@@ -26,6 +27,7 @@ logging.basicConfig(filename='discord_errors.log', level=logging.ERROR)
 
 print(f"[{info}] [bot]: Loading...")
 
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -37,8 +39,12 @@ async def on_message(message):
         if message.content.startswith('!reg'):
             drivers = [ChromeDriver, FirefoxDriver]
             selected_driver = random.choice(drivers)
-            proxy = proxyManager.get_random_proxy()
+            randomProxy = proxyManager.get_random_proxy()
             useragent = proxyManager.get_random_UA()
+            proxy = proxyManager.testProxy(randomProxy)
+            while not testproxy:
+                randomProxy = proxyManager.get_random_proxy()
+                proxy = proxyManager.testProxy(randomProxy)
             driverInstance = selected_driver.create(proxy, useragent)
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")

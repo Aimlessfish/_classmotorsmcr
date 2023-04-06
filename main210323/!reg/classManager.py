@@ -1,4 +1,5 @@
 import random
+import requests
 import os
 from selenium import webdriver
 from selenium.webdriver import Firefox, FirefoxOptions, Proxy
@@ -180,6 +181,20 @@ class ProxyManager:
 	            f.writelines(self.proxies)
 	    else:
 	        print(f"{proxy} not found in proxy list.")
+
+	def testProxy(self, randomProxy):
+		attempts = 0
+		while attempts < 5:
+			self.response = requests.get(randomProxy, timeout=5)
+			if self.response.status_code == 200:
+				return randomProxy
+			else:
+				attempts += 1
+				print(f"{randomProxy} not online. Retrying ({attempts}/5)...")
+		print(f"{randomProxy} could not be verified after {attempts} attempts.")
+		return None
+
+
 
 class FileManager():
 	def __init__(self):
