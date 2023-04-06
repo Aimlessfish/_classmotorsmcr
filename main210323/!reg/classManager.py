@@ -35,18 +35,18 @@ class FirefoxDriver:
 
     @classmethod
     def create(cls, proxy=None, user_agent=None):
-		instance = cls()
-		if proxy:
-			firefox_profile = FirefoxProfile()
-			firefox_profile.set_preference('network.proxy.type', 1)
-			firefox_profile.set_preference('network.proxy.http', proxy.split(':')[0])
-			firefox_profile.set_preference('network.proxy.http_port', int(proxy.split(':')[1]))
-			instance.firefox_profile = firefox_profile
-		if user_agent:
-			instance.options.set_preference('general.useragent.override', user_agent)
-		driver = Firefox(firefox_profile=instance.firefox_profile, options=instance.options,
-			firefox_binary=instance.binary_location, service=instance.firefox_service)
-		return instance
+        instance = cls()
+        if proxy:
+            firefox_profile = FirefoxProfile()
+            firefox_profile.set_preference('network.proxy.type', 1)
+            firefox_profile.set_preference('network.proxy.http', proxy.split(':')[0])
+            firefox_profile.set_preference('network.proxy.http_port', int(proxy.split(':')[1]))
+            instance.firefox_profile = firefox_profile
+        if user_agent:
+            instance.options.set_preference('general.useragent.override', user_agent)
+        driver = Firefox(firefox_profile=instance.firefox_profile, options=instance.options,
+                         firefox_binary=instance.binary_location, service=instance.firefox_service)
+        return instance
 
 class ChromeDriver:
 	def __init__(self, proxy=None, useragent=None):
