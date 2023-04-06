@@ -185,7 +185,7 @@ class ProxyManager:
 	def testProxy(self, randomProxy):
 		attempts = 0
 		while attempts < 5:
-			self.response = requests.get(randomProxy, timeout=5)
+			self.response = requests.get(randomProxy)
 			if self.response.status_code == 200:
 				return randomProxy
 			else:
