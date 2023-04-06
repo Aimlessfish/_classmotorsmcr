@@ -37,7 +37,7 @@ async def on_message(message):
 
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
-            message.channel.send("Proxy Selection Started.")
+            await message.channel.send("Proxy Selection Started.")
             drivers = [ChromeDriver, FirefoxDriver]
             selected_driver = random.choice(drivers)
             useragent = proxyManager.get_random_UA()
@@ -46,7 +46,7 @@ async def on_message(message):
             while not testproxy:
                 randomProxy = proxyManager.get_random_proxy()
                 proxy = proxyManager.testProxy(randomProxy)
-            message.channel.send("Proxy Selection Completed!")
+            await message.channel.send("Proxy Selection Completed!")
             driverInstance = selected_driver.create(proxy, useragent)
             driver_info = f"[SELECTED DRIVER    {driverInstance}]"
             print(f"{info} {driver_info}")
