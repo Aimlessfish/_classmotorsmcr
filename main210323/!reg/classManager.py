@@ -183,12 +183,15 @@ class ProxyManager:
 		return random.choice(self.proxies)
 
 	def remove_proxy(self, proxy):
-	    if proxy in self.proxies:
-	        self.proxies.remove(proxy)
-	        with open(self.proxyfile, "w") as f:
-	            f.writelines(self.proxies)
-	    else:
-	        print(f"{proxy} not found in proxy list.")
+		if proxy in self.proxies:
+			self.proxies.remove(proxy)
+			with open(self.proxyfile, "r") as f:
+				contents = f.readlines()
+			with open(self.proxyfile, "w") as f:
+				for line in contents:
+					if line.strip() != proxy:
+						f.write(line)
+				f.writelines(self.proxies)
 
 	def testProxy(self, randomProxy):
 		attempts = 0
