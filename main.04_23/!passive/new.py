@@ -247,9 +247,19 @@ async def on_ready():
                 print(f'[{timestamp}] {info_statement} - Found leads-channel in {guild.name} (ID: {guild.id}), channel ID: {channel.id}')
                 global leads_channel
                 leads_channel = client.get_channel(channel.id)
-    # asyncio.create_task(run_schedule())
+    # schedule.every().hour.do(lambda: asyncio.create_task(start(leads_channel)))
     asyncio.create_task(start(leads_channel))
 
-if __name__ == '__main__':
-    clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
-    client.run(clientID)
+# if __name__ == '__main__':
+#     clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
+#     client.run(clientID)
+
+
+async def run_bot():
+    try:
+        await client.start("MTA3Njg4NTUzMjc5NTIxMTkzOA.GOvtxR.62XbZu2Zxzs7hI6HkHPydLU3zBkCSPZQHM3qvY")
+        # await client.close()
+    except Exception as e:
+        logging.error(e, exc_info=True)
+
+asyncio.run(run_bot())
