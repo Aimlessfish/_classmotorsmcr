@@ -46,10 +46,6 @@ async def on_message(message):
             useragent = proxyManager.get_random_UA()
             randomProxy = proxyManager.get_random_proxy()
             proxy = proxyManager.testProxy(randomProxy)
-            while not proxy:
-                proxyManager.remove_proxy(randomProxy)
-                randomProxy = proxyManager.get_random_proxy()
-                proxy = proxyManager.testProxy(randomProxy)
             await message.channel.send("Proxy Selection Completed!")
             driverInstance = selected_driver.create(
                 proxy=proxy, useragent=useragent)

@@ -248,7 +248,8 @@ async def on_ready():
                 global leads_channel
                 leads_channel = client.get_channel(channel.id)
     # schedule.every().hour.do(lambda: asyncio.create_task(start(leads_channel)))
-    asyncio.create_task(start(leads_channel))
+    print("starting scrape!")
+    await asyncio.create_task(start(leads_channel))
 
 # if __name__ == '__main__':
 #     clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
