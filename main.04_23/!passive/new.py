@@ -227,10 +227,13 @@ async def checkFinance():
 
 
 async def start(leads_channel):
-    await scrapeAT()
-    print("scrape finsihed. checking finance.")
-    await asyncio.sleep(10)
-    await checkFinance()
+    try:
+        await scrapeAT()
+        print("scrape finsihed. checking finance.")
+        await asyncio.sleep(10)
+        await checkFinance()
+    except Exception as e:
+        logging.error(e, exc_info=True)
 
 
 @client.event
@@ -249,7 +252,7 @@ async def on_ready():
                 leads_channel = client.get_channel(channel.id)
     # schedule.every().hour.do(lambda: asyncio.create_task(start(leads_channel)))
     print("starting scrape!")
-    await asyncio.create_task(start(leads_channel))
+    await start(leads_channel)
 
 # if __name__ == '__main__':
 #     clientID = 'MTA2ODgzODc4OTM3MzUwOTY3Mg.GFApDS.0zYDIu4XqbBVsLrhwyK3WB2wok0gAVjA-Su85w'
