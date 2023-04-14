@@ -36,47 +36,45 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    proxyManager = ProxyManager()
+    # proxyManager = ProxyManager()
 
-    await message.channel.send("Proxy Selection Started.")
-    drivers = [ChromeDriver, FirefoxDriver]
-    selected_driver = random.choice(drivers)
-    useragent = proxyManager.get_random_UA()
-    randomProxy = proxyManager.get_random_proxy()
-    proxy = proxyManager.testProxy(randomProxy)
-    while not proxy:
-        proxyManager.remove_proxy(randomProxy)
-        randomProxy = proxyManager.get_random_proxy()
-        proxy = proxyManager.testProxy(randomProxy)
-    await message.channel.send("Proxy Selection Completed!")
-    driverInstance = selected_driver.create(
-        proxy=proxy, useragent=useragent)
-    driver_info = f"[SELECTED DRIVER    {driverInstance}]"
+    # await message.channel.send("Proxy Selection Started.")
+    # drivers = [ChromeDriver, FirefoxDriver]
+    # selected_driver = random.choice(drivers)
+    # useragent = proxyManager.get_random_UA()
+    # randomProxy = proxyManager.get_random_proxy()
+    # proxy = proxyManager.testProxy(randomProxy)
+    # while not proxy:
+    #     proxyManager.remove_proxy(randomProxy)
+    #     randomProxy = proxyManager.get_random_proxy()
+    #     proxy = proxyManager.testProxy(randomProxy)
+    # await message.channel.send("Proxy Selection Completed!")
+    # driverInstance = selected_driver.create(
+    #     proxy=proxy, useragent=useragent)
+    # driver_info = f"[SELECTED DRIVER    {driverInstance}]"
     print(f"{info} {driver_info}")
 
     if isinstance(message.channel, discord.DMChannel):
         if message.content.startswith('!reg'):
             try:
-                if len(message.content) == 2:
-                    args = message.content.split()[1]
-                    registration = args
+                args = message.content.split()[1]
+                registration = args
+                if message.content > 1:
                     kwarg = message.content.split()[2]
                     miles = kwarg
                     print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     with open('reg.txt', 'w') as f:
-                        f.write(registration)
+                        f.write(registration, miles)
                     await reg(message, registration, miles, driverInstance)
                 else:
-                    args = message.content.split()[1]
-                    registration = args
                     print(f"{info} [Console]: !reg command recieved for reg: {registration}")
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     with open('reg.txt', 'w') as f:
                         f.write(registration)
-                    await reg_nomiles(message, registration, driverInstance)
+                    await reg(message, registration, miles, driverInstance)
             except Exception as e:
                 logging.error(e, exc_info=True)
 

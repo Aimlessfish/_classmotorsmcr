@@ -208,6 +208,7 @@ class ProxyManager:
             print(f"{proxy} not found in proxy list.")
 
     def testProxy(self, randomProxy):
+        self.load_proxies()
         attempts = 0
         while attempts < 2:
             try:
@@ -215,11 +216,14 @@ class ProxyManager:
                 if self.response.status_code != 200:
                     attempts += 1
                     print(f"{randomProxy} not online. Retrying ({attempts}/2)...")
+                    if attempts > 1:
+                        self.remove_proxy(randomProxy)
                 else:
                     return randomProxy
             except requests.exceptions.RequestException:
-                attempts += 1
-                print(f"{randomProxy} connection aborted. Retrying ({attempts}/2)...")
+                attempts += 2
+                print(f"{randomProxy} connection aborted. Removing proxy")
+                self.remove_proxy(randomProxy)
         print(f"{randomProxy} could not be verified after {attempts} attempts.")
         return None
 
