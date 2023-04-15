@@ -38,17 +38,17 @@ async def on_message(message):
 
     proxyManager = ProxyManager()
 
-    # await message.channel.send("Proxy Selection Started.")
+    await message.channel.send("Proxy Selection Started.")
     drivers = [ChromeDriver, FirefoxDriver]
     selected_driver = random.choice(drivers)
     useragent = proxyManager.get_random_UA()
     randomProxy = proxyManager.get_random_proxy()
-    # proxy = proxyManager.testProxy(randomProxy)
-    # while not proxy:
-    #     proxyManager.remove_proxy(randomProxy)
-    #     randomProxy = proxyManager.get_random_proxy()
-    #     proxy = proxyManager.testProxy(randomProxy)
-    # await message.channel.send("Proxy Selection Completed!")
+    proxy = proxyManager.testProxy(randomProxy)
+    while not proxy:
+        proxyManager.remove_proxy(randomProxy)
+        randomProxy = proxyManager.get_random_proxy()
+        proxy = proxyManager.testProxy(randomProxy)
+    await message.channel.send("Proxy Selection Completed!")
     driverInstance = selected_driver.create(
         proxy=randomProxy, useragent=useragent)
     driver_info = f"[SELECTED DRIVER    {driverInstance}]"
