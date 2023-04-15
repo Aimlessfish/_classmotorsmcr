@@ -36,7 +36,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # proxyManager = ProxyManager()
+    proxyManager = ProxyManager()
 
     # await message.channel.send("Proxy Selection Started.")
     # drivers = [ChromeDriver, FirefoxDriver]
