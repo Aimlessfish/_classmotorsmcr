@@ -35,24 +35,6 @@ print(f"[{info}] [bot]: Loading...")
 async def on_message(message):
     if message.author == client.user:
         return
-
-    proxyManager = ProxyManager()
-
-    await message.channel.send("Proxy Selection Started.")
-    drivers = [ChromeDriver, FirefoxDriver]
-    selected_driver = random.choice(drivers)
-    useragent = proxyManager.get_random_UA()
-    randomProxy = proxyManager.get_random_proxy()
-    proxy = proxyManager.testProxy(randomProxy)
-    while not proxy:
-        proxyManager.remove_proxy(randomProxy)
-        randomProxy = proxyManager.get_random_proxy()
-        proxy = proxyManager.testProxy(randomProxy)
-    await message.channel.send("Proxy Selection Completed!")
-    driverInstance = selected_driver.create(
-        proxy=randomProxy, useragent=useragent)
-    driver_info = f"[SELECTED DRIVER    {driverInstance}]"
-    print(f"{info} {driver_info}")
     try:
         if message.content.startswith('!reg'):
             try:
@@ -66,14 +48,14 @@ async def on_message(message):
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     with open('reg.txt', 'w') as f:
                         f.write(registration, miles)
-                    await reg(message, registration, miles, driverInstance)
+                    await reg(message, registration, miles)
                 else:
                     print(f"{info} [Console]: !reg command recieved for reg: {registration}")
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     with open('reg.txt', 'w') as f:
                         f.write(registration)
-                    await reg_nomiles(message, registration, driverInstance)
+                    await reg_nomiles(message, registration)
             except Exception as e:
                 logging.error(e, exc_info=True)
     except Exception as e:
