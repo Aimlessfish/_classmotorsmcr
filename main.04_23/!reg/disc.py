@@ -47,18 +47,21 @@ async def on_message(message):
                     with open('reg.txt', 'w') as f:
                         f.write(registration, miles)
                     await message.channel.send("Proxy Selection Started.")
-                    drivers = [ChromeDriver, FirefoxDriver]
-                    selected_driver = random.choice(drivers)
-                    useragent = proxyManager.get_random_UA()
-                    randomProxy = proxyManager.get_random_proxy()
-                    proxy = proxyManager.testProxy(randomProxy)
-                    while not proxy:
-                        proxyManager.remove_proxy(randomProxy)
+                    try:
+                        drivers = [ChromeDriver, FirefoxDriver]
+                        selected_driver = random.choice(drivers)
+                        useragent = proxyManager.get_random_UA()
                         randomProxy = proxyManager.get_random_proxy()
                         proxy = proxyManager.testProxy(randomProxy)
-                    await message.channel.send("Proxy Selection Completed!")
-                    driverInstance = selected_driver.create(
-                        proxy=proxy, useragent=useragent)
+                        while not proxy:
+                            proxyManager.remove_proxy(randomProxy)
+                            randomProxy = proxyManager.get_random_proxy()
+                            proxy = proxyManager.testProxy(randomProxy)
+                        await message.channel.send("Proxy Selection Completed!")
+                        driverInstance = selected_driver.create(
+                            proxy=proxy, useragent=useragent)
+                    except Exception as e:
+                        logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     await reg(message, registration, miles)
@@ -67,18 +70,21 @@ async def on_message(message):
                     with open('reg.txt', 'w') as f:
                         f.write(registration)
                     await message.channel.send("Loading browser. Please wait..")
-                    drivers = [ChromeDriver, FirefoxDriver]
-                    selected_driver = random.choice(drivers)
-                    useragent = proxyManager.get_random_UA()
-                    randomProxy = proxyManager.get_random_proxy()
-                    proxy = proxyManager.testProxy(randomProxy)
-                    while not proxy:
-                        proxyManager.remove_proxy(randomProxy)
+                    try:
+                        drivers = [ChromeDriver, FirefoxDriver]
+                        selected_driver = random.choice(drivers)
+                        useragent = proxyManager.get_random_UA()
                         randomProxy = proxyManager.get_random_proxy()
                         proxy = proxyManager.testProxy(randomProxy)
-                    await message.channel.send("Loading browser. Please wait..")
-                    driverInstance = selected_driver.create(
-                        proxy=proxy, useragent=useragent)
+                        while not proxy:
+                            proxyManager.remove_proxy(randomProxy)
+                            randomProxy = proxyManager.get_random_proxy()
+                            proxy = proxyManager.testProxy(randomProxy)
+                        await message.channel.send("Proxy Selection Completed!")
+                        driverInstance = selected_driver.create(
+                            proxy=proxy, useragent=useragent)
+                    except Exception as e:
+                        logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
                     await reg_nomiles(message, registration)
