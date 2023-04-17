@@ -39,9 +39,9 @@ async def on_message(message):
     try:
         if message.content.startswith('!reg'):
             try:
-                args = message.content.split()[1]
-                registration = args
-                if len(message.content) == 2:
+                if len(message.content) > 1:
+                    args = message.content.split()[1]
+                    registration = args
                     kwarg = message.content.split()[2]
                     miles = kwarg
                     print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
@@ -53,15 +53,18 @@ async def on_message(message):
                         selected_driver = random.choice(drivers)
                         useragent = proxyManager.get_random_UA()
                         proxy = proxyManager.get_random_proxy()
-                        await message.channel.send("Proxy Selection Completed!")
+                        await message.channel.send(f"Proxy Selection Completed! {proxy}")
                         driverInstance = selected_driver.create(
                             proxy=proxy, useragent=useragent)
+                        print(f"{info} {driverInstance}")
                     except Exception as e:
                         logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
-                    await reg(message, registration, miles)
+                    await reg(message, registration, miles, driverInstance)
                 else:
+                    args = message.content.split()[1]
+                    registration = args
                     print(f"{info} [Console]: !reg command recieved for reg: {registration}")
                     with open('reg.txt', 'w') as f:
                         f.write(registration)
@@ -71,14 +74,15 @@ async def on_message(message):
                         selected_driver = random.choice(drivers)
                         useragent = proxyManager.get_random_UA()
                         proxy = proxyManager.get_random_proxy()
-                        await message.channel.send("Proxy Selection Completed!")
+                        await message.channel.send(f"Proxy Selection Completed! {proxy}")
                         driverInstance = selected_driver.create(
                             proxy=proxy, useragent=useragent)
+                        print(f"{info} {driverInstance}")
                     except Exception as e:
                         logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
                     await message.channel.send("If I do not reply after 2 minutes something is wrong.")
-                    await reg_nomiles(message, registration)
+                    await reg_nomiles(message, registration, driverInstance)
             except Exception as e:
                 logging.error(e, exc_info=True)
     except Exception as e:
