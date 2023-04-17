@@ -39,7 +39,7 @@ async def on_message(message):
     try:
         if message.content.startswith('!reg'):
             try:
-                if len(message.content) > 1:
+                if len(message.content) != 1:
                     args = message.content.split()[1]
                     registration = args
                     kwarg = message.content.split()[2]
@@ -56,7 +56,6 @@ async def on_message(message):
                         await message.channel.send(f"Proxy Selection Completed! {proxy}")
                         driverInstance = selected_driver.create(
                             proxy=proxy, useragent=useragent)
-                        print(f"{info} {driverInstance}")
                     except Exception as e:
                         logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
@@ -77,7 +76,6 @@ async def on_message(message):
                         await message.channel.send(f"Proxy Selection Completed! {proxy}")
                         driverInstance = selected_driver.create(
                             proxy=proxy, useragent=useragent)
-                        print(f"{info} {driverInstance}")
                     except Exception as e:
                         logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
