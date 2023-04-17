@@ -33,6 +33,7 @@ print(f"[{info}] [bot]: Loading...")
 
 @client.event
 async def on_message(message):
+    proxyManager = ProxyManager()
     if message.author == client.user:
         return
     try:
