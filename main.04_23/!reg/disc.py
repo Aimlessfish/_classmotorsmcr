@@ -57,8 +57,12 @@ async def on_message(message):
                         useragent = proxyManager.get_random_UA()
                         proxy = proxyManager.get_random_proxy()
                         await message.channel.send(f"Proxy Selection Completed! {proxy}")
-                        driverInstance = selected_driver.create(
-                            proxy=proxy, useragent=useragent)
+                        try:
+                            driverInstance = selected_driver.create(
+                                proxy=proxy, useragent=useragent)
+                            print(f"Driver selection complete:   {driverInstance}")
+                        except Exception as e:
+                            logging.error(e, exc_info=True)
                     except Exception as e:
                         logging.error(e, exc_info=True)
                     await message.channel.send("Please wait while i get the values..")
