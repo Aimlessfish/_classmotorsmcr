@@ -45,8 +45,11 @@ async def on_message(message):
                     kwarg = message.content.split()[2]
                     miles = kwarg
                     print(f"{info} [Console]: !reg command recieved for reg: {registration} {miles}")
-                    with open('reg.txt', 'w') as f:
-                        f.write(registration, miles)
+                    try:
+                        with open('reg.txt', 'w') as f:
+                            f.write(registration, miles)
+                    except Exception as e:
+                        logging.error(e, exc_info=True)
                     await message.channel.send("Proxy Selection Started.")
                     try:
                         drivers = [ChromeDriver, FirefoxDriver]
