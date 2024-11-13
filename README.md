@@ -1,4 +1,7 @@
 # classmotorsmcr
+
+This is a mess. I am aware.
+
  contains directories relevent to classmotorsmcr bot development
 
  figuring out how to use github sorry if this is shitty.
