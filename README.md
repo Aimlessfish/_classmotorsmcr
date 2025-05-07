@@ -1,4 +1,5 @@
 # classmotorsmcr
+# project discontinued
 
 This is a mess. I am aware.
 
